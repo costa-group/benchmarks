@@ -1,0 +1,85 @@
+module AdvancedFunctions;
+import * from ABS.StdLib;
+
+// Sets
+data Set<A> = EmptySet | Insert(A, Set<A>);
+
+
+/**
+ * Returns True if set 'xs' is empty, False  otherwise.
+ */
+def Bool emptySet<A>(Set<A> xs) = (xs == EmptySet);
+
+
+/**
+ * Returns True if set 'ss' contains element 'e', False otherwise.
+ */
+def Bool contains<A>(Set<A> ss, A e) =
+ case ss {
+   EmptySet => False;
+   Insert(e, _) => True;
+   Insert(_, xs) => contains(xs, e);
+ };
+
+
+def Int slength<A>(Set<A> s) =
+case s {
+    EmptySet => 0 ;
+    Insert(_, ss) => 1 + slength(ss);
+};
+
+/**
+ * Returns the size of set 'xs'.
+ */
+def Int size<A>(Set<A> xs) = case xs { EmptySet => 0 ; Insert(s, ss) => 1 + size(ss); };
+
+
+// Lists
+data List<A> = Nil | Cons(A, List<A>);
+
+/**
+ * Returns element 'n' of list 'list'.
+ */
+def A nth<A>(List<A> list, Int n) =
+ case n { 0 => head(list) ; _ => nth(tail(list), n-1); };
+
+
+/**
+ * Returns a list containing all elements of list 'list1'
+ * followed by all elements of list 'list2'.
+ */
+def List<A> concatenate<A>(List<A> list1, List<A> list2) =
+ case list1 { Nil => list2 ; Cons(head, tail) =>  Cons(head, concatenate(tail, list2)); };
+ 
+ 
+/**
+ * Some functions where a global state could be considered:
+ */
+ 
+/**
+ * Returns a list where all occurrences of a have been removed
+ */
+def List<A> without<A>(List<A> list, A a) =
+ case list {
+    Nil => Nil;
+    Cons(a, tail) => without(tail,a);
+    Cons(x, tail) => Cons(x, without(tail,a));
+ }
+;
+
+/**
+ * Returns a list of length 'n' containing 'p' n times.
+ */
+def List<A> copy<A>(A p, Int n) = case n { 0 => Nil; m => Cons(p,copy(p,m-1)); };
+
+
+/**
+ * Returns a list containing all elements of 'list' in reverse order.
+ */
+def List<A> reverse<A>(List<A> list) =
+ case list { Cons(hd, tl) => appendright(reverse(tl), hd); Nil => Nil; };
+
+{
+    List<String> l = Cons("a", Cons("b",Cons("c",Nil)));
+    List<String> res = reverse(l);
+}

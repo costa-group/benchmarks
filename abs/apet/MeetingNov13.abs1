@@ -1,0 +1,60 @@
+module Scheds;
+import * from ABS.StdLib;
+
+interface Priority {
+    Unit odd();
+    Unit even();
+    Unit setF(Int n);
+    Int m1();
+    Int m2();
+    Int p();
+}
+
+class Prior implements Priority {
+    Int f = 10;
+    Int g = 0;
+    
+    Unit odd(){f = f*2+1;}
+    Unit even(){f = f*2;}
+    
+    Unit setF(Int n){f = n;}
+
+    Int m1(){
+	Int r = 0;
+	this!odd();
+	this!even();
+	//Fut<Int> fut = this!even();
+	//await fut?;
+	if (f == 10) r = 0;
+	else if (f%2 == 0) r = 1;
+	else r = -1;
+	return r;
+    }
+
+    Int m2(){
+	f = 10;
+	this!odd();
+	this!even();
+	Fut<Int> fut = this!p();
+	await fut?;
+	Int n = fut.get;
+	//Int n = this.p();
+	return n;
+    }
+    
+    Int p(){
+	Int r = 0;
+	if (f == 10) r = 0;
+	else if (f%2 == 0) r = 1;
+	else r = -1;
+	return r;
+    }
+} 
+
+{
+    Int n = 0;
+    Priority ob = new cog Prior();
+    Fut<Int> nf = ob!m2();
+    n = nf.get;
+    ob!setF(n);
+}

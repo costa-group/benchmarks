@@ -1,0 +1,77 @@
+module Sum_Fact_Fields;
+import * from ABS.StdLib;
+
+interface A {
+    Unit setFt(Int a);
+    Unit setN(Int b);
+    Unit setFtAndN(Int a,Int b);
+    Int sumFacts(A o);
+    Int fact(Int n, A o);
+}
+
+class AImp() implements A {
+    Int n  = -1; // number of iterations of the loop
+    Int ft = -1; // we compute the factorial of ft
+
+    Unit setFt(Int a){ft = a;}
+
+    Unit setN(Int b){n = b;}
+    
+    Unit setFtAndN(Int a,Int b){
+	this.setFt(a);
+	this.setN(b);
+    }
+    
+    Int sumFacts(A o){
+	Fut<Int> f;
+	Int r = 0;
+	Int m = n;
+	await ft >= 0;
+	while (m > 0) {
+	    f = o ! fact(ft,this);
+	    await f?;
+	    Int a = f.get;
+	    r = r+a;
+	    m = m-1;
+	    ft = ft+1;
+	} 
+	return r;
+    }
+ 
+    // Factorial of a number 
+    Int fact(Int k, A o){
+	Fut<Int> f;
+	Int r=1;
+	if (k==0) r=1;
+	else {
+            f = o ! fact(k-1,this);
+            await f?;
+            r = f.get;
+            r = k * r;
+	}
+	return r;
+    }
+}
+
+
+class B {
+
+    Int q(A o,Int n1, Int n2, Int n3){
+	o ! setN(n1);
+	o ! setFt(3);
+	Fut<Int> f;
+	f = o ! sumFacts(o);
+	//this ! setFt(n3);
+	//Fut<Int> s;
+	//s = this ! sumFacts(this);
+	await f?;
+	//await s?;
+	Int f1 = f.get;
+	//Int s1 = s.get;
+	//return f1+s1;
+	return f1;
+    }
+}
+
+
+

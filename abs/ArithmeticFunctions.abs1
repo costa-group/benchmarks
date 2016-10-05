@@ -1,0 +1,36 @@
+
+module ArithmeticFunctions;
+import * from ABS.StdLib;
+
+def Bool not(Bool a) = case a { True => False; False => True; };
+
+def Bool isGreater(Int a, Int b) = a > b ;
+
+def Int add(Int a, Int b) = a + b ;
+
+def Int max(Int a, Int b) = case a > b { True => a; False => b; };
+
+def Int abs(Int x) = case x > 0 { True => x; False => -x; };
+
+def Int fact(Int x) = 
+      case  ( x ) {
+	  0 => 1; 
+	  _ => x*fact(x-1); 
+      };
+
+def Int gcd(Int a, Int b) = 
+      case  ( b ) {
+          0 => abs(a); 
+          _ => gcd(b,a%b); 
+      };
+
+def Int lcm(Int x, Int y) = 
+      let (Int gcdp) = gcd(x,y) in abs(x*y/gcdp);
+
+{
+    Int a1 = abs(-1);
+    Int a2 = abs(1);
+    Int s = add(1,2);
+    Int m = max(1,2);
+    Bool g = isGreater(1,2);
+}

@@ -1,0 +1,285 @@
+//$id: Peertopeer.abs 5108 2010-07-17 20:14:12Z jschaefer $ 
+
+
+module MyPeerToPeer;
+//import * from ABS.StdLib;
+
+//type synonyms  
+type Filename = String ;
+type Filenames = Set<String> ;
+type Packet = String ;
+type File = List<Packet> ;
+type Catalog = List<Pair<Peer, Filenames> > ;
+
+ 
+// Application functions
+
+def Peer findServer(Filename file, Catalog catalog) =
+case catalog {
+    Nil => null;
+    Cons(Pair(server, files), rest) =>
+    case contains(files, file) { True => server;
+        False => findServer(file, rest); };
+    };
+    
+interface Server {
+    Filenames enquire();
+    Int getLength(Filename fId);
+    Packet getPack(Filename fId, Int pNbr);
+    List<Packet> getPacks(Filename fId, Int numpacks, Int pNbr);
+}
+
+
+interface Peer extends Client, Server { 
+    Unit setAdmin(Network admin);
+    Unit searchFile(Filename file);
+}
+
+interface Network {
+    List<Peer> getNeighbors(Peer caller);
+}
+
+interface DataBase {
+    File getFile(Filename fId);
+    Int getLength(Filename fId);
+    Unit storeFile(Filename fId, File file);
+    Filenames listFiles();
+}
+
+interface Client {
+    Unit reqFile(Server sId, Filename fId);
+}
+
+class DataBaseImpl(Map<Filename, File> db) implements DataBase {
+    
+    [db <= max(db)]
+    File getFile(Filename fId) {
+	return fromJust(lookup(db, fId));
+    }
+
+    [db <= max(db)]
+    Int getLength(Filename fId) {
+	[cost == 2*db + log(2,fId)]
+	Int n = 1;
+	return length(fromJust(lookup(db,fId)));
+    }
+
+    Unit storeFile(Filename fId, File file) {
+	db = InsertAssoc(Pair(fId,file), db);
+    } 
+
+    [db <= max(db)]
+    Filenames listFiles() {
+	return keys(db);
+    }
+}
+
+class Node(DataBase db, Int size) implements Peer {
+    Catalog catalog = Nil;
+    List<Peer> myNeighbors = Nil;
+    Network admin = null;
+
+    Unit searchFile(Filename file) {
+	Fut<Catalog> c ; 
+	Fut<List<Peer>> f;
+	Server server ; 
+	
+	await admin != null;
+	f = admin!getNeighbors(this);   // Asynchronous call to admin
+	myNeighbors = f.get;
+	c = this!availFiles(myNeighbors); // Asynchronous call
+	catalog = c.get;        // Build the catalog
+	server = findServer(file, catalog); // Find the server for the requested file
+	if (server != null) {
+	    this.reqFile(server,file) ;        // Download file
+	}
+    }
+
+    Unit setAdmin(Network admin) {
+	this.admin = admin;
+    }
+
+    Filenames enquire() { 
+	Fut<Filenames> f ;  
+	f = db!listFiles();
+	await f?;
+	return f.get;
+    }
+
+    Int getLength(Filename fId) {
+	Fut<Int> length ; 
+	[cost == 111*fId + log(2,fId) + fId*fId]
+	length = db!getLength(fId);
+	await length?;
+	return length.get;
+    }
+
+    Packet getPack(Filename fId, Int pNbr) {
+	File f = Nil;
+	Fut<File> ff;
+	ff = db!getFile(fId);
+	await ff?;
+	f = ff.get;
+	return nth(f, pNbr);
+    }
+
+    List<Packet> getPacks(Filename fId, Int numpacks, Int pNbr) {
+	File f = Nil;
+	File res = Nil;
+	Fut<File> ff;
+	ff = db!getFile(fId);
+	await ff?;
+	f = ff.get;
+	while(numpacks > 0) {
+	    res = Cons(nth(f, pNbr+numpacks-1),res);
+	    numpacks = numpacks - 1;
+	}	
+	return res;
+    }
+
+    Catalog availFiles (List<Peer> sList) {
+	Catalog cat = Nil;
+	Filenames fNames = EmptySet; 
+	Fut<Filenames> fN;
+	Catalog catList = Nil; 
+	Fut<Catalog> cL;
+	
+	if (sList != Nil) {
+	    fN = head(sList)!enquire();
+	    cL = this!availFiles(tail(sList));
+	    [cL <= max(myNeighbors)]
+	    await fN? & cL?;
+	    catList = cL.get;
+	    fNames = fN.get;
+	    cat = appendright(catList, Pair(head(sList), fNames)); 
+	}
+	return cat; 
+    }
+    
+    Unit reqFile(Server sId, Filename fId) {
+	File file = Nil;
+	List<Packet> packs = Nil;
+	Int lth = 0;
+	Fut<Int> l1;
+	Fut<List<Packet>> l2;
+	Int incr = 0;
+	
+	l1 = sId!getLength(fId);
+	[old(size) == size][size == max(size)][max(size) >= 1]
+	await l1?;
+	lth = l1.get; 
+	while (lth > 0) {
+	    if (size > lth) {
+		incr = lth;
+	    } 
+	    else {
+	        incr = size;
+	    }
+	    lth = lth - incr;            
+	    l2 = sId!getPacks(fId, incr, lth);
+	    [old(size) == size][l2 <= max(db)][size == max(size)][max(size) >= 1]
+	    await l2?;
+	    packs = l2.get ;
+	    file = concatenate(packs, file); 
+	} 
+	db!storeFile(fId, file);
+    }
+}
+
+class OurTopology( Peer node1, Peer node2,   Peer node3 )
+implements Network
+{
+    List<Peer> getNeighbors(Peer caller) {
+	List<Peer> res = Nil;
+	//if (caller == node0) { res = Cons(node1, Cons(node2,Nil)); }
+	//if (caller == node1) { res = Cons(node3,Nil); }
+	//if (caller == node2) { res = Cons(node0, Cons(node1,Cons(node3,Nil))); }
+	//if (caller == node3) { res = Cons(node0, Cons(node2,Nil)); }
+	if (caller == node1) { res = Cons(node2, Cons(node3,Nil)); }
+	if (caller == node2) { res = Cons(node3,Nil); }
+	if (caller == node3) { res = Nil; }
+	return res;
+    }
+}
+
+{ 
+//   Peer node0;
+//   Peer node1;
+//   Peer node2;
+//   Peer node3;
+//   DataBase db0;
+//   DataBase db1;
+//   DataBase db2;
+//   Network admin;
+//   // Map<Filename, File>
+//   db0 = new cog DataBaseImpl(map(Cons(Pair("file0",Cons("file",Cons("from",Cons("db0",Nil)))),Nil)));
+//   db1 = new cog DataBaseImpl(map(Cons(Pair("file1",Cons("file",Cons("from",Cons("db1",Nil)))),Nil)));
+//   db2 = new cog DataBaseImpl(map(Cons(Pair("file2",Cons("file",Cons("from",Cons("db2",Nil)))),Nil)));
+//   node0 = new cog Node(db0, "file2");
+//   node1 = new cog Node(db1, "file2");
+//   node2 = new cog Node(db2, "file1");
+//   node3 = new cog Node(db2, "file0");
+//   admin = new cog OurTopology(node0, node1, node2, node3);
+//   node0!setAdmin(admin);
+//   node1!setAdmin(admin);
+//   node2!setAdmin(admin);
+//   node3!setAdmin(admin);
+//   
+//   node0!searchFile();
+//   node1!searchFile();
+//   node2!searchFile();
+//   node3!searchFile();
+
+    Map<String,List<String>> db = 
+    InsertAssoc (
+	Pair ("file0", 
+            Cons ("a", Cons ("b", Cons ("c", Nil )))), 
+	    InsertAssoc (
+		Pair ("file1", 
+		    (Cons ("d", Nil ))), 
+		EmptyMap )
+	    );
+
+/*
+  Map<String,List<String>> db = 
+    InsertAssoc (
+      Pair ("file0", 
+               Cons ("a", Cons ("b", Cons ("c", Nil )))), 
+    InsertAssoc (
+      Pair ("file1", 
+               (Cons ("d", Nil ))), 
+    InsertAssoc (
+      Pair ("file1", Nil),
+    InsertAssoc (
+      Pair ("file1", Nil),
+    EmptyMap )))
+    );
+*/
+	    DataBase db1;
+	    db1 = new cog DataBaseImpl(EmptyMap); 
+	    
+	    DataBase db2;
+	    db2 = new cog DataBaseImpl(db); 
+	    
+	    Peer n1;
+	    n1 = new cog Node(db1,2);
+	    //n1 = new cog Node(db1,1);
+	    
+	    Peer n2;
+	    n2 = new cog Node(db1,1);
+	    
+	    Peer n3;
+	    n3 = new cog Node(db2,1);
+	    
+	    Network admin;
+	    admin = new cog OurTopology(n1, n2, n3);
+	    
+	    n1!setAdmin(admin);
+	    n2!setAdmin(admin);
+	    n3!setAdmin(admin);
+	    
+	    n1!searchFile("file0");
+	    n2!searchFile("file1");
+	    n2!searchFile("file0");
+	}
+	

@@ -1,0 +1,53 @@
+module Mhp_B;
+
+
+
+interface A {
+  Unit m();
+  Int r();
+}
+interface B {
+  Int p();
+  Int q();
+}
+
+class A1() implements A {
+ 
+Unit m(){
+Fut<Int> y;
+Fut<Int> z;
+Int i=0;
+B x=new local B1();
+
+y=this!r();
+z=x!p();
+z=x!q();
+
+i=z.get;
+//here we have pending!!
+await y?;
+
+}   
+
+Int r(){
+ return 0;
+}
+
+}
+
+class B1() implements B {
+ 
+Int p(){
+ return 0;
+}
+Int q(){
+ return 0;
+}
+
+}
+
+//main
+//{
+
+
+//}

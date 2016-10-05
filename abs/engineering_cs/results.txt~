@@ -1,0 +1,44 @@
+=================
+Deadlock Analysis
+=================
+Code: ETICS_full_code.abs -> deadlock free
+
+
+==================
+Resource Analysis
+==================
+
+costabs ~/Systems/costa/costabs/examples/engineering_cs/ETICS2.abs -entries 'Solver.bestSolution' -backend cofloco -size_abst typed_norms -typed_norm_definition  max_precise
+
+*Solver.bestSolution
+	Constant
+
+*Solver.utility
+	UB for 'Solver.utility'(vm_info_1,vm_info_2,requests_1,requests_2) = max([82,nat(requests_2-1)*83,nat(requests_2-2)*83+82])+10
+
+*Solver.randomMap
+	Constant
+
+*Solver.contains
+	UB for 'Solver.contains'(list_1,list_2,target_1) = max([nat(list_2-1)*10,nat(list_2-2)*10+10])+6
+
+*Solver.createSolution
+	UB for 'Solver.createSolution'(problem_1,problem_2,problem_3,problem_4,maps_1,maps_2) = max([max([7,nat(maps_2-1)+6+nat(maps_2-2)*6+nat(maps_2-2)*2*nat(maps_2-2)]),nat(problem_2-1)*2+27+nat(problem_2-2)*2+nat(problem_3-1)+nat(problem_3-2)*5+max([nat(problem_2-1)+2530,nat(maps_1)*108*nat(maps_2-2)+nat(maps_1)*3+nat(problem_2-1)*112*nat(maps_2-2)+nat(problem_3-1)*2+nat(problem_3-2)*6+nat(problem_3-2)*128*nat(maps_2-2)+nat(maps_2-1)*4+nat(maps_2-2)*540+nat(maps_2-2)*256*nat(maps_2-2)+nat(maps_2-3)*7+nat(maps_2-3)*66*nat(maps_2-2)+nat(maps_2-4)*198*nat(maps_2-2)+nat(problem_2+maps_2-4)*5536+nat(problem_2+maps_2-5)*12948*nat(problem_2+maps_2-4)+nat(2*problem_2+2*maps_2-10)*238*nat(problem_2+maps_2-4)])])+5
+	
+	n²
+
+*Solver.mutate
+	UB for
+	'Solver.mutate'(solution_1,solution_2,solution_3,solution_4,solution_5,solution_6,solution_7) = max([max([23,nat(solution_7-1)*4+19+nat(solution_7-2)*32+nat(solution_7-2)*6*nat(solution_7-2)]),nat(solution_1-1)*6+62+nat(solution_1-2)*4+nat(solution_3-1)*4+nat(solution_3-2)*22+max([5056,nat(nat(solution_1-1)+ -1)*240*nat(solution_7-2)+nat(solution_1-1)*4+nat(solution_1-1)*240*nat(solution_7-2)+nat(solution_3-1)*6+nat(solution_3-2)*24+nat(solution_3-2)*264*nat(solution_7-2)+nat(solution_7-1)*16+nat(solution_7-2)*1168+nat(solution_7-2)*536*nat(solution_7-2)+nat(solution_7-3)*14+nat(solution_7-3)*138*nat(solution_7-2)+nat(solution_7-4)*414*nat(solution_7-2)+nat(solution_1+solution_7-4)*11072+nat(solution_1+solution_7-5)*25896*nat(solution_1+solution_7-4)+nat(2*solution_1+2*solution_7-10)*476*nat(solution_1+solution_7-4)])])+11
+
+	n²
+
+*Solver.crossover
+	UB for 'Solver.crossover'(s1_1,s1_2,s1_3,s1_4,s1_5,s1_6,s1_7,s2_1,s2_2) = max([max([max([25,nat(s2_2-1)*160+78+nat(s2_2-2)*12+nat(s2_2-2)*8*nat(s2_2-1)+nat(s2_2-2)*4*nat(s2_2-2)]),nat(s1_7-2)*22+19+nat(s1_7-2)*2*nat(s1_7-2)+nat(s1_7-3)*11+nat(s1_7-3)*nat(s1_7-3)+max([nat(s1_7-2)*12+nat(s1_7-1)*10+nat(s1_7-2)*4*nat(s1_7-2)+nat(s1_7-3)*6+nat(s1_7-3)*2*nat(s1_7-3),nat(s2_2-1)*530+65+nat(s2_2-2)*42+nat(s2_2-2)*14*nat(s2_2-2)+nat(s1_7+s2_2-3)*22*nat(s2_2-1)])]),nat(s1_1-1)*6+44+nat(s1_1-2)*4+nat(s1_3-1)*2+nat(s1_3-2)*10+max([5062,nat(s1_1-2)*4+nat(s1_1-1)*10+nat(s1_3-1)*6+nat(s1_3-2)*22+max([nat(nat(s1_1-1)+ -1)*208*nat(s2_2-2)+199+nat(s1_1-1)*232*nat(s2_2-2)+nat(s1_3-2)*256*nat(s2_2-2)+nat(s2_2-1)*480+nat(s2_2-2)*1080+nat(s2_2-2)*512*nat(s2_2-2)+nat(s2_2-4)*396*nat(s2_2-2)+max([nat(s2_2-2)*24*nat(s2_2-1)+nat(s2_2-3)*14+nat(s2_2-3)*132*nat(s2_2-2)+nat(s1_1+s2_2-4)*16128+nat(s1_1+s2_2-5)*30212*nat(s1_1+s2_2-4)+nat(2*s1_1+2*s2_2-10)*542*nat(s1_1+s2_2-4),nat(nat(s1_1-1)+ -1)*520*nat(s2_2-2)+5+nat(s1_1-1)*31+nat(s1_1-1)*580*nat(s2_2-2)+nat(s1_1-2)*14+nat(s1_3-1)*17+nat(s1_3-2)*65+nat(s1_3-2)*640*nat(s2_2-2)+nat(s1_7-2)*88+nat(s1_7-2)*8*nat(s1_7-2)+nat(s1_7-3)*44+nat(s1_7-3)*4*nat(s1_7-3)+nat(s2_2-1)*1260+nat(s2_2-2)*2700+nat(s2_2-2)*1056*nat(s2_2-2)+nat(s2_2-4)*990*nat(s2_2-2)+nat(s1_7+s2_2-3)*72*nat(s2_2-1)+nat(s1_7+s2_2-3)*168*nat(s2_2-2)+nat(s1_7+s2_2-4)*56*nat(s2_2-2)+nat(s1_7+s2_2-5)*49+nat(s1_7+s2_2-5)*462*nat(s2_2-2)+nat(s1_1+s1_7+s2_2-5)*48864+nat(s1_1+s1_7+s2_2-7)*99268*nat(s1_1+s1_7+s2_2-5)+nat(2*s1_1+2*s1_7+2*s2_2-14)*1798*nat(s1_1+s1_7+s2_2-5)]),nat(nat(s1_1-1)+ -1)*312*nat(s1_7-3)+nat(s1_1-1)*2+nat(s1_1-1)*348*nat(s1_7-3)+nat(s1_3-1)*2+nat(s1_3-2)*6+nat(s1_3-2)*384*nat(s1_7-3)+nat(s1_7-1)*36+nat(s1_7-2)*88+nat(s1_7-2)*8*nat(s1_7-2)+nat(s1_7-2)*96*nat(s1_7-3)+nat(s1_7-3)*1664+nat(s1_7-3)*676*nat(s1_7-3)+nat(s1_7-4)*21+nat(s1_7-4)*198*nat(s1_7-3)+nat(s1_7-5)*594*nat(s1_7-3)+nat(s1_1+s1_7-4)*19136+nat(s1_1+s1_7-6)*41002*nat(s1_1+s1_7-4)+nat(2*s1_1+2*s1_7-12)*747*nat(s1_1+s1_7-4)])])])+17
+
+	n²
+
+*Solver.createNextGeneration
+	¿¿?? Time Out	
+
+Allowing inheritance works too.

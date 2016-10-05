@@ -1,0 +1,90 @@
+
+module Sum_Fact;
+import * from ABS.StdLib;
+
+
+interface A {
+ Int fact_1(Int i,A o);
+ Int fact_2(Int i,A o);
+ Int q1(Int n,B o1);
+}
+
+interface B {
+ Int m2(Int i,A o);
+}
+
+
+class AImpl() implements A {
+
+Int loop_fact(Int n,Int ft, A o1){
+  Fut<Int> f1;
+  Int r=0;
+  while (n>0) {
+       f1=o1 ! fact_1(ft,this);
+       await f1?;
+       Int a = f1.get;
+       r=r+a;
+       n=n-1;
+       ft=ft+1;
+    } 
+  return r;
+}
+ 
+ Int m(Int n){
+ Fut<Int> f;
+ f = this ! fact_1(n,this);
+ await f?;
+ Int r=0;
+ r=f.get;
+ return r;
+}
+
+ // Factorial of a number 
+ Int fact_1(Int n,A o1){
+  Fut<Int> f1;
+  Int r1=1;
+  if (n==0) r1=1;
+  else {
+        f1 = o1 ! fact_1(n-1,this);
+        await f1?;
+        r1 = f1.get;
+        r1=n * r1;
+  }
+  return r1;
+ }
+// Factorial of a number 
+ Int fact_2(Int n,A o1){
+  Fut<Int> f1;
+  Int r1=1;
+  if (n<=0) r1=1;
+  else {
+        f1 = o1 ! fact_1(n-1,this);
+        await f1?;
+        r1 = f1.get;
+        r1=n * r1;
+  }
+  return r1;
+ }
+
+
+
+
+
+ Int q1(Int n,B o1){
+  Fut<Int> f1;
+  Int r1=0;
+  while (n>0) {
+    if (n % 2 == 0){ 
+       r1=r1+n;
+    }
+    else  {
+       f1=o1 ! m2(n,this);
+       await f1?;
+       Int a = f1.get;
+       r1=r1+a;
+    } 
+    n=n-1; 
+} 
+ return r1;
+ }
+}

@@ -1,0 +1,50 @@
+module Paper_dead2;
+
+interface Ai{
+    Unit calculateFact(Ai a);
+    Int q();
+    Unit show(Ai a);
+    Int getN();
+}
+class A(Int n) implements Ai{
+Unit calculateFact(Ai a){
+ Fut<Int> f1;
+ Int m = 0;
+ f1=a!q();
+ m = f1.get;
+ m = m*n;
+}
+
+Int q(){
+  Ai a = new cog A(1);
+   Int rep = 1;
+   Int i = 0;
+   while(i < rep){
+     Fut<Int> f2 = a!getN();
+     await f2?;
+     i=i+1;
+   }
+   return n;
+}
+Int getN(){ return n;}
+
+Unit show(Ai a){
+  Fut<Int> f;
+  f = a!getN();
+  f.get;
+}
+
+}
+
+{
+Int n = 3;
+Int i = 0;
+Ai ant = new cog A(1);
+Ai ini = ant;
+while(i < n){
+  Ai newa =new cog A(i+2);
+  ant!calculateFact(newa);
+  ant=newa;
+  i=i+1;
+}
+}

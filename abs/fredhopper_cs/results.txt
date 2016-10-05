@@ -1,0 +1,143 @@
+************************************************************************************
+******* termination analysis: which methods in the model certainly terminate? which certainly don't? Which may or may not terminate?
+
+./termination.sh
+
+Method InfrastructureServiceImpl.cpu terminates?: YES
+Method InfrastructureServiceImpl.acquireInstance terminates?: YES
+Method InfrastructureServiceImpl.release terminates?: YES
+Method LoadBalancerEndPointImpl.remove terminates?: YES
+Method LoadBalancerEndPointImpl.add terminates?: YES
+Method LoadBalancerEndPointImpl.invoke terminates?: YES
+Method LoadBalancerEndPointImpl.setStatus terminates?: YES
+Method LoadBalancerEndPointImpl.getStatus terminates?: YES
+Method ServiceImpl.getCPU terminates?: YES
+Method ServiceImpl.getResource terminates?: YES
+Method ServiceImpl.cost terminates?: YES
+Method ServiceImpl.getLatency terminates?: YES
+Method ServiceImpl.getStatus terminates?: YES
+Method ServiceImpl.setStatus terminates?: YES
+Method ServiceImpl.getServiceId terminates?: YES
+Method ServiceImpl.getServiceType terminates?: YES
+Method ServiceImpl.getCustomer terminates?: YES
+Method DeploymentServiceImpl.install terminates?: YES
+Method DeploymentServiceImpl.lookup terminates?: YES
+Method DeploymentServiceImpl.uninstall terminates?: YES
+Method DeploymentServiceImpl.invoke terminates?: YES
+Method DeploymentServiceImpl.start terminates?: YES
+Method DeploymentServiceImpl.stop terminates?: YES
+Method LoadBalancerServiceImpl.change terminates?: YES
+Method LoadBalancerServiceImpl.decrease terminates?: YES
+Method LoadBalancerServiceImpl.increase terminates?: YES
+Method LoadBalancerServiceImpl.status terminates?: YES
+Method LoadBalancerServiceImpl.enable terminates?: YES
+Method LoadBalancerServiceImpl.add terminates?: YES
+Method LoadBalancerServiceImpl.getServiceEndPoint terminates?: YES
+Method PlatformServiceImpl.createService terminates?: YES
+Method PlatformServiceImpl.createServiceInstance terminates?: YES
+Method PlatformServiceImpl.uninstallInstance terminates?: YES
+Method PlatformServiceImpl.alterResource terminates?: YES
+Method PlatformServiceImpl.getEndPoints terminates?: YES
+Method PlatformServiceImpl.getServiceIds terminates?: YES
+Method PlatformServiceImpl.getService terminates?: YES
+Method PlatformServiceImpl.findVM terminates?: YES
+Method PlatformServiceImpl.matchResources terminates?: YES
+Method RepeatUserImpl.use terminates?: UNKOWN
+Method RepeatUserImpl.invoke terminates?: YES
+Method RepeatUserImpl.invokeWithSize terminates?: YES
+Method RepeatUserImpl.getState terminates?: YES
+Method MonitoringServiceImpl.add terminates?: YES
+Method MonitoringServiceImpl.run terminates?: UNKOWN
+Method MonitoringServiceImpl.execute terminates?: YES
+Method LatencyMonitor.scaling terminates?: YES
+Method LatencyMonitor.getLatencies terminates?: YES
+Method LatencyMonitor.monitor terminates?: YES
+Method ScaleResourceAction.action terminates?: YES
+Method ServiceProviderImpl.addCustomer terminates?: YES
+Method QueryServiceImpl.invoke terminates?: YES
+Method QueryServiceImpl.setStatus terminates?: YES
+Method QueryServiceImpl.getStatus terminates?: YES
+Method QueryServiceImpl.getServiceId terminates?: YES
+Method QueryServiceImpl.getServiceType terminates?: YES
+Method QueryServiceImpl.getCustomer terminates?: YES
+Method QueryServiceImpl.getLatency terminates?: YES
+Method QueryServiceImpl.cost terminates?: YES
+Method QueryServiceImpl.getCPU terminates?: YES
+Method QueryServiceImpl.getResource terminates?: YES
+Method ExampleSetup.getConfigs terminates?: YES
+Method ExampleSetup.main terminates?: UNKOWN
+Method DeploymentComponent.total terminates?: YES
+
+
+************************************************************************************
+******* may happen in parallel: find all methods for the different services in the FRH abs model that may, must
+execute in parallel for the current main program
+
+/home/groman/Systems/costa/costabs/src/interfaces/mhp/shell/mhp_shell 'ExampleSetup.main' -i '/home/groman/Systems/costa/costabs/examples/fredhopper_cs/FredhopperCloudServices_Costs.abs' -type_mhp reduced -mode complete -v 2 -ignore_exits -stats
+
+ Computed all possible pairs in 6890 ms.
+ 
+Graph statistics:
+339 nodes.
+209 program point nodes in the graph.
+145 program point nodes ignoring exit points.
+
+MHP inference statistics:
+145 program points.
+21025 possible mhp pairs.
+2869 MHP pairs
+Parallelism:13.645659928656363 %
+
+Mhp analysis performed in 9395 ms.
+
+
+************************************************************************************
+******* can we get a report of the total number of objects (ideally per type) created during the execution of the main block of the model?
+
+costabs fredhopper_cs/FredhopperCloudServices_Costs_groman.abs -entries main -cost_model objects -symb_or_num symb
+
+Abstract compilation performed in 135 ms.
+
+Size analysis performed in 792 ms.
+
+Cost relation system stored in /tmp/costabs/crs.crs
+
+Generated 378 equations 
+
+Cost relation system solved by PUBS in 25949 ms.
+
+Method main terminates?: YES
+
+UB for main(this,max(instances),max(toBeRun),max(monitorRun),max(scalings),max(cc),max(configs),max(us)) = c(object('ExampleSetup'))+c(object('CloudProvider'))+c(object('InfrastructureServiceImpl'))+c(object('DeploymentServiceImpl'))+c(object('LoadBalancerServiceImpl'))+c(object('PlatformServiceImpl'))+c(object('MonitoringServiceImpl'))+c(object('ServiceProviderImpl'))+c(object('LatencyMonitor'))+nat(max(monitorRun))*nat(max(toBeRun)/2-1/2)* (c(object('ScaleResourceAction'))+nat(max(scalings)/2-2)*c(object('ServiceImpl')))+nat(max(configs)/2-2)*nat(max(cc)/2-5/2)* (nat(max(instances)/2-1/2)*c(object('ServiceImpl'))+c(object('LoadBalancerEndPointImpl'))+nat(max(us))*c(object('RepeatUserImpl')))
+
+
+************************************************************************************
+******* or during execution of RepeatUserImpl.use(...) (parametric in the parameters of that method probably)
+
+ costabs fredhopper_cs/FredhopperCloudServices_Costs_groman.abs -entries RepeatUserImpl.use -cost_model objects -symb_or_num symb
+
+UB for 'RepeatUserImpl.use'(this,endPoint,min,max) = 0
+
+************************************************************************************
+******* deadlock freedom of the abs model
+
+/home/groman/Systems/costa/costabs/src/interfaces/deadlock/shell/deadlock_shell -i '/home/groman/Systems/costa/costabs/examples/fredhopper_cs/FredhopperCloudServices_Costs.abs'  -ei_version 2
+
+Abs program loaded in 23 ms.
+Missing type from variable s(24) in Rule 225
+
+Rule based representation generated in 68 ms.
+
+Rule based representation stored in /tmp/costabs/rbr.rbr
+Points-to analysis: Fixpoint reached in 261 iterations
+Pointsto analysis performed in 56 ms.
+LMhp analysis performed in 81 ms.
+Mhp graph created in 12 ms.
+
+
+Closure time 182 ms.
+Deadlock analysis 9 ms.
+Discarded 0 cycles with freshness analysis.
+
+
+The program is deadlock free

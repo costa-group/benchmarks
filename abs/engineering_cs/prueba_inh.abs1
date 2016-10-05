@@ -1,0 +1,32 @@
+module XX;
+
+interface X{
+Unit foo();
+}
+
+class X() implements X{
+Unit foo(){
+this.goo();
+}
+  
+Unit goo(){ /* do nothing */ }
+}
+
+interface Y extends X{}
+
+class Y() implements Y{
+X x;
+{ // init
+x = new local X();
+}
+  
+Unit foo(){
+x.foo();
+}
+  
+}
+// main
+{
+Y y = new Y();
+y.foo();
+}

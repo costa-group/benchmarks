@@ -1,0 +1,563 @@
+//==========================================================================
+// ETICS_resource_analysis.abs
+// REDUCED VERSION OF THE ENG "ETICS" MODEL FOR SACO RESOURCE (steps) ANALYSIS
+//==========================================================================
+
+
+// SACO:
+//  ?- use_module(costabs(costabs_driver)).
+//  ?- costabs(['engineering_cs/ETICS_resource_analysis.abs'],['Solver.createSolution'],[size_abst=typed_norms]).
+//
+
+module ETICS;
+
+import * from ABS.DC;
+
+//==========================================================================
+// FUNCTIONS
+//==========================================================================
+
+def Rat randomf() = random(10000000)/10000000;
+def Int ceiling(Rat r) = truncate(r) + 1;
+
+//==========================================================================
+// CONSTANTS
+//==========================================================================
+
+def Rat global_xP() = 1; // unit cost per size for requests
+def Rat global_kCT() = 1; // completion time constant
+def Rat global_xCT() = 1; // unit completion time penalty
+def Rat global_xFR() = 1; // unit failure rate penalty
+def Rat global_du() = 60; // VM time unit (in minutes)
+
+//=====================================
+// Aliases
+//=====================================
+
+data Price = Price(Rat priceValue);
+
+//==========================================================================
+// FUNC TYPES
+//==========================================================================
+
+//==========================================================================
+// ServiceLevels
+
+def Rat bronzeSL() = 1/2;
+def Rat silverSL() = 3/4;
+def Rat goldSL() = 1;
+
+data ServiceLevel = ServiceLevel(Rat serviceLevelValue);
+
+//==========================================================================
+// SLA
+
+data SLA = SLA(	Int slaId, 
+			   	Int slaTimeZone, 
+			   	Int slaUserCount,
+			   	ServiceLevel slaServiceLevel); 
+
+def Rat maxFR(SLA sla) 
+	= ceiling(2/serviceLevelValue(slaServiceLevel(sla)));
+
+//==========================================================================
+// RequestPriority
+
+def Rat adHocPriority() = 1;
+def Rat scheduledPriority() = 1/2;
+
+data RequestPriority = RequestPriority(Rat requestPriorityValue);
+
+//==========================================================================
+// VMData
+
+data VMId = VMId(Int vmIdValue);
+data VMData = VMData(VMId vmId, Rat vmClock, Int vmCores, Int vmMemory, Int vmDisk);
+
+def Rat vmPower(VMData d) 
+	= vmPower3(vmClock(d), vmCores(d), vmMemory(d));
+
+def Rat vmPower3(Rat clk, Int cor, Int mem)
+	= (clk * cor) + (6 * mem / 10);
+
+def Rat vmSpec(VMData d) 
+	= vmPower(d) + vmDisk(d);
+
+def Price vmUnitCost(VMData d) 
+	= Price((266/100000) * vmSpec(d));
+
+//==========================================================================
+// Request
+
+data RequestId = RequestId(Int requestIdValue);
+data Request = NoRequest | Request(	RequestId requestId,  
+									Rat requestSize,
+									Int requestUser,
+									RequestPriority requestPriority,
+									Time requestReceiveTime,
+									SLA requestSLA,
+									VMData requestDefaultVMData);
+
+def Rat requestPhi(Request r) 
+	= rawRequestPhi(requestSLA(r), requestPriority(r));
+
+def Rat rawRequestPhi(SLA sla, RequestPriority p) 
+	= serviceLevelValue(slaServiceLevel(sla)) * requestPriorityValue(p);
+
+def Duration requestMaxCT(Request r)
+	= rawRequestMaxCT(requestSize(r), requestPhi(r));
+
+def Duration rawRequestMaxCT(Rat size, Rat phi)
+	= Duration((global_kCT() * size) / phi);
+
+def Price requestPrice(Request r)
+	= Price(global_xP() * requestSize(r) * requestPhi(r));
+
+def Price requestPenaltyFR(Request r)
+	= Price(global_xFR() * serviceLevelValue(slaServiceLevel(requestSLA(r))) 
+							* serviceLevelValue(slaServiceLevel(requestSLA(r))));
+							
+
+//==========================================================================
+// VMInfo
+
+data VMInfo = VMInfo(	VMData vmInfoVMData,
+					  	Time vmInfoActionTime,
+					  	Time vmInfoStartTime,
+					  	Time vmInfoLaunchTime,
+					  	Rat vmScore,
+					  	Bool vmInfoFirstUse);
+
+//==========================================================================
+// Task
+
+data Task = Task(Request taskRequest, List<VMInfo> taskVMInfoList);
+
+//==========================================================================
+// Problem
+
+data Problem = Problem(	Map<RequestId, Task> problemTaskMap,
+						Map<VMId, VMInfo> problemVMInfoMap);
+
+//==========================================================================
+// Solution
+
+data Solution = NoSolution | Solution(	Problem solutionProblem,
+										List<Request> solutionRejections,
+										Map<VMId, Pair<VMInfo, List<Request>>> solutionAssignments,
+    									Price solutionUtility,
+    									List<Pair<RequestId,Int>> solutionMaps);
+
+
+
+
+/**
+ * Returns the length of list 'list'.
+ */
+def Int mylength(List<VMInfo> list) = 
+   case list { 
+      Nil => 0 ; 
+      Cons(p, l) => 1 + mylength(l) ; 
+   };
+
+
+
+def Maybe<Pair<VMInfo, List<Request>>> mylookup(Map<VMId, Pair<VMInfo, List<Request>>> ms, VMId k) = // retrieve from the map
+  case ms {
+     InsertAssoc(Pair(k, y), _) => Just(y);
+     InsertAssoc(_, tm) => mylookup(tm, k);
+     EmptyMap => Nothing;
+  };
+ 
+
+def VMInfo mynth(List<VMInfo> list, Int n) = 
+  case n { 
+    0 => head(list) ; 
+    _ => mynth(tail(list), n-1); 
+  };
+
+//==========================================================================
+// SOLVER
+//==========================================================================
+
+interface Solver {
+	Solution bestSolution();
+  
+  	// uncomment if needed (see main)
+  	// List<Solution> createNextGeneration(List<Solution> previous, Int pop_count, Map<VMId, VM> pool)
+}
+
+class Solver(
+	Rat vmPower
+) implements Solver{
+
+	//Bool cancelled = False;
+	Solution best = NoSolution;
+  
+	Solution bestSolution(){
+		return best;
+	}
+  
+  	/*
+    THIS IS THE TOP-LEVEL TARGET METHOD FOR RESOURCE ANALYSIS
+    Q: how many computational steps w.r.t. sizes of params?
+    
+    This method calls:
+    	- this.mutate(..)
+        - this.crossover(..)
+        - vm.bestSolution(..)
+  	*/
+  List<Solution> createNextGeneration(List<Solution> previous, Int pop_count, Map<VMId, VM> pool){
+		List<VM> vms = values(pool);
+		Int vm_count = length( vms );	
+    Int top_count = ceiling(pop_count / 20);
+    List<Solution> next_generation = Nil;
+		Int i = 0;
+		//while (!cancelled && i < pop_count){
+		while (i < pop_count){
+			Solution solution = nth(previous, random(top_count));
+			Rat f = randomf();
+			if (f < 1/4 || vm_count == 0){
+				solution = this.mutate(solution);
+			}else if (f < 1/2){
+				Solution another = nth(previous, random(top_count));
+				solution = this.crossover(solution, another);
+			}else if (f < 3/4){
+                 	// note: vm_count > 0 (see 1st case above)
+      			VM vm = nth(vms, random(vm_count));
+      			if (vm != null){
+					solution = await vm!bestSolution();
+                }
+			}// just use 'solution' again
+			next_generation = Cons(solution, next_generation);
+			i = i + 1;
+		}
+		return next_generation;
+  }
+  
+	/*
+    INVOKED BY createNextGeneration(..)
+    
+    This method calls:
+    	- this.randomMap(..)
+        - this.createSolution(..)
+  	*/
+  Solution mutate(Solution solution){
+		Problem problem = solutionProblem(solution);
+		Map<RequestId, Task> task_map = problemTaskMap(problem);
+		List<Pair<RequestId,Int>> old_maps = solutionMaps(solution);
+		List<Pair<RequestId,Int>> new_maps = Nil;
+		Int i = 0;
+		
+		//Int replace = random(length(old_maps)); // choose a map to mutate
+		Int replace = length(old_maps); //new
+		while(old_maps != Nil){
+			Pair<RequestId,Int> old_map = head(old_maps);
+			Bool use_old_map = True;
+			if (i == replace){
+				RequestId request_id = fst(old_map);
+				Maybe<Task> maybe_task = lookup(task_map, request_id);
+				if (maybe_task != Nothing){
+					Task task = fromJust(maybe_task);
+					Pair<RequestId,Int> new_map = this.randomMap(task);
+					new_maps = appendright(new_maps, new_map); //We have to fix it!!
+					use_old_map = False;
+				}
+			}
+			if (use_old_map){
+				new_maps = appendright(new_maps, old_map); //We have to fix it!!
+			}
+			old_maps = tail(old_maps);
+			i = i + 1;
+		}
+		return this.createSolution(problem, new_maps);
+	}
+
+	/*
+    INVOKED BY createNextGeneration(..)
+    
+    This method calls:
+    	- this.contains(..)
+        - this.createSolution(..)
+  	*/
+  Solution crossover(Solution s1, Solution s2){
+		Problem problem = solutionProblem(s1);
+		Map<RequestId, Task> task_map = problemTaskMap(problem);
+		List<Pair<RequestId,Int>> old_maps = solutionMaps(s1);
+		List<Pair<RequestId,Int>> new_maps = Nil;
+		List<RequestId> used = Nil;
+		Int i = 0;
+		Int n = random(length(old_maps)); // random crossover point
+		//Int n = length(old_maps);//new 
+		while (i < n){
+			Pair<RequestId,Int> map = head(old_maps);
+			new_maps = appendright(new_maps, map); //WE HAVE TO FIX IT!!!
+			used = Cons(fst(map), used);
+			old_maps = tail(old_maps);
+			i = i + 1;
+		}
+		old_maps = solutionMaps(s2);
+		while(old_maps != Nil){
+			Pair<RequestId,Int> map = head(old_maps);
+			Bool already_used = this.contains(used, fst(map)); //WE HAVE TO FIX IT!!
+			if (!already_used){
+				new_maps = appendright(new_maps, map); //WE HAVE TO FIX IT!!
+			}
+			old_maps = tail(old_maps);
+		}
+		return this.createSolution(problem, new_maps);
+  }
+    
+    /*
+    INVOKED BY mutate(..)
+  	*/
+  Pair<RequestId,Int> randomMap(Task task){
+		Request request = taskRequest(task);
+		RequestId request_uuid = requestId(request);
+		List<VMInfo> vm_info_list = taskVMInfoList(task);
+		Int n = length(vm_info_list);
+		Int i = 0;
+		Int selected = -1;
+	/*	while (selected < 0 && i < n){
+			if (randomf() > (1/4)){
+				selected = i;
+			}
+			i = i + 1;
+		}*/
+		while (i < n){
+		    if (selected < 0 && randomf() > (1/4)){
+			selected = i;
+		    }
+		    i = i + 1;
+		}
+		if (selected < 0){
+			selected = random(n + 1); // extra ‘1’ is for rejections
+		}
+        return Pair(request_uuid, selected);
+    }
+
+	/*
+    INVOKED BY mutate(..) and crossover(..)
+    
+    This method calls:
+    	- this.utility(..)
+  	*/
+  Solution createSolution(Problem problem, List<Pair<RequestId,Int>> maps){
+    Map<RequestId, Task> task_map = problemTaskMap(problem);
+		List<Request> rejected = Nil;
+		Map<VMId, Pair<VMInfo, List<Request>>> assigned = EmptyMap;
+		Rat utility = 0;
+		Int n = length(maps);
+		Int i = 0;
+		List<VMId> vm_ids = Nil;
+		
+		while (i < n){
+     	Pair<RequestId,Int> map = nth(maps, i);
+			RequestId request_id = fst(map);
+			Int vmi_index = snd(map);
+			Maybe<Task> maybe_task = lookup(task_map, request_id);
+			if (maybe_task != Nothing){
+				Task task = fromJust(maybe_task);
+				Request request = taskRequest(task);
+				List<VMInfo> vmis = taskVMInfoList(task);
+				if (vmi_index >= mylength(vmis)){
+					rejected = Cons(request, rejected);
+					Rat penalty_fr = priceValue(requestPenaltyFR(request));
+					utility = utility - penalty_fr;
+				}else{
+					VMInfo vm_info = mynth(vmis, vmi_index);
+					VMId vm_id = vmId(vmInfoVMData(vm_info));
+					Maybe<Pair<VMInfo, List<Request>>> maybe_assigned = mylookup(assigned, vm_id);
+					List<Request> requests = Nil;
+					if (maybe_assigned != Nothing){
+						Pair<VMInfo, List<Request>> p = fromJust(maybe_assigned);
+						requests = snd(p);
+					}
+					requests = Cons(request, requests);
+					//vm_id = VMId(0);//new <--
+					//VMData vm_data = VMData(vm_id, 0, 0, 0, 0);
+					//vm_info = VMInfo(	vm_data, Time(0), Time(0), Time(0), 0, True);
+					//requests = Nil;
+					assigned = put(assigned, vm_id, Pair(vm_info, requests)); //WE HAVE TO FIX THIS STATEMENT
+					vm_ids = Cons(vm_id, vm_ids); //new
+				}
+			}
+			i = i + 1;
+		}
+		
+		//Set<VMId> vm_ids = keys(assigned);
+		while(vm_ids != Nil){
+      //VMId vm_id = take(vm_ids);
+      VMId vm_id = head(vm_ids);//new
+			Maybe<Pair<VMInfo, List<Request>>> maybe_assigned = lookup(assigned, vm_id);
+			if (maybe_assigned != Nothing){
+				Pair<VMInfo, List<Request>> p = fromJust(maybe_assigned);
+				VMInfo vm_info = fst(p);
+				List<Request> requests = snd(p);
+				Triple<Rat, List<Request>, List<Request>> t = this.utility(vm_info, requests);
+				utility = utility + fstT(t);
+				List<Request> accepted = sndT(t);
+				List<Request> rejects = trd(t);
+				if (length(rejects) > 0){
+					assigned = put(assigned, vm_id, Pair(vm_info, accepted));
+					while (rejects != Nil){
+						rejected = Cons(head(rejects), rejected);
+						rejects = tail(rejects);
+					}
+				} 
+			}
+    	//vm_ids = remove(vm_ids, vm_id);
+    	vm_ids = tail(vm_ids);
+     	i = i + 1;
+		}
+		
+		return Solution(problem, rejected, assigned, Price(utility), maps);
+	}
+
+	/*
+    INVOKED BY createSolution(..)
+  	*/
+  	Triple<Rat, List<Request>, List<Request>> utility(VMInfo vm_info, List<Request> requests){
+		VMData vmData = vmInfoVMData(vm_info);
+		Rat utility = 0;
+		List<Request> accepted = Nil;
+		List<Request> rejected = Nil;
+		Rat tACT = timeValue(vmInfoActionTime(vm_info));
+		Rat tSTART = timeValue(vmInfoStartTime(vm_info));
+		Rat tLAUNCH = timeValue(vmInfoLaunchTime(vm_info));
+		Bool used = !vmInfoFirstUse(vm_info);
+		List<Request> list = requests;
+		while (list != Nil){
+			Request request = head(list);
+			Rat tRCV = timeValue(requestReceiveTime(request));
+			Rat size = requestSize(request);
+			Rat pow = vmPower(vmData);
+			Rat dXT = ((11/10) * size) / pow;
+			Rat tEND = tSTART + (2 * dXT);
+			Rat dAT = tACT - tRCV;
+			Rat dQT = tSTART - tACT;
+			Rat dXT_1_5 = ((3/2) * dXT);
+			
+			// price for using VM ..
+
+			Rat uc = priceValue(vmUnitCost(vmData));
+			Rat price_at_start = 0;
+			if (used){
+				price_at_start = uc * ceiling((tSTART - tLAUNCH) / global_du());
+			}
+			Rat price_at_end = uc * ceiling((tEND - tLAUNCH) / global_du());
+			Rat vm_price = price_at_end - price_at_start;
+			
+			// completion-time penalty ..
+			
+			Rat dCT = dAT + dQT + dXT_1_5;
+			Rat maxCT = durationValue(requestMaxCT(request));
+			Rat diffCT = 0;
+			if (dCT > maxCT){
+				diffCT = dCT - maxCT;
+			}
+			Rat phi = requestPhi(request);
+			Rat penalty_ct = global_xCT() * diffCT * phi;
+			
+			// utility ..
+	
+			Rat income = priceValue(requestPrice(request));
+			utility = utility + (income - penalty_ct - vm_price);
+			
+			// will it survive the time-out?
+
+			Rat penalty_fr = priceValue(requestPenaltyFR(request));
+			Rat cut_dCT = maxCT + (global_xCT() * ((income - vm_price + penalty_fr) / phi));
+			Rat dTO = cut_dCT - dAT - dXT_1_5;
+			if (dTO < dQT){
+				utility = utility - 100000;
+				rejected = Cons(request, rejected);
+			}else{
+				accepted = Cons(request, accepted);
+			}
+
+			// now for the next request ..
+
+			tSTART = tEND;
+			used = True;
+			list = tail(list);
+		}
+		return Triple(utility, accepted, rejected);
+	}
+	
+	/*
+    INVOKED BY crossover(..)
+  	*/
+  	Bool contains(List<RequestId> list, RequestId target){
+		Int targetId = requestIdValue(target);
+		Bool found = False;
+		List<RequestId> l = list;
+		while (!found && l != Nil){
+			Int id = requestIdValue(head(l));
+			if (targetId == id){
+				found = True;
+			}
+			l = tail(l);
+		}
+		return found;
+	}
+	
+}
+
+//=====================================
+// VM
+//=====================================
+
+interface VM{
+	Solution bestSolution();
+}
+
+class VM(
+	VMData vmData
+) implements VM{
+  
+	Solver solver;
+  
+  	// INIT
+  	{
+      solver = new Solver(vmPower(vmData)); // —> Separate COG on DEPLOYMENT COMP
+    }
+  
+	Solution bestSolution(){
+		Solution solution = NoSolution;
+		if (solver != null){
+			solution = await solver!bestSolution();
+		}
+		return solution;
+	}
+  
+}
+
+//==========================================================================
+// MAIN
+//==========================================================================
+ 
+{
+	/* 
+    // If needed:
+        
+    // 1. create a solver instance ...
+        
+    Rat clk = <cpu clock speed>
+    Int cor = <cpu cores count>
+    Int mem = <cpu memory>
+    Rat vmPower = vmPower3(clk, cor, mem);
+    Solver solver = new local Solver(vmPower);
+    
+    // 2. prepare the params for creating a new generation ...
+    
+    Int pop_count = <number of solutions in a single generation>
+    List<Solution> previous = <list of solutions, size = 'pop_count'>
+    Map<VMId, VM> pool = <arbitrary collection of VMs>
+    
+    // 3. invoke the target 'createNextGeneration' method
+    
+    solver.createNextGeneration(previous, pop_count, pool);
+    
+  	*/ 
+}

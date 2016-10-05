@@ -1,0 +1,79 @@
+module Scheds;
+import * from ABS.StdLib;
+
+interface B {
+    Int m();
+    Int l();
+}
+
+class A() implements B {
+
+    Int m(){return 1;}
+    Int l(){return 2;}
+    
+    Int p(){
+	Fut<Int> f;
+	Fut<Int> g;
+	B a;
+	a = new cog A();
+	f = a ! m();
+	g = a ! l();  
+	await f?;
+	await g?;
+	Int f1 = f.get;
+	Int g1 = g.get;
+	return f1 + g1;
+    }
+}
+
+interface Priority {
+    Unit odd();
+    Unit even();
+    Int m1();
+    Int m2();
+    Int p();
+}
+
+class Prior implements Priority {
+    Int f = 10;
+    Int g = 0;
+    
+    Unit odd(){f = f*2+1;}
+    Unit even(){f = f*2;}
+    
+    Int m1(){
+	Int r = 0;
+	this!odd();
+	this!even();
+	//Fut<Int> fut = this!even();
+	//await fut?;
+	if (f == 10) r = 0;
+	else if (f%2 == 0) r = 1;
+	else r = -1;
+	return r;
+    }
+
+    Int m2(){
+	f = 10;
+	this!odd();
+	this!even();
+	Fut<Int> fut = this!p();
+	await fut?;
+	Int n = fut.get;
+	//Int n = this.p();
+	//g = f;
+	return n;
+    }
+    
+    Int p(){
+	Int r = 0;
+	if (f == 10) r = 0;
+	else if (f%2 == 0) r = 1;
+	else r = -1;
+	return r;
+    }
+} 
+
+{
+Int n = 0;
+}

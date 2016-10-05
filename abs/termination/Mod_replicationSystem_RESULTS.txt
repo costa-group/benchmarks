@@ -1,0 +1,442 @@
+Termination time of Current method: 992300 ms
+Termination time of new approach: 47839 ms
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| #  | Type         | Nodes                                                             | Terminating OLD   | Termination NEW   | Time    |
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| 0  | non_recursive| [case_98]                                                         | yes               | yes               | -       |
+| 1  | non_recursive| [entries]                                                         | yes               | yes               | -       |
+| 2  | non_recursive| [case_27]                                                         | yes               | yes               | -       |
+| 3  | non_recursive| [snd]                                                             | yes               | yes               | -       |
+| 4  | non_recursive| [dirContent]                                                      | yes               | yes               | -       |
+| 5  | non_recursive| [BasicReplicationItemImpl.getContents]                            | yes               | yes               | -       |
+| 6  | non_recursive| [BasicReplicationItemImpl.getState]                               | yes               | yes               | -       |
+| 7  | non_recursive| [emptyDir]                                                        | yes               | yes               | -       |
+| 8  | non_recursive| [rootId]                                                          | yes               | yes               | -       |
+| 9  | non_recursive| [rootDir]                                                         | yes               | yes               | -       |
+| 10 | non_recursive| [case_26]                                                         | yes               | yes               | -       |
+| 11 | non_recursive| [fst]                                                             | yes               | yes               | -       |
+| 12 | non_recursive| [case_56]                                                         | yes               | yes               | -       |
+| 13 | non_recursive| [deroot]                                                          | yes               | yes               | -       |
+| 14 | non_recursive| [fileSep]                                                         | yes               | yes               | -       |
+| 15 | non_recursive| [case_59]                                                         | yes               | yes               | -       |
+| 16 | non_recursive| [getFileContent]                                                  | yes               | yes               | -       |
+| 17 | non_recursive| [case_58]                                                         | yes               | yes               | -       |
+| 18 | non_recursive| [getFileId]                                                       | yes               | yes               | -       |
+| 19 | non_recursive| [substr]                                                          | yes               | yes               | -       |
+| 20 | non_recursive| [headStr]                                                         | yes               | yes               | -       |
+| 21 | non_recursive| [strapp]                                                          | yes               | yes               | -       |
+| 22 | non_recursive| [strlen]                                                          | yes               | yes               | -       |
+| 23 | non_recursive| [tailStr]                                                         | yes               | yes               | -       |
+| 24 | recursive    | [case_13,concatenate]                                             | yes               | yes               | -       |
+| 25 | non_recursive| [appendright]                                                     | yes               | yes               | -       |
+| 26 | recursive    | [case_14,reverse]                                                 | yes               | yes               | -       |
+| 27 | recursive    | [case_34,case_35,case_36,split2]                                  | yes               | yes               | -       |
+| 28 | non_recursive| [case_33]                                                         | yes               | yes               | -       |
+| 29 | non_recursive| [split]                                                           | yes               | yes               | -       |
+| 30 | recursive    | [case_83,create]                                                  | yes               | yes               | -       |
+| 31 | recursive    | [case_20,put]                                                     | yes               | yes               | -       |
+| 32 | non_recursive| [case_23]                                                         | yes               | yes               | -       |
+| 33 | non_recursive| [fromJust]                                                        | yes               | yes               | -       |
+| 34 | recursive    | [case_18,lookup]                                                  | yes               | yes               | -       |
+| 35 | non_recursive| [lookupUnsafe]                                                    | yes               | yes               | -       |
+| 36 | recursive    | [case_4,contains]                                                 | yes               | yes               | -       |
+| 37 | recursive    | [case_17,keys]                                                    | yes               | yes               | -       |
+| 38 | recursive    | [case_80,case_81,case_82,updateFile1]                             | yes               | yes               | -       |
+| 39 | non_recursive| [updateFile]                                                      | yes               | yes               | -       |
+| 40 | non_recursive| [case_79]                                                         | yes               | yes               | -       |
+| 41 | non_recursive| [updateDirWith]                                                   | yes               | yes               | -       |
+| 42 | non_recursive| [updateDirWithDir]                                                | yes               | yes               | -       |
+| 43 | non_recursive| [BasicReplicationItemImpl.init]                                   | yes               | yes               | -       |
+| 44 | non_recursive| [BasicReplicationItemImpl.setState]                               | yes               | yes               | -       |
+| 45 | recursive    | [case_19,lookupDefault]                                           | yes               | yes               | -       |
+| 46 | non_recursive| [SyncClientImpl.becomesState]                                     | yes               | yes               | -       |
+| 47 | non_recursive| [SyncClientImpl.waitToBoot]                                       | yes               | yes               | -       |
+| 48 | non_recursive| [cont_39]                                                         | yes               | yes               | -       |
+| 49 | non_recursive| [SyncClientImpl.boot]                                             | yes               | yes               | -       |
+| 50 | non_recursive| [cont_40]                                                         | yes               | yes               | -       |
+| 51 | non_recursive| [SyncClientImpl.replicate]                                        | yes               | yes               | -       |
+| 52 | non_recursive| [cont_41]                                                         | yes               | yes               | -       |
+| 53 | non_recursive| [SyncClientImpl.waitToReplicate]                                  | yes               | yes               | -       |
+| 54 | non_recursive| [cont_42]                                                         | yes               | yes               | -       |
+| 55 | non_recursive| [SyncClientImpl.end]                                              | yes               | yes               | -       |
+| 56 | non_recursive| [cont_43]                                                         | yes               | yes               | -       |
+| 57 | non_recursive| [if_43]                                                           | yes               | yes               | -       |
+| 58 | non_recursive| [if_42]                                                           | yes               | yes               | -       |
+| 59 | non_recursive| [if_41]                                                           | yes               | yes               | -       |
+| 60 | non_recursive| [if_40]                                                           | yes               | yes               | -       |
+| 61 | non_recursive| [if_39]                                                           | yes               | yes               | -       |
+| 62 | non_recursive| [ClientJobImpl.becomeState]                                       | yes               | yes               | -       |
+| 63 | non_recursive| [cont_24]                                                         | yes               | yes               | -       |
+| 64 | non_recursive| [lowlevelDeadline]                                                | yes               | yes               | -       |
+| 65 | non_recursive| [case_22]                                                         | yes               | yes               | -       |
+| 66 | non_recursive| [deadline]                                                        | yes               | yes               | -       |
+| 67 | non_recursive| [case_96]                                                         | yes               | yes               | -       |
+| 68 | non_recursive| [dline]                                                           | yes               | yes               | -       |
+| 69 | non_recursive| [case_31]                                                         | yes               | yes               | -       |
+| 70 | non_recursive| [durationValue]                                                   | yes               | yes               | -       |
+| 71 | non_recursive| [currentms]                                                       | yes               | yes               | -       |
+| 72 | non_recursive| [now]                                                             | yes               | yes               | -       |
+| 73 | non_recursive| [case_95]                                                         | yes               | yes               | -       |
+| 74 | non_recursive| [sched]                                                           | yes               | yes               | -       |
+| 75 | non_recursive| [case_93]                                                         | yes               | yes               | -       |
+| 76 | non_recursive| [schedname]                                                       | yes               | yes               | -       |
+| 77 | non_recursive| [case_30]                                                         | yes               | yes               | -       |
+| 78 | non_recursive| [timeValue]                                                       | yes               | yes               | -       |
+| 79 | non_recursive| [if_24]                                                           | yes               | yes               | -       |
+| 80 | non_recursive| [ClientJobImpl.beginMeasurement]                                  | yes               | yes               | -       |
+| 81 | non_recursive| [SyncClientImpl.getClientDataBase]                                | yes               | yes               | -       |
+| 82 | non_recursive| [ClientJobImpl.clientDB]                                          | yes               | yes               | -       |
+| 83 | non_recursive| [cont_38]                                                         | yes               | yes               | -       |
+| 84 | non_recursive| [if_38]                                                           | yes               | yes               | -       |
+| 85 | non_recursive| [ClientJobImpl.command]                                           | yes               | yes               | -       |
+| 86 | recursive    | [case_61,makePaths]                                               | yes               | yes               | -       |
+| 87 | non_recursive| [case_29]                                                         | yes               | yes               | -       |
+| 88 | non_recursive| [tail]                                                            | yes               | yes               | -       |
+| 89 | non_recursive| [case_28]                                                         | yes               | yes               | -       |
+| 90 | non_recursive| [head]                                                            | yes               | yes               | -       |
+| 91 | recursive    | [case_10,length]                                                  | yes               | yes               | -       |
+| 92 | recursive    | [case_74,case_75,case_76,case_77,getFromEntry]                    | yes               | yes               | -       |
+| 93 | non_recursive| [case_1]                                                          | yes               | yes               | -       |
+| 94 | non_recursive| [isJust]                                                          | yes               | yes               | -       |
+| 95 | non_recursive| [hasQualifiedEntry]                                               | yes               | yes               | -       |
+| 96 | non_recursive| [case_71]                                                         | yes               | yes               | -       |
+| 97 | non_recursive| [hasQualifiedEntriesIn]                                           | yes               | yes               | -       |
+| 98 | non_recursive| [DataBaseImpl.hasFile]                                            | yes               | yes               | -       |
+| 99 | non_recursive| [ClientJobImpl.hasFile]                                           | yes               | yes               | -       |
+| 100| non_recursive| [case_97]                                                         | yes               | yes               | -       |
+| 101| non_recursive| [content]                                                         | yes               | yes               | -       |
+| 102| non_recursive| [fileContent]                                                     | yes               | yes               | -       |
+| 103| non_recursive| [cont_14]                                                         | yes               | yes               | -       |
+| 104| non_recursive| [case_73]                                                         | yes               | yes               | -       |
+| 105| non_recursive| [case_72]                                                         | yes               | yes               | -       |
+| 106| non_recursive| [getFromEntryIn]                                                  | yes               | yes               | -       |
+| 107| non_recursive| [if_14]                                                           | yes               | yes               | -       |
+| 108| non_recursive| [DataBaseImpl.getContent]                                         | yes               | yes               | -       |
+| 109| non_recursive| [file]                                                            | yes               | yes               | -       |
+| 110| non_recursive| [updateDirWithFile]                                               | yes               | yes               | -       |
+| 111| non_recursive| [DataBaseImpl.updateFile]                                         | yes               | yes               | -       |
+| 112| non_recursive| [cont_34]                                                         | yes               | yes               | -       |
+| 113| non_recursive| [if_34]                                                           | yes               | yes               | -       |
+| 114| non_recursive| [ClientJobImpl.continue]                                          | yes               | yes               | -       |
+| 115| non_recursive| [SyncClientImpl.jobCountAndMaximumTransactionId]                  | yes               | yes               | -       |
+| 116| non_recursive| [SyncClientImpl.isShutdownRequested]                              | yes               | yes               | -       |
+| 117| non_recursive| [SyncServerImpl.requestShutDown]                                  | yes               | yes               | -       |
+| 118| non_recursive| [UpdaterImpl.shutDown]                                            | yes               | yes               | -       |
+| 119| non_recursive| [cont_11]                                                         | yes               | yes               | -       |
+| 120| non_recursive| [DataBaseImpl.getRoot]                                            | yes               | yes               | -       |
+| 121| non_recursive| [DataBaseImpl.getTransactions]                                    | yes               | yes               | -       |
+| 122| recursive    | [case_86,case_87,firstValues]                                     | yes               | yes               | -       |
+| 123| non_recursive| [DataBaseImpl.lastTransactionIds]                                 | yes               | yes               | -       |
+| 124| non_recursive| [SyncServerImpl.getUpdatableDataBase]                             | yes               | yes               | -       |
+| 125| non_recursive| [SyncServerImpl.listSchedules]                                    | yes               | yes               | -       |
+| 126| non_recursive| [case_60]                                                         | yes               | yes               | -       |
+| 127| non_recursive| [case_57]                                                         | yes               | yes               | -       |
+| 128| non_recursive| [isFile]                                                          | yes               | yes               | -       |
+| 129| non_recursive| [makeContent]                                                     | yes               | yes               | -       |
+| 130| non_recursive| [updateDirWithContent]                                            | yes               | yes               | -       |
+| 131| recursive    | [case_78,updateDirWithContents]                                   | yes               | yes               | -       |
+| 132| recursive    | [applyChanges,case_84,case_85]                                    | yes               | yes               | -       |
+| 133| non_recursive| [TesterImpl.checkDataORIGIN_ReplicationItemDelta]                 | yes               | yes               | -       |
+| 134| non_recursive| [cont_8]                                                          | yes               | yes               | -       |
+| 135| non_recursive| [cont_9]                                                          | yes               | yes               | -       |
+| 136| non_recursive| [case_9]                                                          | yes               | yes               | -       |
+| 137| non_recursive| [next]                                                            | yes               | yes               | -       |
+| 138| recursive    | [entrywhile_3,while_3]                                            | yes               | yes               | -       |
+Built-in SCC: #139 [eq]
+| 139| non_recursive| [eq]                                                              | yes               | yes               | -       |
+| 140| non_recursive| [emptySet]                                                        | yes               | yes               | -       |
+Built-in SCC: #141 [neg]
+| 141| non_recursive| [neg]                                                             | yes               | yes               | -       |
+| 142| non_recursive| [hasNext]                                                         | yes               | yes               | -       |
+| 143| non_recursive| [TesterImpl.compareEntrySets]                                     | yes               | yes               | -       |
+| 144| non_recursive| [makePath]                                                        | yes               | yes               | -       |
+| 145| non_recursive| [case_7]                                                          | yes               | yes               | -       |
+| 146| non_recursive| [insertElement]                                                   | yes               | yes               | -       |
+| 147| recursive    | [case_6,union]                                                    | yes               | yes               | -       |
+| 148| recursive    | [case_66,case_67,getFileIdFromEntries]                            | yes               | yes               | -       |
+| 149| recursive    | [case_64,case_65,getFileIdFromEntries1]                           | yes               | yes               | -       |
+| 150| non_recursive| [case_63]                                                         | yes               | yes               | -       |
+| 151| non_recursive| [case_62]                                                         | yes               | yes               | -       |
+| 152| non_recursive| [getFileIdFromDir]                                                | yes               | yes               | -       |
+| 153| non_recursive| [case_24]                                                         | yes               | yes               | -       |
+| 154| non_recursive| [left]                                                            | yes               | yes               | -       |
+| 155| non_recursive| [case_70]                                                         | yes               | yes               | -       |
+| 156| non_recursive| [makeMaybeEitherValue]                                            | yes               | yes               | -       |
+| 157| non_recursive| [case_69]                                                         | yes               | yes               | -       |
+| 158| non_recursive| [case_68]                                                         | yes               | yes               | -       |
+| 159| non_recursive| [qualify]                                                         | yes               | yes               | -       |
+| 160| non_recursive| [case_25]                                                         | yes               | yes               | -       |
+| 161| non_recursive| [right]                                                           | yes               | yes               | -       |
+| 162| non_recursive| [case_44]                                                         | yes               | yes               | -       |
+| 163| non_recursive| [isDirectory]                                                     | yes               | yes               | -       |
+| 164| non_recursive| [qualifyEntry]                                                    | yes               | yes               | -       |
+| 165| recursive    | [case_45,qualifyFileEntry]                                        | yes               | yes               | -       |
+| 166| non_recursive| [TesterImpl.compareDir]                                           | yes               | yes               | -       |
+| 167| non_recursive| [TesterImpl.compareFile]                                          | yes               | yes               | -       |
+| 168| non_recursive| [cont_10]                                                         | yes               | yes               | -       |
+| 169| non_recursive| [dir]                                                             | yes               | yes               | -       |
+| 170| non_recursive| [if_10]                                                           | yes               | yes               | -       |
+| 171| non_recursive| [if_9]                                                            | yes               | yes               | -       |
+| 172| non_recursive| [case_55]                                                         | yes               | yes               | -       |
+| 173| non_recursive| [item]                                                            | yes               | yes               | -       |
+| 174| non_recursive| [if_8]                                                            | yes               | yes               | -       |
+| 175| non_recursive| [case_2]                                                          | yes               | yes               | -       |
+| 176| non_recursive| [isLeft]                                                          | yes               | yes               | -       |
+| 177| non_recursive| [TesterImpl.checkDataORIGIN_DirDelta]                             | yes               | yes               | -       |
+Built-in SCC: #178 [and_op]
+| 178| non_recursive| [and_op]                                                          | yes               | yes               | -       |
+| 179| non_recursive| [cont_3]                                                          | yes               | yes               | -       |
+| 180| non_recursive| [cont_4]                                                          | yes               | yes               | -       |
+| 181| non_recursive| [cont_5]                                                          | yes               | yes               | -       |
+| 182| recursive    | [case_37,case_38,isPrefix]                                        | yes               | yes               | -       |
+| 183| recursive    | [case_39,stringToChar]                                            | yes               | yes               | -       |
+| 184| non_recursive| [isPrefixText]                                                    | yes               | yes               | -       |
+| 185| non_recursive| [filter]                                                          | yes               | yes               | -       |
+| 186| recursive    | [case_40,case_41,filters]                                         | yes               | yes               | -       |
+| 187| non_recursive| [TesterImpl.compareDirWithPattern]                                | yes               | yes               | -       |
+| 188| non_recursive| [cont_6]                                                          | yes               | yes               | -       |
+| 189| non_recursive| [cont_7]                                                          | yes               | yes               | -       |
+| 190| non_recursive| [if_7]                                                            | yes               | yes               | -       |
+| 191| non_recursive| [if_6]                                                            | yes               | yes               | -       |
+| 192| non_recursive| [if_5]                                                            | yes               | yes               | -       |
+| 193| non_recursive| [if_4]                                                            | yes               | yes               | -       |
+Built-in SCC: #194 [neq]
+| 194| non_recursive| [neq]                                                             | yes               | yes               | -       |
+| 195| non_recursive| [if_3]                                                            | yes               | yes               | -       |
+| 196| non_recursive| [isRight]                                                         | yes               | yes               | -       |
+| 197| non_recursive| [TesterImpl.checkData]                                            | yes               | yes               | -       |
+| 198| recursive    | [entrywhile_2,while_2]                                            | yes               | yes               | -       |
+| 199| non_recursive| [case_94]                                                         | yes               | yes               | -       |
+| 200| non_recursive| [items]                                                           | yes               | yes               | -       |
+| 201| recursive    | [case_11,nth]                                                     | yes               | yes               | -       |
+| 202| recursive    | [cont_2,entrywhile_1,if_2,while_1]                                | no                | no                | -       |
+| 203| non_recursive| [TesterImpl.checkDatas]                                           | yes               | yes               | -       |
+| 204| non_recursive| [TesterImpl.analyse]                                              | yes               | yes               | -       |
+| 205| recursive    | [entrywhile_5,while_5]                                            | yes               | yes               | -       |
+| 206| non_recursive| [if_11]                                                           | yes               | yes               | -       |
+| 207| recursive    | [case_8,remove]                                                   | yes               | yes               | -       |
+| 208| non_recursive| [Network.shutDown]                                                | yes               | yes               | -       |
+| 209| non_recursive| [SyncClientImpl.requestShutDown]                                  | yes               | yes               | -       |
+| 210| non_recursive| [cont_30]                                                         | yes               | yes               | -       |
+| 211| non_recursive| [if_30]                                                           | yes               | yes               | -       |
+| 212| non_recursive| [ClientJobImpl.shutDownClient]                                    | yes               | yes               | -       |
+| 213| non_recursive| [cont_23]                                                         | yes               | yes               | -       |
+| 214| non_recursive| [SyncClientImpl.waitFor]                                          | yes               | yes               | -       |
+| 215| non_recursive| [SyncClientImpl.getAcceptor]                                      | yes               | yes               | -       |
+| 216| non_recursive| [SyncServerImpl.isShutdownRequested]                              | yes               | yes               | -       |
+| 217| non_recursive| [ConnectionThreadImpl.init]                                       | yes               | yes               | -       |
+| 218| non_recursive| [cont_0]                                                          | yes               | yes               | -       |
+| 219| non_recursive| [if_0]                                                            | yes               | yes               | -       |
+| 220| non_recursive| [SyncServerAcceptorImpl.getResource]                              | yes               | yes               | -       |
+| 221| non_recursive| [cont_1]                                                          | yes               | yes               | -       |
+| 222| non_recursive| [if_1]                                                            | yes               | yes               | -       |
+| 223| non_recursive| [SyncServerAcceptorImpl.getConnection]                            | yes               | yes               | -       |
+| 224| non_recursive| [case_89]                                                         | yes               | yes               | -       |
+| 225| non_recursive| [case_88]                                                         | yes               | yes               | -       |
+| 226| non_recursive| [defaultScheduleCost]                                             | yes               | yes               | -       |
+| 227| non_recursive| [ClientJobImpl.getConnectionThread]                               | yes               | yes               | -       |
+| 228| non_recursive| [SyncClientImpl.getId]                                            | yes               | yes               | -       |
+| 229| non_recursive| [case_91]                                                         | yes               | yes               | -       |
+| 230| non_recursive| [deadlineafter]                                                   | yes               | yes               | -       |
+Built-in SCC: #231 [gt]
+| 231| non_recursive| [gt]                                                              | yes               | yes               | -       |
+| 232| non_recursive| [case_92]                                                         | yes               | yes               | -       |
+| 233| non_recursive| [totaltime]                                                       | yes               | yes               | -       |
+| 234| non_recursive| [Recorder.record]                                                 | yes               | yes               | -       |
+| 235| non_recursive| [cont_22]                                                         | yes               | yes               | -       |
+| 236| non_recursive| [if_22]                                                           | yes               | yes               | -       |
+| 237| non_recursive| [SyncClientImpl.finishJob]                                        | yes               | yes               | -       |
+| 238| non_recursive| [cont_25]                                                         | yes               | yes               | -       |
+| 239| non_recursive| [ConnectionThreadImpl.command]                                    | yes               | yes               | -       |
+| 240| non_recursive| [SyncClientImpl.nextJob]                                          | yes               | yes               | -       |
+| 241| non_recursive| [ClientJobImpl.nextJob]                                           | yes               | yes               | -       |
+| 242| non_recursive| [cont_28]                                                         | yes               | yes               | -       |
+| 243| non_recursive| [cont_29]                                                         | yes               | yes               | -       |
+| 244| non_recursive| [case_0]                                                          | yes               | yes               | -       |
+| 245| non_recursive| [abs]                                                             | yes               | yes               | -       |
+| 246| non_recursive| [case_42]                                                         | yes               | yes               | -       |
+| 247| non_recursive| [updateJobData]                                                   | yes               | yes               | -       |
+| 248| non_recursive| [if_29]                                                           | yes               | yes               | -       |
+| 249| non_recursive| [case_21]                                                         | yes               | yes               | -       |
+| 250| non_recursive| [isDurationInfinite]                                              | yes               | yes               | -       |
+| 251| non_recursive| [if_28]                                                           | yes               | yes               | -       |
+| 252| non_recursive| [cont_27]                                                         | yes               | yes               | -       |
+| 253| non_recursive| [if_27]                                                           | yes               | yes               | -       |
+| 254| non_recursive| [cont_26]                                                         | yes               | yes               | -       |
+| 255| non_recursive| [ClientJobImpl.init]                                              | yes               | yes               | -       |
+| 256| non_recursive| [SyncClientImpl.setNext]                                          | yes               | yes               | -       |
+| 257| non_recursive| [cont_21]                                                         | yes               | yes               | -       |
+| 258| recursive    | [ClientJobImpl.establishSchedule,ClientJobImpl.executeJob,SyncClientImpl.makeJob,SyncClientImpl.scheduleJob,entrywhile_15,if_21,if_23,if_25,if_26,while_15]| no                | no                | -       |
+| 259| non_recursive| [ClientJobImpl.overwrite]                                         | yes               | yes               | -       |
+| 260| non_recursive| [cont_35]                                                         | yes               | yes               | -       |
+| 261| non_recursive| [cont_36]                                                         | yes               | yes               | -       |
+| 262| non_recursive| [cont_37]                                                         | yes               | yes               | -       |
+| 263| non_recursive| [if_37]                                                           | yes               | yes               | -       |
+| 264| non_recursive| [if_36]                                                           | yes               | yes               | -       |
+| 265| non_recursive| [if_35]                                                           | yes               | yes               | -       |
+| 266| non_recursive| [ClientJobImpl.processContent]                                    | yes               | yes               | -       |
+| 267| non_recursive| [cont_32]                                                         | yes               | yes               | -       |
+| 268| non_recursive| [cont_33]                                                         | yes               | yes               | -       |
+| 269| non_recursive| [if_33]                                                           | yes               | yes               | -       |
+| 270| non_recursive| [if_32]                                                           | yes               | yes               | -       |
+| 271| non_recursive| [ClientJobImpl.processFile]                                       | yes               | yes               | -       |
+| 272| non_recursive| [ClientJobImpl.receiveSchedule]                                   | yes               | yes               | -       |
+| 273| non_recursive| [cont_15]                                                         | yes               | yes               | -       |
+| 274| non_recursive| [if_15]                                                           | yes               | yes               | -       |
+| 275| recursive    | [case_3,set]                                                      | yes               | yes               | -       |
+| 276| non_recursive| [DataBaseImpl.prepareReplicationItem]                             | yes               | yes               | -       |
+| 277| non_recursive| [SyncClientImpl.setMaximumTransactionId]                          | yes               | yes               | -       |
+| 278| non_recursive| [cont_31]                                                         | yes               | yes               | -       |
+| 279| non_recursive| [if_31]                                                           | yes               | yes               | -       |
+| 280| non_recursive| [ClientJobImpl.registerReplicationItems]                          | yes               | yes               | -       |
+| 281| non_recursive| [Resource.consume]                                                | yes               | yes               | -       |
+| 282| recursive    | [entrywhile_16,while_16]                                          | yes               | yes               | -       |
+| 283| non_recursive| [ConnectionThreadImpl.consumeResource]                            | yes               | yes               | -       |
+| 284| non_recursive| [cont_51]                                                         | yes               | yes               | -       |
+| 285| non_recursive| [ReplicationSnapshotImpl.clearSnapshot]                           | yes               | yes               | -       |
+| 286| non_recursive| [SyncServerClientCoordinatorImpl.clearSnapshot]                   | yes               | yes               | -       |
+| 287| non_recursive| [cont_52]                                                         | yes               | yes               | -       |
+| 288| non_recursive| [if_52]                                                           | yes               | yes               | -       |
+| 289| recursive    | [case_5,size]                                                     | yes               | yes               | -       |
+| 290| non_recursive| [if_51]                                                           | yes               | yes               | -       |
+| 291| non_recursive| [SyncServerClientCoordinatorImpl.finishReplicationUpdate]         | yes               | yes               | -       |
+| 292| non_recursive| [ConnectionThreadImpl.finishReplicationUpdate]                    | yes               | yes               | -       |
+| 293| recursive    | [entrywhile_19,while_19]                                          | yes               | yes               | -       |
+| 294| non_recursive| [virtual_1]                                                       | yes               | yes               | -       |
+| 295| recursive    | [entrywhile_18,while_18]                                          | yes               | yes               | -       |
+| 296| non_recursive| [ConnectionThreadImpl.registerItems]                              | yes               | yes               | -       |
+| 297| non_recursive| [SyncServerImpl.getSchedule]                                      | yes               | yes               | -       |
+| 298| non_recursive| [cont_46]                                                         | yes               | yes               | -       |
+| 299| non_recursive| [case_90]                                                         | yes               | yes               | -       |
+| 300| non_recursive| [ssname]                                                          | yes               | yes               | -       |
+| 301| non_recursive| [if_46]                                                           | yes               | yes               | -       |
+| 302| non_recursive| [ConnectionThreadImpl.sendSchedule]                               | yes               | yes               | -       |
+| 303| non_recursive| [SyncServerImpl.getCoordinator]                                   | yes               | yes               | -       |
+| 304| non_recursive| [DataBaseImpl.refresh]                                            | yes               | yes               | -       |
+| 305| non_recursive| [ReplicationSnapshotImpl.replicationItemORIGIN_ReplicationItemDelta]| yes               | yes               | -       |
+| 306| non_recursive| [SearchDirectoryItem.init]                                        | yes               | yes               | -       |
+| 307| non_recursive| [cont_18]                                                         | yes               | yes               | -       |
+| 308| non_recursive| [if_18]                                                           | yes               | yes               | -       |
+| 309| non_recursive| [case_48]                                                         | yes               | yes               | -       |
+| 310| non_recursive| [isSearchItem]                                                    | yes               | yes               | -       |
+| 311| non_recursive| [ReplicationSnapshotImpl.replicationItemORIGIN_DirDelta]          | yes               | yes               | -       |
+| 312| non_recursive| [ReplicationFilePattern.init]                                     | yes               | yes               | -       |
+| 313| non_recursive| [cont_19]                                                         | yes               | yes               | -       |
+| 314| non_recursive| [if_19]                                                           | yes               | yes               | -       |
+| 315| non_recursive| [case_49]                                                         | yes               | yes               | -       |
+| 316| non_recursive| [isFileItem]                                                      | yes               | yes               | -       |
+| 317| non_recursive| [ReplicationSnapshotImpl.replicationItemORIGIN_FileDelta]         | yes               | yes               | -       |
+| 318| non_recursive| [ReplicationLogItem.init]                                         | yes               | yes               | -       |
+| 319| non_recursive| [cont_17]                                                         | yes               | yes               | -       |
+| 320| non_recursive| [if_17]                                                           | yes               | yes               | -       |
+| 321| non_recursive| [case_50]                                                         | yes               | yes               | -       |
+| 322| non_recursive| [isLogItem]                                                       | yes               | yes               | -       |
+| 323| non_recursive| [ReplicationSnapshotImpl.replicationItem]                         | yes               | yes               | -       |
+| 324| recursive    | [entrywhile_14,while_14]                                          | yes               | yes               | -       |
+| 325| non_recursive| [ReplicationSnapshotImpl.replicationItems]                        | yes               | yes               | -       |
+| 326| recursive    | [entrywhile_13,while_13]                                          | no                | no                | -       |
+| 327| non_recursive| [ReplicationSnapshotImpl.createReplicationItems]                  | yes               | yes               | -       |
+| 328| non_recursive| [cont_16]                                                         | yes               | yes               | -       |
+| 329| non_recursive| [virtual_0]                                                       | yes               | yes               | -       |
+| 330| recursive    | [entrywhile_12,while_12]                                          | yes               | yes               | -       |
+| 331| recursive    | [entrywhile_11,while_11]                                          | yes               | yes               | -       |
+| 332| non_recursive| [if_16]                                                           | yes               | yes               | -       |
+| 333| non_recursive| [ReplicationSnapshotImpl.refreshSnapshot]                         | yes               | yes               | -       |
+| 334| non_recursive| [SyncServerClientCoordinatorImpl.refreshSnapShot]                 | yes               | yes               | -       |
+| 335| non_recursive| [cont_50]                                                         | yes               | yes               | -       |
+| 336| non_recursive| [if_50]                                                           | yes               | yes               | -       |
+| 337| non_recursive| [SyncServerClientCoordinatorImpl.startReplicationUpdate]          | yes               | yes               | -       |
+| 338| non_recursive| [SyncServerImpl.getReplicationSnapshot]                           | yes               | yes               | -       |
+| 339| non_recursive| [ConnectionThreadImpl.startReplicationUpdate]                     | yes               | yes               | -       |
+| 340| non_recursive| [ReplicationSnapshotImpl.getIndexingId]                           | yes               | yes               | -       |
+| 341| non_recursive| [cont_44]                                                         | yes               | yes               | -       |
+| 342| non_recursive| [ReplicationSnapshotImpl.getItems]                                | yes               | yes               | -       |
+| 343| recursive    | [cont_47,cont_48,cont_49,entrywhile_20,if_47,if_48,if_49,while_20]| yes               | yes               | -       |
+| 344| non_recursive| [ConnectionThreadImpl.transferItems]                              | yes               | yes               | -       |
+| 345| recursive    | [entrywhile_17,while_17]                                          | yes               | yes               | -       |
+| 346| non_recursive| [cont_45]                                                         | yes               | yes               | -       |
+| 347| non_recursive| [if_45]                                                           | yes               | yes               | -       |
+| 348| non_recursive| [if_44]                                                           | yes               | yes               | -       |
+| 349| non_recursive| [ConnectionThreadImpl.run]                                        | yes               | yes               | -       |
+| 350| non_recursive| [DataBaseImpl.init]                                               | yes               | yes               | -       |
+| 351| non_recursive| [DataBaseImpl.listFilesAt]                                        | yes               | yes               | -       |
+| 352| non_recursive| [DataBaseImpl.update]                                             | yes               | yes               | -       |
+| 353| non_recursive| [DeploymentComponent.init]                                        | yes               | yes               | -       |
+| 354| non_recursive| [Network.init]                                                    | yes               | yes               | -       |
+| 355| non_recursive| [TesterImpl.init]                                                 | yes               | yes               | -       |
+| 356| recursive    | [entrywhile_4,while_4]                                            | yes               | yes               | -       |
+| 357| non_recursive| [Network.run]                                                     | yes               | yes               | -       |
+| 358| non_recursive| [Recorder.init]                                                   | yes               | yes               | -       |
+| 359| non_recursive| [ReplicationFilePattern.getContents]                              | yes               | yes               | -       |
+| 360| non_recursive| [cont_53]                                                         | yes               | yes               | -       |
+| 361| recursive    | [case_43,entrySet]                                                | yes               | yes               | -       |
+| 362| non_recursive| [isAncester]                                                      | yes               | yes               | -       |
+| 363| recursive    | [cont_54,entrywhile_21,if_54,while_21]                            | yes               | yes               | -       |
+| 364| non_recursive| [if_53]                                                           | yes               | yes               | -       |
+| 365| non_recursive| [ReplicationFilePattern.refresh]                                  | yes               | yes               | -       |
+| 366| non_recursive| [ReplicationLogItem.getContents]                                  | yes               | yes               | -       |
+| 367| non_recursive| [cont_55]                                                         | yes               | yes               | -       |
+| 368| non_recursive| [if_55]                                                           | yes               | yes               | -       |
+| 369| non_recursive| [ReplicationLogItem.refresh]                                      | yes               | yes               | -       |
+| 370| non_recursive| [ReplicationSnapshotImpl.init]                                    | yes               | yes               | -       |
+| 371| non_recursive| [ReplicationSystem.getClientDeployment]                           | yes               | yes               | -       |
+| 372| non_recursive| [ReplicationSystem.getServerDeployment]                           | yes               | yes               | -       |
+| 373| recursive    | [case_15,map]                                                     | yes               | yes               | -       |
+| 374| non_recursive| [stateMachine]                                                    | yes               | yes               | -       |
+| 375| non_recursive| [SyncClientImpl.init]                                             | yes               | yes               | -       |
+| 376| non_recursive| [ReplicationSystem.getSyncClient]                                 | yes               | yes               | -       |
+| 377| recursive    | [case_46,case_47,schedulemap]                                     | yes               | yes               | -       |
+| 378| non_recursive| [SyncServerImpl.init]                                             | yes               | yes               | -       |
+| 379| non_recursive| [ReplicationSystem.getSyncServer]                                 | yes               | yes               | -       |
+| 380| non_recursive| [ReplicationSystem.init]                                          | yes               | yes               | -       |
+| 381| non_recursive| [SyncServerImpl.getAcceptor]                                      | yes               | yes               | -       |
+Built-in SCC: #382 [list]
+| 382| non_recursive| [list]                                                            | yes               | yes               | -       |
+| 383| non_recursive| [UpdaterImpl.init]                                                | yes               | yes               | -       |
+| 384| non_recursive| [SyncClientImpl.setAcceptor]                                      | yes               | yes               | -       |
+| 385| non_recursive| [SyncClientImpl.setNetwork]                                       | yes               | yes               | -       |
+| 386| recursive    | [entrywhile_10,while_10]                                          | yes               | yes               | -       |
+| 387| recursive    | [entrywhile_9,while_9]                                            | yes               | yes               | -       |
+| 388| non_recursive| [ReplicationSystem.run]                                           | yes               | yes               | -       |
+| 389| recursive    | [entrywhile_0,while_0]                                            | yes               | yes               | -       |
+| 390| non_recursive| [ReplicationSystemMain.getCids]                                   | yes               | yes               | -       |
+| 391| non_recursive| [ReplicationSystemMain.getMaxJobs]                                | yes               | yes               | -       |
+| 392| non_recursive| [ReplicationSystemMain.getMaxUpdates]                             | yes               | yes               | -       |
+| 393| non_recursive| [ReplicationSystemMain.getScheduleMapORIGIN_ScheduleDelta]        | yes               | yes               | -       |
+| 394| non_recursive| [ReplicationSystemMain.getScheduleMap]                            | yes               | yes               | -       |
+| 395| recursive    | [case_16,removeKey]                                               | yes               | yes               | -       |
+| 396| recursive    | [case_12,without]                                                 | yes               | yes               | -       |
+| 397| recursive    | [case_51,case_52,getSchedule]                                     | yes               | yes               | -       |
+| 398| recursive    | [case_53,case_54,itemMapToSchedule]                               | yes               | yes               | -       |
+| 399| non_recursive| [ReplicationSystemMain.getSchedulesORIGIN_ScheduleDelta]          | yes               | yes               | -       |
+| 400| non_recursive| [ReplicationSystemMain.getSchedulesORIGIN_BusinessDelta]          | yes               | yes               | -       |
+| 401| non_recursive| [ReplicationSystemMain.getSchedules]                              | yes               | yes               | -       |
+| 402| non_recursive| [ReplicationSystemMain.init]                                      | yes               | yes               | -       |
+| 403| non_recursive| [ReplicationSystemMain.run]                                       | yes               | yes               | -       |
+| 404| non_recursive| [Resource.init]                                                   | yes               | yes               | -       |
+| 405| non_recursive| [SearchDirectoryItem.getContents]                                 | yes               | yes               | -       |
+| 406| non_recursive| [cont_20]                                                         | yes               | yes               | -       |
+| 407| non_recursive| [if_20]                                                           | yes               | yes               | -       |
+| 408| non_recursive| [SearchDirectoryItem.refresh]                                     | yes               | yes               | -       |
+| 409| non_recursive| [SyncClientImpl.run]                                              | yes               | yes               | -       |
+| 410| non_recursive| [SyncServerAcceptorImpl.init]                                     | yes               | yes               | -       |
+| 411| non_recursive| [SyncServerClientCoordinatorImpl.init]                            | yes               | yes               | -       |
+| 412| non_recursive| [SyncServerClientCoordinatorImpl.setSnapshot]                     | yes               | yes               | -       |
+| 413| non_recursive| [SyncServerImpl.run]                                              | yes               | yes               | -       |
+| 414| non_recursive| [random]                                                          | yes               | yes               | -       |
+| 415| recursive    | [entrywhile_7,while_7]                                            | yes               | yes               | -       |
+| 416| non_recursive| [UpdaterImpl.assignContent]                                       | yes               | yes               | -       |
+| 417| recursive    | [cont_13,entrywhile_8,if_13,while_8]                              | yes               | yes               | -       |
+| 418| non_recursive| [UpdaterImpl.chooseFile]                                          | yes               | yes               | -       |
+| 419| non_recursive| [UpdaterImpl.makeChange]                                          | yes               | yes               | -       |
+| 420| recursive    | [cont_12,entrywhile_6,if_12,while_6]                              | yes               | no                | -       |
+Built-in SCC: #421 [lt]
+| 421| non_recursive| [lt]                                                              | yes               | yes               | -       |
+Built-in SCC: #422 [or]
+| 422| non_recursive| [or]                                                              | yes               | yes               | -       |
+| 423| non_recursive| [UpdaterImpl.run]                                                 | yes               | yes               | -       |
+| 424| non_recursive| [case_32]                                                         | yes               | yes               | -       |
+| 425| non_recursive| [isAppendCommand]                                                 | yes               | yes               | -       |
+| 426| non_recursive| [main]                                                            | yes               | yes               | -       |
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+

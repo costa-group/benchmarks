@@ -1,0 +1,52 @@
+module CC2016;
+import * from ABS.StdLib;
+
+type Data = Int;
+
+interface Worker {
+    Unit work(DB db);
+    Int ping(Int n);
+}
+
+interface DB {
+    Unit register(Worker w);
+    Int getData(Worker w);
+} 
+
+class DBimp(Int dt) implements DB {
+    Worker cl = null;
+
+    Unit register(Worker w){
+        Fut<Int> f = w!ping(1); 
+        Int r = f.get;
+        if (r == 1) this.cl = w;  
+    }
+    Int getData(Worker w){
+        Int n = -1;
+        if (cl == w) n = this.dt;
+        else n = -1;
+        return n;
+    }	   
+}
+
+class WorkerImp() implements Worker {
+    Int datum = 0;
+
+    Unit work(DB db){
+       Fut<Int> f = db!getData(this);
+       //await f?;
+       this.datum = f.get;
+    }
+
+    Int ping(Int n){
+       Int m = n;
+       return n;
+    }
+}
+
+{
+    DB db = new DBimp(1);
+    Worker w = new WorkerImp();
+    db!register(w);
+    w!work(db);
+}

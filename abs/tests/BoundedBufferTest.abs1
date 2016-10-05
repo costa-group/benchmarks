@@ -1,0 +1,338 @@
+/*
+ * A working version of a program with two producers and 
+ * two consumers comunicating via a shared bounded-buffer
+ *
+ */
+module BoundedBufferTest;
+
+type Data = Int ;
+//type Buffer = DataList
+data DataList = DataNil | ConsData(Data, DataList) ;
+
+def Int count1() = 1;
+def Int count2() = 1;
+def Int count3() = 1;
+
+
+def Data dataHead(DataList dl) = case dl { ConsData(d,l) => d ; };  
+def DataList dataTail(DataList dl) = case dl { ConsData(d,l) => l ; }; 
+
+def DataList appendData(Data d, DataList list) = 
+    let (Int x) = count2() in concat(list, ConsData(d,DataNil));
+
+def DataList concat(DataList l1 , DataList l2) = 
+  let (Int x) = count1() in 
+  case l1 {
+    DataNil => l2 ; 
+    ConsData(hd,tl) => ConsData(hd, concat(tl,l2)) ; 
+};        
+
+interface Buffer {
+
+//    Unit init();
+    Unit append(Data d);
+    Data remove();
+
+}
+
+interface Consumer {
+   Unit loop(Data d);
+} 
+
+interface Producer {
+   Unit loop(Data d);
+}
+
+interface BBTest {
+	Unit testloopLow();
+	Unit testloopMid();
+	Unit testloopHigh();
+	Unit testAppendRemove();
+	Unit testDataHead();
+	Unit testDataTail();
+	Unit testAppendData();
+	Unit testConcat();
+}
+
+class BBTestImpl implements BBTest {
+
+	Unit testloopLow() {
+		Buffer buff;
+    	Producer p1;
+    	Producer p2;
+    	Consumer c1;
+    	Consumer c2;
+    	buff = new BoundedBuffer(); 
+    	p1 = new ProducerImpl(buff);    
+    	c1 = new ConsumerImpl(buff);
+    	p2 = new ProducerImpl(buff);    
+    	c2 = new ConsumerImpl(buff);
+    	
+    	p1!loop(5);
+    	c1!loop(5);
+    	p2!loop(5);
+    	c2!loop(5);
+	}
+
+	Unit testloopMid() {
+		Buffer buff;
+    	Producer p1;
+    	Producer p2;
+    	Consumer c1;
+    	Consumer c2;
+    	buff = new BoundedBuffer(); 
+    	p1 = new ProducerImpl(buff);    
+    	c1 = new ConsumerImpl(buff);
+    	p2 = new ProducerImpl(buff);    
+    	c2 = new ConsumerImpl(buff);
+    	
+    	p1!loop(10);
+    	c1!loop(10);
+    	p2!loop(10);
+    	c2!loop(10);
+	}
+	
+	Unit testloopHigh() {
+		Buffer buff;
+    	Producer p1;
+    	Producer p2;
+    	Consumer c1;
+    	Consumer c2;
+    	buff = new BoundedBuffer(); 
+    	p1 = new ProducerImpl(buff);    
+    	c1 = new ConsumerImpl(buff);
+    	p2 = new ProducerImpl(buff);    
+    	c2 = new ConsumerImpl(buff);
+    	
+    	p1!loop(20);
+    	c1!loop(20);
+    	p2!loop(20);
+    	c2!loop(20);
+	}
+	
+	Unit testAppendRemove() {
+		Buffer buff;
+		buff = new BoundedBuffer(); 
+		
+		buff!append(1);
+		buff!append(20);
+		buff!append(30);
+		buff!append(40);
+		buff!append(50);
+		
+		buff!remove();
+		buff!remove();
+		buff!remove();
+		buff!remove();
+		buff!remove();
+	}
+
+	Unit testDataHead() {
+	
+		DataList buffer = DataNil;
+		Data d = 0;
+		
+		buffer = appendData(5,buffer);
+		buffer = appendData(10,buffer);
+		buffer = appendData(15,buffer);
+		buffer = appendData(20,buffer);
+		buffer = appendData(25,buffer);
+		
+		d = dataHead(buffer);
+		
+		buffer = appendData(50,buffer);
+		buffer = appendData(100,buffer);
+		buffer = appendData(150,buffer);
+		buffer = appendData(200,buffer);
+		buffer = appendData(250,buffer);
+		
+		d = dataHead(buffer);
+		
+		buffer = appendData(500,buffer);
+		buffer = appendData(1000,buffer);
+		buffer = appendData(1500,buffer);
+		buffer = appendData(2000,buffer);
+		buffer = appendData(2500,buffer);
+		
+		d = dataHead(buffer);
+	}
+	
+	Unit testDataTail() {
+		DataList buffer = DataNil;
+		Data d = 0;
+		
+		buffer = appendData(5,buffer);
+		buffer = appendData(10,buffer);
+		buffer = appendData(15,buffer);
+		buffer = appendData(20,buffer);
+		buffer = appendData(25,buffer);
+		
+		buffer = appendData(50,buffer);
+		buffer = appendData(100,buffer);
+		buffer = appendData(150,buffer);
+		buffer = appendData(200,buffer);
+		buffer = appendData(250,buffer);
+				
+		buffer = appendData(500,buffer);
+		buffer = appendData(1000,buffer);
+		buffer = appendData(1500,buffer);
+		buffer = appendData(2000,buffer);
+		buffer = appendData(2500,buffer);
+		
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		buffer = dataTail(buffer);
+		
+	}
+	
+	Unit testAppendData() {
+		DataList buffer = DataNil;
+		Data d = 0;
+		
+		buffer = appendData(5,buffer);
+		buffer = appendData(10,buffer);
+		buffer = appendData(15,buffer);
+		buffer = appendData(20,buffer);
+		buffer = appendData(25,buffer);
+		
+		buffer = appendData(50,buffer);
+		buffer = appendData(100,buffer);
+		buffer = appendData(150,buffer);
+		buffer = appendData(200,buffer);
+		buffer = appendData(250,buffer);
+				
+		buffer = appendData(500,buffer);
+		buffer = appendData(1000,buffer);
+		buffer = appendData(1500,buffer);
+		buffer = appendData(2000,buffer);
+		buffer = appendData(2500,buffer);
+	}
+	
+	Unit testConcat() {
+		DataList buffer = DataNil;
+		DataList buffer2 = DataNil;
+		DataList concatLow = DataNil;
+		DataList concatMid = DataNil;
+		DataList concatHigh = DataNil;
+		
+		buffer = appendData(5,buffer);
+		buffer = appendData(10,buffer);
+		buffer = appendData(15,buffer);
+		buffer = appendData(20,buffer);
+		buffer = appendData(25,buffer);
+		
+		buffer2 = appendData(50,buffer);
+		buffer2 = appendData(100,buffer);
+		buffer2 = appendData(150,buffer);
+		buffer2 = appendData(200,buffer);
+		buffer2 = appendData(250,buffer);
+		
+		concatLow = concat(buffer,buffer2);
+				
+		buffer = appendData(500,buffer);
+		buffer = appendData(1000,buffer);
+		buffer = appendData(1500,buffer);
+		buffer = appendData(2000,buffer);
+		buffer = appendData(2500,buffer);
+		
+		buffer2 = appendData(5000,buffer);
+		buffer2 = appendData(10000,buffer);
+		buffer2 = appendData(15000,buffer);
+		buffer2 = appendData(20000,buffer);
+		buffer2 = appendData(25000,buffer);
+		
+		concatMid = concat(buffer, buffer2);
+		
+		buffer = appendData(5000,buffer);
+		buffer = appendData(10000,buffer);
+		buffer = appendData(15000,buffer);
+		buffer = appendData(20000,buffer);
+		buffer = appendData(25000,buffer);
+		
+		buffer2 = appendData(50000,buffer);
+		buffer2 = appendData(100000,buffer);
+		buffer2 = appendData(150000,buffer);
+		buffer2 = appendData(200000,buffer);
+		buffer2 = appendData(250000,buffer);
+		
+		concatHigh = concat(buffer, buffer2);
+	}
+}
+
+
+class BoundedBuffer implements Buffer {
+    
+    //A bounded buffer
+    DataList buffer = DataNil; 
+    Int max = 5;
+    Int n = 0;
+
+//   Unit init() { }
+
+    Unit append(Data d){
+        await (n < max) ; 
+        buffer = appendData(d,buffer);
+        n = n + 1 ; 
+    }
+    
+    Data remove() {
+        Data d = 0;
+        await n > 0 ; 
+        d = dataHead(buffer);
+        buffer = dataTail(buffer);
+        n = n - 1 ; 
+        return d ; 
+    }
+}
+
+class ProducerImpl (Buffer b) implements Producer {
+    
+    Unit loop(Data d) {
+        if (d > 0) {
+            b!append(d);
+            this!loop(d - 1);
+        }
+    }
+}
+
+class ConsumerImpl (Buffer b) implements Consumer {
+    
+    Unit loop(Data d) {
+        if (d > 0) {
+            b!remove();
+            this!loop(d - 1);
+        }
+    }
+}
+
+//Main
+{
+    Buffer buff;
+    Producer p1;
+    Producer p2;
+    Consumer c1;
+    Consumer c2;
+    buff = new BoundedBuffer(); 
+    Int x = count1(); // because of BoundedBuffer.init
+    p1 = new ProducerImpl(buff);    
+    c1 = new ConsumerImpl(buff);
+    p2 = new ProducerImpl(buff);    
+    c2 = new ConsumerImpl(buff);
+
+    p1!loop(20);
+    c1!loop(20);
+    p2!loop(20);
+    c2!loop(20);
+}

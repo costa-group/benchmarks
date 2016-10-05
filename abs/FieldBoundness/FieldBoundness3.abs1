@@ -1,0 +1,99 @@
+module FieldBoundness3;
+
+data List<A> = Nil | Cons(A, List<A>);
+
+type ListInt = List<Int> ;
+
+def Int increment(Int i) =
+  case i>10 {
+    True => i-1;
+    False => i;
+   };
+
+def Int size1(ListInt i) =
+  case i {
+     Nil => 0;
+    Cons(_,a) => 1+size1(a);
+   };
+
+def Bool hasNext1(ListInt i) = case i {
+    Nil => False;
+    Cons(_,_) => True;
+};
+
+interface A {
+  Int dec_int_loop();
+  Int inc_int_loop();
+  Int two_dec_loop();
+  Int two_inc_loop();
+  Int do_nothing(Int n);
+
+}
+
+
+class A1_with_awaits(Int dec_int,Int inc_int, ListInt dec1,ListInt dec2,Int inc2) implements A {
+ 
+Int do_nothing(Int n){
+ return n;
+}   
+
+Int dec_int_loop() {
+    Fut<Int> out;
+    while(dec_int>0){
+	out= this!do_nothing(1);await out?;
+	dec_int=dec_int-1;
+	
+    }    
+return 0;
+}
+//Success: It does not need assumptions but makes other loop termination proofs fail
+Int inc_int_loop() {
+    Fut<Int> out;
+	Int a=0;
+    while(inc_int<100){
+	a=inc_int;
+	a=a+1;
+	out= this!do_nothing(1);await out?;
+	inc_int=a;
+    }    
+return 0;
+}
+
+ Int two_dec_loop() {
+  Fut<Int> out;
+  while (hasNext1(dec1)|| hasNext1(dec2)){
+	if(size1(dec1)>size1(dec2))
+		dec1=tail(dec1);
+	else
+		dec2=tail(dec2);
+	out= this!do_nothing(1);await out?;
+   }
+return 0;
+}
+//Fails because of inc_int_loop
+ Int two_inc_loop() {
+  Fut<Int> out;
+  while (inc_int+inc2<200){
+	if(inc_int>inc2)
+		inc2=inc2+1;
+	else
+		inc_int=inc_int+1;
+	out= this!do_nothing(1);await out?;
+   }
+return 0;
+}
+
+}
+
+{
+  A x;
+
+  ListInt a=Cons(1,Cons(2,Cons(3,Nil)));
+  ListInt b=Cons(1,Cons(2,Cons(3,Nil)));
+  x = new local A1_with_awaits(100,0,a,b,5);
+  x!dec_int_loop();
+  x!inc_int_loop();
+  x!two_dec_loop();
+  x!two_inc_loop();
+
+}

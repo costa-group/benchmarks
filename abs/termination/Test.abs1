@@ -1,0 +1,102 @@
+//costabs( ['/home/kike/Systems/costa/costabs/examples/termination/Test.abs'], ['main'], [cost_model = termination, rely_guarantee_termination = yes, debug = no]).
+module Test;
+
+type ListInt = List<Int> ;
+
+interface A {
+  Int fun();
+  Int funSamir();
+  Int fun2(Int a, ListInt b);
+  Int todo();
+  Int si_se_puede();
+}
+
+
+class A1(Int my_field, Int my_other_field, Int unico) implements A {
+
+// Termination cannot be proved because of circularity: fun() may happen in 
+// parallel with funSamir, which modifies my_field. To prove termination of 
+// funSamir we need to prove termination of fun(), since it MHP and modifies 
+// my_field
+Int fun() {
+  while( my_field > 0 ) {
+		my_field = my_field - 1;
+		suspend;
+	}
+	return 45;
+}
+
+// Non-terminating because its proof depends on the termiination of fun()
+Int funSamir() {
+  while( my_field > 0 ) {
+		my_field = my_field - 1;
+		while ( my_field < 5 ){
+		  my_field = my_field + 1;
+		}
+		suspend;
+	}
+	return my_field;
+}
+
+// Trivially terminating
+Int fun2(Int a, ListInt b){
+	Fut<Int> retorno;
+	retorno = this ! fun();
+	await retorno?;
+	return my_field;
+}
+
+// Non-terminating because its proof depends on the termiination of fun()
+Int todo(){
+  while ( my_field > my_other_field ){
+    my_field = my_field - 1;
+    suspend;
+  }
+  return my_field;
+}
+
+// Terminating, since only this funcion modifies the field 'unico'
+Int si_se_puede() {
+  while( unico > 0 ) {
+		unico = unico - 1;
+		//[old(my_field) == my_field]
+		suspend;
+	}
+	return my_field;
+}
+
+}
+
+interface B{
+  Unit loop_local();
+}
+
+class B1 implements B{
+  Unit loop_local(){
+    Int k = 10;
+    while ( k > 0 ){
+      k = k - 1;
+    }
+  }
+}
+
+{
+  A x;
+  B y;
+
+  x = new local A1(100,50,7);
+  y = new local B1();
+  
+  x!fun();
+  x!funSamir();
+  x!fun2(200, Nil);
+  x!todo();
+  x!si_se_puede();
+  
+  y!loop_local();
+}
+
+// costabs(['/tmp/Test2.abs'], ['main'], [cost_model = termination, enrique = yes, debug = yes]).
+// costabs(['/home/kike/Test2.abs'], ['main'], [cost_model = termination, field_boundness = yes, debug = yes]).
+// costabs(['/tmp/Test2.abs'], ['A1.fun'], [cost_model = termination, field_boundness = yes, debug = yes]).
+// costabs(['/tmp/Test2.abs'], ['A1.fun2'], [cost_model = termination, field_boundness = yes, debug = yes]).

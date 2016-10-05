@@ -1,0 +1,114 @@
+module Guille;
+
+interface ReaderInterface {
+	Int hdRead (Int pos);
+}
+
+class Reader (String fn,Int elems) implements ReaderInterface{
+
+        // This function is supposed to read the element
+        // number "v" of the file and to do something with
+        // the element
+        Int readAndProcess(Int v){return 10;}
+
+        // This function is suppose to do some kind of operation
+        // with acu and value
+        Int updateValue(Int acu, Int value){return acu+value;}
+	
+       
+	
+	Int hdRead (Int pos) {
+		Int i = 0; 
+		Fut<Int> res;
+		Int acu=0;
+		Int value=0;
+		while (i < elems) {
+                       res = this ! readAndProcess(pos+i);
+                       [elems <= max(elems)][elems >= 1][old(elems) == elems]
+                       await res?;
+		       value = res.get;
+		       acu = this.updateValue(acu,value);  
+		       i = i + 1;
+		}
+		return acu;
+	}
+}
+
+interface FileISInt {
+ Int read();
+ Int readOnce();
+}
+
+class FileIS(String fn, Int lth, Int blockSize) implements FileISInt {
+	
+       	[lth == max(lth)][max(lth) >= 1][blockSize == max(blockSize)][max(blockSize) >= 1]
+	Int read() {
+                Int incr = 0;
+		Int pos = 0;
+                Int acu = 0;
+                Int i = lth;
+                Int v = 0;
+		while (i > 0) {
+    		if (blockSize > i) {
+			incr = i;
+    		} 
+    		else {
+        		incr = blockSize;
+    		}	
+    		        
+		Fut<Int> value; 
+    		value = this ! readContent(pos, incr);
+    		[old(blockSize) == blockSize][blockSize == max(blockSize)][max(blockSize) >= 1][old(lth) == lth][lth == max(lth)][max(lth) >= 1]
+    		await value?;
+                v = value.get;
+                acu = acu + v;
+                i = i - incr;
+    		pos = pos + incr;   
+		} 
+                return v;
+    }
+ 	
+ 
+        
+        
+
+		[blockSize == max(blockSize)][max(blockSize) >= 1][lth == max(lth)][max(lth) >= 1]
+ 	Int readOnce () {
+                Fut<Int> res;
+		res = this ! readContent(0, lth);
+                await res?;
+                Int r = res.get;
+                return r;
+ 	}
+
+ 	
+	Int readContent(Int pos, Int elems) {
+		ReaderInterface reader = new Reader(fn,elems);
+		Fut<Int> tmp;
+		tmp = reader ! hdRead(pos);
+                [old(blockSize) == blockSize][blockSize == max(blockSize)][max(blockSize) >= 1][old(lth) == lth][lth == max(lth)][max(lth) >= 1]  
+		await tmp?;
+                Int r = tmp.get;
+		return r;
+	}
+}
+
+
+
+
+{
+ FileISInt ob1 = new FileIS("A",20,2);
+ FileISInt ob2 = new FileIS("A",20,4);
+ Fut<Int> f1;
+ 
+ f1 = ob1 ! read();
+ 
+ Fut<Int> f2;
+ f2 = ob2 ! readOnce();
+ //await f1?;
+ //await f2?;
+ //Int a1=0;
+ //Int a2=0;
+ //a1 = f1.get;
+ //a2 = f2.get;
+}

@@ -1,0 +1,126 @@
++---------------------------------------------------------------------------------------------------+ 
+| Method                                                              | Terminating       | Time    |
++---------------------------------------------------------------------------------------------------+ 
+| SyncServerAcceptorImpl.init                                         | yes               | 30      |
+| SyncServerAcceptorImpl.getConnection                                | ppl exception     | 0       |
+| BasicReplicationItemImpl.init                                       | yes               | 430     |
+| BasicReplicationItemImpl.getContents                                | yes               | 40      |
+| BasicReplicationItemImpl.getState                                   | yes               | 20      |
+| BasicReplicationItemImpl.setState                                   | yes               | 50      |
+| ReplicationFilePattern.init                                         | yes               | 380     |
+| ReplicationFilePattern.getContents                                  | yes               | 40      |
+| ReplicationFilePattern.refresh                                      | ppl exception     | 0       |
+| ReplicationLogItem.init                                             | yes               | 370     |
+| ReplicationLogItem.getContents                                      | yes               | 60      |
+| ReplicationLogItem.refresh                                          | yes               | 620     |
+| ClientJobImpl.init                                                  | yes               | 40      |
+| ClientJobImpl.getConnectionThread                                   | ppl exception     | 0       |
+| ClientJobImpl.clientDB                                              | yes               | 30      |
+| ClientJobImpl.establishSchedule                                     | ppl exception     | 0       |
+| ClientJobImpl.executeJob                                            | ppl exception     | 0       |
+| ClientJobImpl.becomeState                                           | ppl exception     | 0       |
+| ClientJobImpl.shutDownClient                                        | ppl exception     | 0       |
+| ClientJobImpl.registerReplicationItems                              | yes               | 130     |
+| ClientJobImpl.hasFile                                               | yes               | 410     |
+| ClientJobImpl.processFile                                           | yes               | 520     |
+| ClientJobImpl.overwrite                                             | yes               | 390     |
+| ClientJobImpl.continue                                              | yes               | 590     |
+| ClientJobImpl.processContent                                        | yes               | 270     |
+| ClientJobImpl.command                                               | yes               | 40      |
+| ClientJobImpl.receiveSchedule                                       | yes               | 140     |
+| SyncClientImpl.init                                                 | yes               | 80      |
+| SyncClientImpl.jobCount                                             | yes               | 70      |
+| SyncClientImpl.scheduleJob                                          | ppl exception     | 0       |
+| SyncClientImpl.setNext                                              | yes               | 30      |
+| SyncClientImpl.waitFor                                              | yes               | 30      |
+| SyncClientImpl.makeJob                                              | ppl exception     | 0       |
+| SyncClientImpl.finishJob                                            | yes               | 40      |
+| SyncClientImpl.nextJob                                              | yes               | 40      |
+| SyncClientImpl.getId                                                | yes               | 40      |
+| SyncClientImpl.isShutdownRequested                                  | yes               | 40      |
+| SyncClientImpl.requestShutDown                                      | ppl exception     | 0       |
+| SyncClientImpl.getAcceptor                                          | yes               | 20      |
+| SyncClientImpl.run                                                  | ppl exception     | 0       |
+| SyncClientImpl.getClientDataBase                                    | yes               | 30      |
+| SyncClientImpl.becomesState                                         | yes               | 50      |
+| SyncClientImpl.setAcceptor                                          | yes               | 30      |
+| SyncClientImpl.setNetwork                                           | yes               | 40      |
+| SyncClientImpl.waitToBoot                                           | yes               | 50      |
+| SyncClientImpl.boot                                                 | yes               | 70      |
+| SyncClientImpl.waitToReplicate                                      | yes               | 40      |
+| SyncClientImpl.replicate                                            | yes               | 40      |
+| SyncClientImpl.end                                                  | ppl exception     | 0       |
+| ConnectionThreadImpl.init                                           | yes               | 50      |
+| ConnectionThreadImpl.startReplicationUpdate                         | ppl exception     | 0       |
+| ConnectionThreadImpl.finishReplicationUpdate                        | yes               | 100     |
+| ConnectionThreadImpl.run                                            | ppl exception     | 0       |
+| ConnectionThreadImpl.sendSchedule                                   | yes               | 150     |
+| ConnectionThreadImpl.command                                        | yes               | 40      |
+| ConnectionThreadImpl.registerItems                                  | yes               | 580     |
+| ConnectionThreadImpl.transferItems                                  | yes               | 950     |
+| SyncServerClientCoordinatorImpl.init                                | yes               | 50      |
+| SyncServerClientCoordinatorImpl.setSnapshot                         | yes               | 30      |
+| SyncServerClientCoordinatorImpl.startReplicationUpdate              | ppl exception     | 0       |
+| SyncServerClientCoordinatorImpl.finishReplicationUpdate             | yes               | 100     |
+| SyncServerClientCoordinatorImpl.clearSnapshot                       | yes               | 50      |
+| SyncServerClientCoordinatorImpl.refreshSnapShot                     | ppl exception     | 0       |
+| DataBaseImpl.init                                                   | yes               | 50      |
+| DataBaseImpl.getTransactions                                        | yes               | 30      |
+| DataBaseImpl.update                                                 | yes               | 410     |
+| DataBaseImpl.refresh                                                | yes               | 50      |
+| DataBaseImpl.getContent                                             | yes               | 450     |
+| DataBaseImpl.hasFile                                                | yes               | 390     |
+| DataBaseImpl.getRoot                                                | yes               | 30      |
+| DataBaseImpl.prepareReplicationItem                                 | yes               | 120     |
+| DataBaseImpl.lastTransactionIds                                     | yes               | 50      |
+| DataBaseImpl.updateFile                                             | yes               | 370     |
+| DataBaseImpl.listFilesAt                                            | yes               | 360     |
+| ReplicationSystemMain.init                                          | yes               | 80      |
+| ReplicationSystemMain.run                                           | ppl exception     | 0       |
+| ReplicationSystemMain.getMaxJobs                                    | yes               | 40      |
+| ReplicationSystemMain.getMaxUpdates                                 | yes               | 40      |
+| ReplicationSystemMain.getScheduleMap                                | yes               | 30      |
+| ReplicationSystemMain.getSchedules                                  | yes               | 240     |
+| ReplicationSystemMain.getCids                                       | yes               | 60      |
+| ReplicationSystemMain.getNumberOfClients                            | yes               | 40      |
+| Network.init                                                        | yes               | 40      |
+| Network.run                                                         | yes               | 120     |
+| Network.shutDown                                                    | ppl exception     | 0       |
+| ReplicationSnapshotImpl.init                                        | yes               | 40      |
+| ReplicationSnapshotImpl.getItems                                    | yes               | 50      |
+| ReplicationSnapshotImpl.refreshSnapshot                             | ppl exception     | 0       |
+| ReplicationSnapshotImpl.createReplicationItems                      | yes               | 510     |
+| ReplicationSnapshotImpl.replicationItems                            | yes               | 520     |
+| ReplicationSnapshotImpl.replicationItem                             | yes               | 530     |
+| ReplicationSnapshotImpl.clearSnapshot                               | yes               | 40      |
+| ReplicationSnapshotImpl.getIndexingId                               | yes               | 30      |
+| ReplicationSystem.init                                              | yes               | 30      |
+| ReplicationSystem.run                                               | ppl exception     | 0       |
+| SearchDirectoryItem.init                                            | yes               | 380     |
+| SearchDirectoryItem.getContents                                     | yes               | 40      |
+| SearchDirectoryItem.refresh                                         | yes               | 540     |
+| SyncServerImpl.init                                                 | yes               | 100     |
+| SyncServerImpl.run                                                  | yes               | 40      |
+| SyncServerImpl.getSchedule                                          | yes               | 70      |
+| SyncServerImpl.listSchedules                                        | yes               | 30      |
+| SyncServerImpl.getReplicationSnapshot                               | yes               | 30      |
+| SyncServerImpl.getUpdatableDataBase                                 | yes               | 50      |
+| SyncServerImpl.isShutdownRequested                                  | yes               | 40      |
+| SyncServerImpl.requestShutDown                                      | yes               | 20      |
+| SyncServerImpl.getCoordinator                                       | yes               | 40      |
+| SyncServerImpl.getAcceptor                                          | yes               | 40      |
+| TesterImpl.init                                                     | yes               | 40      |
+| TesterImpl.analyse                                                  | ppl exception     | 0       |
+| TesterImpl.checkDatas                                               | ppl exception     | 0       |
+| TesterImpl.checkData                                                | ppl exception     | 0       |
+| TesterImpl.compareDirWithPattern                                    | ppl exception     | 0       |
+| TesterImpl.compareDir                                               | yes               | 320     |
+| TesterImpl.compareEntrySets                                         | yes               | 120     |
+| TesterImpl.compareFile                                              | yes               | 40      |
+| UpdaterImpl.init                                                    | yes               | 40      |
+| UpdaterImpl.run                                                     | no                | 730     |
+| UpdaterImpl.makeChange                                              | yes               | 170     |
+| UpdaterImpl.shutDown                                                | yes               | 30      |
+| UpdaterImpl.assignContent                                           | yes               | 70      |
+| UpdaterImpl.chooseFile                                              | yes               | 180     |
++---------------------------------------------------------------------------------------------------+ 

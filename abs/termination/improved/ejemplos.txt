@@ -1,0 +1,73 @@
+EJEMPLO #1
+** costabs(['termination/improved/BoundMin1.abs'],['Main.main'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+
+is_increment( while_1,pp((8,4)), rf(entrywhile_0(_G2054,_G2055),nat(1*_G2055)), _G2610 )
+
+RBR:
+entrywhile_0(2,l(this),[],[],[]) => 
+         s(0)=field(counter),
+         s(1)=0,
+         call(sync,while_0(l(this),[s(0),s(1)],[])),
+         
+ANTONIO ABS:
+entrywhile_0(2,[A],fieldIn([B]),[],fieldOut([C]),[]):-
+	imp_block([D=B,E=0]),
+	call(sync,while_0([A,D,E],[B],[],[C])).
+
+RBR DEL PROGRAM POINT:	
+while_1(8,l(this),[s(0),l(a)],[l(a)],[]) => 
+         gt(l(a),s(0)),
+         s(2)=field(counter),
+         s(3)=1,
+         s(1)=s(2)+s(3),
+ =====>  field(counter)=s(1),  <=====
+         s(4)=1,
+         l(a)=l(a)-s(4),
+         release(1),
+         call(sync,entrywhile_1(l(this),[l(a)],[l(a)])),	
+
+
+        
+EJEMPLO #2
+** costabs(['termination/improved/Lists.abs'],['Main.main3'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+
+is_increment( TaskQueue.addTask,pp((18,3)), rf(entrywhile_1(_G14625,_G14626,_G14627),nat(1/2*_G14627+ -1/2)), _G15227 )         
+
+RBR:
+entrywhile_1(15,l(this),[l(ps)],[l(f),l(p),l(tk)],[]) => 
+         s(0)=field(pending),
+         cons(s(1),'Nil'),
+         call(sync,while_1(l(this),[s(0),s(1),l(ps)],[l(f),l(p),l(tk)])),
+         
+ANTONIO ABS:
+entrywhile_1(15,[A,B],fieldIn([C]),[D,E,F],fieldOut([G]),[]):-
+	imp_block([H=C,I=1]),
+	call(sync,while_1([A,H,I,B],[C],[D,E,F],[G])).        
+	
+RBR DEL PROGRAM POINT:
+'TaskQueue.addTask'(18,l(this),[l(tk)],[s(2)],[]) => 
+         method_release,
+         s(1)=field(pending),
+ =====>  call(func,appendright(none,[s(1),l(tk)],[s(0)])),  <=====
+         field(pending)=s(0),
+         s(2)='Unit',
+         
+         
+         
+EJEMPLO #3
+costabs(['termination/improved/Lists.abs'],['Main.main2'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+** op_not_covered( =<, while_1,pp((17,5)))
+
+RBR:
+while_1(17,l(this),[s(0),s(1),l(ps)],[l(f),l(p),l(tk)],[]) => 
+         neq(s(0),s(1)),
+         s(2)=field(pending),
+         call(func,head(none,[s(2)],[l(tk)])),
+         s(4)=field(pending),
+         call(func,tail(none,[s(4)],[s(3)])),
+ =====>  field(pending)=s(3),  <========
+         call(func,head(none,[l(ps)],[l(p)])),
+         call(async('Somewhere'),'ProcC.startTask'(l(p),[l(tk)],[l(f)])),
+         await(1,l(f)),
+         call(sync,entrywhile_1(l(this),[l(ps)],[l(f),l(p),l(tk)])),

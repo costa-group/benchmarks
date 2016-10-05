@@ -1,0 +1,118 @@
+=================
+Deadlock Analysis
+=================
+Code: ETICS_finalcode.abs -> deadlock free
+
+
+
+
+
+==================
+Resource Analysis
+==================
+Code: ETICS_finalcode.abs
+
+Upper bounds obtained using the following options:
+ + Size abstraction for terms: Typed Norms
+ + Backend: CoFloCo
+
+
+
+
+***Solver.bestSolution (6 ms)
+ UB for 'Solver.bestSolution' = 2
+
+ O(1)
+
+
+
+***Solver.utility (3180 ms)
+ - vm_info_1: size of vm_info wrt. Rat
+ - vm_info_2: size of vm_info wrt. Bool
+ - requests_1: size of requests wrt. Rat
+ - requests_2: size of requests wrt. List<Request>
+
+ UB for 'Solver.utility'(vm_info_1,vm_info_2,requests_1,requests_2) = 243*requests_2+268
+
+ O(n)
+
+
+
+***Solver.randomMap (147 ms)
+ - task_1: size of task wrt. List<VMInfo>
+ 
+ UB for 'Solver.randomMap'(task_1) = 42*task_1+101
+
+ O(n)	
+
+
+
+***Solver.contains (113 ms)
+ - list_1: size of list wrt. Rat
+ - list_2: size of list wrt. List<RequestId>
+ - target_1: size of target wrt. Rat
+ 
+ UB for 'Solver.contains'(list_1,list_2,target_1) = 19*list_2+33
+ 
+ O(n)
+
+
+
+***Solver.createSolution (15442 ms)
+ - problem_1: size of problem wrt. Rat
+ - problem_2: size of problem wrt. List<VMInfo>
+ - problem_3: size of problem wrt. Map<RequestId, Task>
+ - problem_4: size of problem wrt. Bool
+ - maps_1: size of maps wrt. Rat
+ - maps_2: size of maps wrt. List<Pair<RequestId, Rat>>
+UB for 'Solver.createSolution'(problem_1,problem_2,problem_3,problem_4,maps_1,maps_2) = max([max([33,33*maps_2+27+9*maps_2*maps_2]),nat(problem_2)*27+74+24*problem_3+max([7467,nat(problem_2)*672*maps_2+nat(problem_2)*12+32*problem_3+512*problem_3*maps_2+nat(maps_1)*492*maps_2+1840*maps_2+2528*maps_2*maps_2+nat(problem_2+maps_2)*16542+nat(problem_2+maps_2)*37752*nat(problem_2+maps_2)+nat(2*problem_2+2*maps_2)*1216*nat(problem_2+maps_2)])])+22
+
+ O(n^2)
+
+
+
+***Solver.mutate (17202 ms)
+ - solution_1: size of solution wrt. List<VMInfo>
+ - solution_2: size of solution wrt. List<Request>
+ - solution_3: size of solution wrt. Map<RequestId, Task>
+ - solution_4: size of solution wrt. Rat
+ - solution_5: size of solution wrt. Map<VMId, Pair<VMInfo, List<Request>>>
+ - solution_6: size of solution wrt. Bool
+ - solution_7: size of solution wrt. List<Pair<RequestId, Rat>>
+ UB for 'Solver.mutate'(solution_1,solution_2,solution_3,solution_4,solution_5,solution_6,solution_7) = max([max([89,128*solution_7+65+28*solution_7*solution_7]),nat(solution_1)*138+369+112*solution_3+max([14856,nat(solution_1)*1440*solution_7+nat(solution_1)*108+128*solution_3+1056*solution_3*solution_7+3960*solution_7+5296*solution_7*solution_7+nat(nat(solution_1)+ -1)*1080*solution_7+nat(solution_1+solution_7)*33084+nat(solution_1+solution_7)*75504*nat(solution_1+solution_7)+nat(2*solution_1+2*solution_7)*2432*nat(solution_1+solution_7)])])+45
+ 
+ O(n^2)
+
+	
+
+***Solver.crossover (21392 ms)
+ - s1_1: size of s1 wrt. List<VMInfo>
+ - s1_2: size of s1 wrt. List<Request>
+ - s1_3: size of s1 wrt. Map<RequestId, Task>
+ - s1_4: size of s1 wrt. Rat
+ - s1_5: size of s1 wrt. Map<VMId, Pair<VMInfo, List<Request>>>
+ - s1_6: size of s1 wrt. Bool
+ - s1_7: size of s1 wrt. List<Pair<RequestId, Rat>>
+ - s2_1: size of s2 wrt. Rat
+ - s2_2: size of s2 wrt. List<Pair<RequestId, Rat>>
+ UB for 'Solver.crossover'(s1_1,s1_2,s1_3,s1_4,s1_5,s1_6,s1_7,s2_1,s2_2) = max([51*s1_7+54+5*s1_7*s1_7+max([578*s2_2+98+27*s2_2*s2_2+ (50*s1_7+50*s2_2)*s2_2,nat(s1_1)*66+53+80*s1_3+108*s1_7+6*s1_7*s1_7+max([nat(s1_1)*696*s1_7+512*s1_3*s1_7+1780*s1_7+2528*s1_7*s1_7+nat(nat(s1_1)+ -1)*468*s1_7+nat(s1_1+s1_7)*23997+nat(s1_1+s1_7)*44044*nat(s1_1+s1_7)+nat(2*s1_1+2*s1_7)*1412*nat(s1_1+s1_7),nat(s1_1)*105+306+nat(s1_1)*2088*s2_2+136*s1_3+1536*s1_3*s2_2+6986*s2_2+6120*s2_2*s2_2+nat(nat(s1_1)+ -1)*1404*s2_2+ (60*s1_7+60*s2_2)+ (1624*s1_7+1624*s2_2)*s2_2+nat(s1_1+s1_7+s2_2)*64536+nat(s1_1+s1_7+s2_2)*125840*nat(s1_1+s1_7+s2_2)+nat(2*s1_1+2*s1_7+2*s2_2)*4040*nat(s1_1+s1_7+s2_2)])+ (9*s1_7*s1_7+21*s1_7)]),nat(s1_1)*66+219+nat(s1_1)*696*s2_2+80*s1_3+512*s1_3*s2_2+2141*s2_2+2559*s2_2*s2_2+nat(nat(s1_1)+ -1)*468*s2_2+nat(s1_1+s2_2)*23997+nat(s1_1+s2_2)*44044*nat(s1_1+s2_2)+nat(2*s1_1+2*s2_2)*1412*nat(s1_1+s2_2)+ (203*s2_2+113+29*s2_2*s2_2)])+52
+ 
+ O(n^2)
+
+	
+	
+***Solver.createNextGeneration (893510 ms)
+ - previous_1: size of previous wrt. List<VMInfo>
+ - previous_2: size of previous wrt. List<Request>
+ - previous_3: size of previous wrt. Map<RequestId, Task>
+ - previous_4: size of previous wrt. Rat
+ - previous_5: size of previous wrt. Map<VMId, Pair<VMInfo, List<Request>>>
+ - previous_6: size of previous wrt. Bool
+ - previous_7: size of previous wrt. List<Solution>
+ - previous_8: size of previous wrt. List<Pair<RequestId, Rat>>
+ - pop_count_1: size of pop_count wrt. Rat
+ - pool_1: size of pool wrt. Interface
+ - pool_2: size of pool wrt. Map<VMId, Interface>
+ UB for 'Solver.createNextGeneration'(previous_1,previous_2,previous_3,previous_4,previous_5,previous_6,previous_7,previous_8,pop_count_1,pool_1,pool_2) = max([16*pool_2,nat(previous_1)*28800*nat(previous_8)*nat(pop_count_1)+nat(previous_1)*58848*nat(pop_count_1)+nat(previous_3)*21120*nat(previous_8)*nat(pop_count_1)+nat(previous_3)*47616*nat(pop_count_1)+nat(previous_7)*1026*nat(pop_count_1)+nat(previous_8)*100160*nat(previous_8)*nat(pop_count_1)+nat(previous_8)*723360*nat(pop_count_1)+nat(pop_count_1)*1988474+nat(nat(previous_1)+ -2)*1176*nat(pop_count_1)+nat(nat(previous_1)+ -1)*21600*nat(previous_8)*nat(pop_count_1)+nat(nat(previous_1)+ -1)*46128*nat(pop_count_1)+nat(previous_1+previous_8)*1792064*nat(pop_count_1)+nat(previous_1+previous_8)*869504*nat(previous_1+previous_8)*nat(pop_count_1)+max([nat(previous_8)*128256*nat(previous_1+previous_8)*nat(pop_count_1)+nat(nat(previous_1)+ -2)*1176*nat(pop_count_1)+nat(previous_1+previous_8)*1515712*nat(pop_count_1)+nat(previous_1+previous_8)*1143936*nat(previous_1+previous_8)*nat(pop_count_1),nat(previous_1)*57600*nat(previous_8)*nat(pop_count_1)+nat(previous_1)*117456*nat(pop_count_1)+nat(previous_3)*42240*nat(previous_8)*nat(pop_count_1)+nat(previous_3)*86016*nat(pop_count_1)+nat(previous_7)*3222*nat(pop_count_1)+nat(previous_8)*214640*nat(previous_8)*nat(pop_count_1)+nat(previous_8)*1261024*nat(pop_count_1)+nat(previous_8)*628992*nat(previous_1+2*previous_8)*nat(pop_count_1)+nat(pop_count_1)*4692040+48*pool_2+1260*pool_2*nat(pop_count_1)+nat(nat(previous_1)+ -1)*43200*nat(previous_8)*nat(pop_count_1)+nat(nat(previous_1)+ -1)*86232*nat(pop_count_1)+nat(previous_1+2*previous_8)*9021920*nat(pop_count_1)+nat(previous_1+2*previous_8)*4932928*nat(previous_1+2*previous_8)*nat(pop_count_1)])])+25
+ 
+ O(n^3)

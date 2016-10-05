@@ -1,0 +1,60 @@
+// Sleeping Barber problem from
+// "Combining Static Analysis and Testing for Deadlock Detection", iFM'16
+
+module Paper_dead2;
+
+interface Barberi{
+    Unit sleeps(Clienti client, Chairi chair);
+    Unit cuts();
+}
+interface Clienti{
+    Unit wakesup(Barberi b,Chairi chair);
+    Unit sits();
+}
+
+interface Chairi{
+     Unit takenby(Clienti client);
+     Unit iscleaned();
+}
+class Barber implements Barberi{
+   Unit sleeps(Clienti client, Chairi chair){
+   Fut<Unit> f = chair!takenby(client);
+   f.get;
+}
+Unit cuts(){}
+}
+
+class Chair() implements Chairi{
+     Unit takenby(Clienti client){
+        Fut<Unit> f = client!sits();
+        await f?;
+     }
+     Unit iscleaned(){}
+}
+class Client() implements Clienti{
+   Unit wakesup(Barberi barb,Chairi chair){
+      Fut<Unit> f = barb!cuts();
+      chair!iscleaned();
+      f.get;
+   }
+   Unit sits(){}
+}
+
+interface MainI{
+    Unit main();
+}
+
+class Main implements MainI{
+    Unit main(){
+        Barberi barber = new local  Barber();
+        Chairi chair = new local  Chair();
+        Int n = 1;
+        Int i = 0;
+        while(i < n){
+           Clienti client = new local  Client();
+           client!wakesup(barber,chair);
+           barber!sleeps(client,chair);
+           i = i+1;
+        }
+    }
+}

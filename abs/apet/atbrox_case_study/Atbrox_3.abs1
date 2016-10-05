@@ -1,0 +1,95 @@
+module Atbrox;
+//import * from ABS.StdLib;
+//import * from ABS.DC;
+
+type Key = Int;
+type Value = Int;
+type Input = List<Pair<Key,Value>>;
+type Output =  List<Pair<Key,Value>>;
+type URI = String;
+
+// MapReduce
+interface MapReduce {
+    Output mapReduce(Input input);
+    Unit finished(Worker w);
+}
+
+class MapReduce(Int maxMachines) implements MapReduce {
+    Set<Worker> workers = set[];
+    Int nWorkers = 0;
+
+    Output mapReduce(Input input) {
+        List<Fut<Pair<Key,Value>>> fMapResults = Nil;
+	Fut<Pair<Key,Value>> fMap;
+	Pair<Key,Value> mapResult = Pair(0,0);
+        Output intermediates = Nil;
+	Fut<Worker> fw;
+	Worker w;
+	Pair<Key,Value> item = Pair(0,0);
+	Key key = 0; Value value = 0;
+	
+	// MAP
+        while (~isEmpty(input)) {
+            item = head(input);
+            key = fst(item);
+            value = snd(item);
+            input = tail(input);
+	    fw = this!getWorker();
+            await fw?; w = fw.get;
+            fMap = w!invokeMap(key,value);
+            fMapResults = appendright(fMapResults, fMap);
+        }
+        while (~isEmpty(fMapResults)) {
+            fMap = head(fMapResults);
+            fMapResults = tail(fMapResults);
+            await fMap?;
+            mapResult = fMap.get;
+            intermediates = Cons(mapResult,intermediates);
+        }
+        // REDUCE es igual que "map"
+        return intermediates; 
+    }
+
+    
+    Worker getWorker() {
+	Worker w;
+	Worker result;
+        if (emptySet(workers)) {
+            if (nWorkers < maxMachines) {
+                w = new cog Worker(this);
+                nWorkers = nWorkers + 1;
+                workers = insertElement(workers, w);
+            }
+            await ~(emptySet(workers));
+        }
+        result = take(workers);
+        workers = remove(workers, result);
+        return result;
+    }
+    Unit finished(Worker w) {
+        workers = insertElement(workers, w);
+    }
+    
+}
+
+
+interface Worker {
+    Pair<Key,Value> invokeMap(Key key, Value value);
+}
+
+class Worker(MapReduce master) implements Worker {
+    Pair<Key,Value> invokeMap(Key key, Value value){
+        master!finished(this);
+        return Pair(key,value);
+    }
+}
+
+// Main
+{
+    //Input input = list[Pair(2,3),Pair(5,7),Pair(9,12)];
+    //Input input = list[Pair(2,3),Pair(5,7)];
+    Input input = list[Pair(2,3)];
+    MapReduce m = new cog MapReduce(1);
+    m!mapReduce(input);    
+}
+

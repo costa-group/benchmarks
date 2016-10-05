@@ -1,0 +1,12 @@
+module Test;
+
+{
+  Int n=1000;
+  while ( n>0 ) {
+    print("Hello World ");
+    println(toString(n));
+    n=n-1;
+    await duration(2000, 2000);
+  }
+}
+								

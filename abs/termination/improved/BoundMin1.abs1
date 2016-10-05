@@ -1,0 +1,43 @@
+module BoundMin1;
+
+interface A{
+  Unit f();
+  Unit molesto(Int a);
+}
+
+class AImpl implements A {
+  Int counter = 0;
+  
+  Unit f(){
+    while (counter > 0) {
+      counter = counter - 1;
+      suspend;
+    }
+  }
+
+  Unit molesto(Int a){
+    while ( a > 0 ) {
+      counter = counter + 1;
+      a = a - 1;
+      suspend;
+    }
+  }
+
+}
+
+interface M{
+  Unit main(Int a);
+}
+
+class Main implements M{
+  Unit main(Int a){
+    A q = new local  AImpl();
+  
+    // With improvements:
+    // The cost of f must be max(counter) + nat(a) (Constant field update)
+    // Without improvements: max(counter) * nat(a)
+    q ! molesto(a);
+    q ! f();
+    
+  }
+}

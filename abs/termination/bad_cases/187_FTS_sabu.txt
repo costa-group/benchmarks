@@ -1,0 +1,59 @@
+?- terminates( 187, [], Ans ).
+Correct to: "termination:terminates(187,[],Ans)"? yes
+SCC #187
+Nodes: [cont_26,entrywhile_6,if_26,while_6]
+Type: recursive
+Used Fields: [cashBoxEnv,cardReaderEnv]
+Release points: [ (if_26,pp((237,3)))]
+----------
+*** sync call to the same SCC: call(sync,entrywhile_6([_G47447,_G47450,_G47453,_G47456,_G47459,_G47462,_G47465,_G47468,_G47471,_G47474,_G47477,_G47480,_G47483,_G47486,_G47489,_G47492,_G47495],[_G47498,_G47501,_G47504,_G47507,_G47510,_G47513,_G47516],[_G47519,_G47522,_G47525,_G47528,_G47531],[_G47534,_G47537,_G47540,_G47543,_G47546,_G47549,_G47552]))***
+*** func call to a different SCC: neg([_G47738],[_G47852])***
+*** No sabu I/O relation for neg***
+*** sync call to the same SCC: call(sync,while_6([_G47732,_G47852,_G47735,_G47738,_G47741,_G47744,_G47747,_G47750,_G47753,_G47756,_G47759,_G47762,_G47765,_G47768,_G47771,_G47774,_G47777,_G47780],[_G47783,_G47786,_G47789,_G47792,_G47795,_G47798,_G47801],[_G47804,_G47807,_G47810,_G47813,_G47816],[_G47819,_G47822,_G47825,_G47828,_G47831,_G47834,_G47837]))***
+*** func call to a different SCC: moneyToInt([_G48599],[_G48694])***
+*** sync call to the same SCC: call(sync,cont_26([_G48560,_G48566,_G48849,_G48572,_G48575,_G48578,_G48581,_G48584,_G48587,_G48590,_G48593,_G48596,_G48599,_G48602,_G48605,_G48608,_G48611],[_G48614,_G48617,_G48620,_G48623,_G48626,_G48629,_G48632],[_G48635,_G48638,_G48641,_G48644,_G48647],[_G48650,_G48653,_G48656,_G48659,_G48662,_G48665,_G48668]))***
+*** sync call to the same SCC: call(sync,cont_26([_G48035,_G48041,_G48397,_G48047,_G48185,_G48053,_G48056,_G48059,_G48062,_G48391,_G48068,_G48071,_G48074,_G48077,_G48080,_G48083,_G48394],[_G48239,_G48242,_G48245,_G48248,_G48251,_G48254,_G48257],[_G48110,_G48113,_G48116,_G48119,_G48122],[_G48125,_G48128,_G48131,_G48134,_G48137,_G48140,_G48143]))***
+*** func call to a different SCC: eq([_G49059,_G49154],[_G49172])***
+*** No sabu I/O relation for eq***
+*** func call to a different SCC: eq([_G49053,_G49183],[_G49201])***
+*** No sabu I/O relation for eq***
+*** func call to a different SCC: or([_G49172,_G49201],[_G49219])***
+*** No sabu I/O relation for or***
+*** sync call to the same SCC: call(sync,if_26([_G49029,_G49219,_G49035,_G49038,_G49041,_G49044,_G49047,_G49050,_G49053,_G49056,_G49059,_G49062,_G49065,_G49068,_G49071,_G49074,_G49077,_G49080],[_G49083,_G49086,_G49089,_G49092,_G49095,_G49098,_G49101],[_G49104,_G49107,_G49110,_G49113,_G49116],[_G49119,_G49122,_G49125,_G49128,_G49131,_G49134,_G49137]))***
+Crs_equations (no_fields): 
+eq(cont_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X],0,[entrywhile_6(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X)],[])
+eq(entrywhile_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X],0,[while_6(A,Y,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X)],[])
+eq(if_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[cont_26(A,C,Z,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y)],[B=1,1*N>=3,A1=1,Z=A1])
+eq(if_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[cont_26(A,C,Z,E,A1,G,H,I,J,B1,L,M,N,O,P,Q,C1,D1,E1,F1,G1,H1,I1,J1)],[B=0,A1=K1,L1=1,M1=L1])
+eq(while_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[],[B=0])
+eq(while_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[if_26(A,Z,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y)],[B=1,A1=1,B1=1])
+
+Used fields: [cashBoxEnv,cardReaderEnv]
+*** sync call to the same SCC: call(sync,entrywhile_6([_G1601,_G1604,_G1607,_G1610,_G1613,_G1616,_G1619,_G1622,_G1625,_G1628,_G1631,_G1634,_G1637,_G1640,_G1643,_G1646,_G1649],[_G1652,_G1655,_G1658,_G1661,_G1664,_G1667,_G1670],[_G1673,_G1676,_G1679,_G1682,_G1685],[_G1688,_G1691,_G1694,_G1697,_G1700,_G1703,_G1706]))***
+*** func call to a different SCC: neg([_G1851],[_G1965])***
+*** No sabu I/O relation for neg***
+*** sync call to the same SCC: call(sync,while_6([_G1845,_G1965,_G1848,_G1851,_G1854,_G1857,_G1860,_G1863,_G1866,_G1869,_G1872,_G1875,_G1878,_G1881,_G1884,_G1887,_G1890,_G1893],[_G1896,_G1899,_G1902,_G1905,_G1908,_G1911,_G1914],[_G1917,_G1920,_G1923,_G1926,_G1929],[_G1932,_G1935,_G1938,_G1941,_G1944,_G1947,_G1950]))***
+*** func call to a different SCC: moneyToInt([_G2668],[_G2763])***
+*** sync call to the same SCC: call(sync,cont_26([_G2629,_G2635,_G2918,_G2641,_G2644,_G2647,_G2650,_G2653,_G2656,_G2659,_G2662,_G2665,_G2668,_G2671,_G2674,_G2677,_G2680],[_G2683,_G2686,_G2689,_G2692,_G2695,_G2698,_G2701],[_G2704,_G2707,_G2710,_G2713,_G2716],[_G2719,_G2722,_G2725,_G2728,_G2731,_G2734,_G2737]))***
+*** sync call to the same SCC: call(sync,cont_26([_G2107,_G2113,_G2469,_G2119,_G2257,_G2125,_G2128,_G2131,_G2134,_G2463,_G2140,_G2143,_G2146,_G2149,_G2152,_G2155,_G2466],[_G2311,_G2314,_G2317,_G2320,_G2323,_G2326,_G2329],[_G2182,_G2185,_G2188,_G2191,_G2194],[_G2197,_G2200,_G2203,_G2206,_G2209,_G2212,_G2215]))***
+*** func call to a different SCC: eq([_G3087,_G3182],[_G3200])***
+*** No sabu I/O relation for eq***
+*** func call to a different SCC: eq([_G3081,_G3211],[_G3229])***
+*** No sabu I/O relation for eq***
+*** func call to a different SCC: or([_G3200,_G3229],[_G3247])***
+*** No sabu I/O relation for or***
+*** sync call to the same SCC: call(sync,if_26([_G3057,_G3247,_G3063,_G3066,_G3069,_G3072,_G3075,_G3078,_G3081,_G3084,_G3087,_G3090,_G3093,_G3096,_G3099,_G3102,_G3105,_G3108],[_G3111,_G3114,_G3117,_G3120,_G3123,_G3126,_G3129],[_G3132,_G3135,_G3138,_G3141,_G3144],[_G3147,_G3150,_G3153,_G3156,_G3159,_G3162,_G3165]))***
+Crs_equations (eq_fields): 
+eq(cont_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X],0,[entrywhile_6(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X)],[])
+eq(entrywhile_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X],0,[while_6(A,Y,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X)],[])
+eq(if_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[cont_26(A,C,Z,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y)],[B=1,1*N>=3,A1=1,Z=A1])
+eq(if_26,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[cont_26(A,C,Z,E,A1,G,H,I,J,B1,L,M,N,O,P,Q,C1,D1,E1,F1,G1,H1,I1,J1)],[B=0,A1=K1,T=E1,U=F1,L1=1,M1=L1])
+eq(while_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[],[B=0])
+eq(while_6,[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y],0,[if_26(A,Z,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y)],[B=1,A1=1,B1=1])
+
+Terminating : no
+Closure time 390 ms.
+Direct mhp time 80 ms.
+ Indirect mhp time 670 ms.
+Ans = no .
+

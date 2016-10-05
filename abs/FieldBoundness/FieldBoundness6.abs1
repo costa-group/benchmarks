@@ -1,0 +1,43 @@
+module FieldBoundness6;
+
+interface A {
+  Int mut_recursive();
+}
+interface B {
+  Int mut_recursive();
+}
+//Fails: We don't know anything about the input fields and it does not seem easy to apply any knowlegde
+class A1(Int recA,B other) implements A {
+ 
+Int mut_recursive() {
+    Fut<Int> out;
+    	if(recA>0){
+	recA=recA-1;
+	out= other!mut_recursive();
+	}   
+return 0;
+}
+
+}
+class B1(Int recB,A other) implements B {
+ 
+Int mut_recursive() {
+    Fut<Int> out;
+    	if(recB>0){
+	recB=recB-1;
+	out= other!mut_recursive();
+	}   
+return 0;
+}
+
+}
+
+{
+  A x;
+  B y;
+  x = new local A1(100,y);
+  y = new local B1(100,x); 
+  x!mut_recursive();
+
+
+}

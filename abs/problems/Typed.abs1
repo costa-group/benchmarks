@@ -1,0 +1,37 @@
+module Test;
+
+import * from ABS.StdLib;
+
+class CC {
+
+	Int kkk = 0;
+    List<Int> f = Nil;
+ 
+  	// With typed norms, that is not needed, maximization fails.
+	// 
+	// costabs problems/Typed.abs -entries CC.pp -size_abst typed_norms -typed_norm_inference no
+	// UB for 'CC.pp'(this_1) = 7+9*c(maximize_failed)
+	// 
+	// Without typed norms it works:
+	// UB for 'CC.pp'(this,max(kkk)) = 7+9*nat(max(kkk))
+		 
+    [kkk <= max(kkk)]
+	Unit pp () {
+		while (kkk > 0) {
+			kkk = kkk - 1;
+		}
+	}
+
+    // As in the previous example, maximization fails for data structure fields
+	//  costabs problems/Typed.abs -entries CC.ppp -size_abst typed_norms -typed_norm_inference no
+	//		
+	// UB for 'CC.ppp'(this_1) = 7+10*c(maximize_failed)
+	
+    [f <= max(f)]
+    Unit ppp () {
+        while(f != Nil) {
+            f = tail(f);
+        }
+    }
+
+}

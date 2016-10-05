@@ -1,0 +1,52 @@
+module FieldBoundness4;
+
+interface A {
+  Int recursive(Int i);
+  Int recursive_release(Int i);
+  Int recursive_dep();
+
+}
+
+
+class A1_recursive(Int rec,Int rec_r,Int rec_dep) implements A {
+ 
+//Success
+Int recursive(Int i) {
+    Fut<Int> out;
+    	if(i>0){
+	rec=rec+1;
+	out= this!recursive(i-1);
+	}   
+return 0;
+}
+//Success
+Int recursive_release(Int i) {
+    Fut<Int> out;
+    	if(i>0){
+	rec_r=rec_r+1;
+	out= this!recursive_release(i-1);
+	await out?;
+	}   
+return 0;
+}
+//Fail : we don't know anything about the input fields in the recursive call
+Int recursive_dep() {
+    Fut<Int> out;
+    	if(rec_dep>0){
+	rec_dep=rec_dep-1;
+	out= this!recursive_dep();
+	await out?;
+	}   
+return 0;
+}
+
+}
+
+{
+  A x;
+  x = new local A1_recursive(100,100,100);
+  x!recursive(100);
+  x!recursive_release(100);
+  x!recursive_dep();	
+
+}

@@ -1,0 +1,1038 @@
+(11, 11, '32126', {'AgentImp.free': (True, '14+nat(max(sessions)/2-1/2)'), 'DatabaseImp.init': (True, '5'), 'SyncClient.run2': (True, '255+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)+5*nat(max(booksS)/2-1/2)+nat(max(booksS)/2+max(countriesS)/2-2)+nat(max(booksS)/2+max(countriesS)/2-2)'), 'SessionImp.order': (True, '176+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)'), 'Main.main': (True, '295+3*nat(nclients)+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)+5*nat(max(booksS)/2-1/2)+nat(max(booksS)/2+max(countriesS)/2-2)+nat(max(booksS)/2+max(countriesS)/2-2)+2*nat(cDB/4-1/4)'), 'AgentImp.init': (True, '3'), 'DatabaseImp.getInfo': (True, '40+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)'), 'DatabaseImp.confirmOrder': (True, '34+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)'), 'AgentImp.getsession': (True, '19'), 'SyncClient.init': (True, '9'), 'SessionImp.init': (True, '8')})
+(11, 5, 292, {'AgentImp.free': (False, '10+5*c(maximize_failed)'), 'DatabaseImp.init': (True, '5'), 'SyncClient.run2': (False, '142+5*c(maximize_failed)+5*c(maximize_failed)+c(maximize_failed)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed)'), 'SessionImp.order': (False, '35+nat(books/2-1/2)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed)'), 'Main.main': (False, '20+nat(nclients)* (165+5*nat(cDB/4-1/4)+5*c(maximize_failed)+5*c(maximize_failed)+c(maximize_failed)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed))'), 'AgentImp.init': (True, '3'), 'DatabaseImp.getInfo': (False, '11+nat(books/2-1/2)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))'), 'DatabaseImp.confirmOrder': (False, '7+nat(books/2-1/2)* (18+c(maximize_failed)* (13+9*c(maximize_failed))+9*c(maximize_failed))'), 'AgentImp.getsession': (True, '20'), 'SyncClient.init': (True, '9'), 'SessionImp.init': (True, '8')})
+===============================================================
+BOOKSHOP
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  11
+Total UBs        :  11
+Time             :  32126
++ UB for AgentImp.init = 3
++ UB for DatabaseImp.init = 5
++ UB for SyncClient.init = 9
++ UB for SessionImp.init = 8
++ UB for AgentImp.getsession = 19
++ UB for DatabaseImp.getInfo = 40+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)
++ UB for DatabaseImp.confirmOrder = 34+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)
++ UB for AgentImp.free = 14+nat(max(sessions)/2-1/2)
++ UB for SessionImp.order = 176+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)
++ UB for SyncClient.run2 = 255+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)+5*nat(max(booksS)/2-1/2)+nat(max(booksS)/2+max(countriesS)/2-2)+nat(max(booksS)/2+max(countriesS)/2-2)
++ UB for Main.main = 295+3*nat(nclients)+nat(max(sessions)/2-1/2)+2*nat(max(info)/4-1/4)+nat(max(info)/2-1/2)+nat(max(booksDB)/7-1/7)* (19+nat(max(booksDB)/4-2))+nat(max(booksDB)/4-2)+2*nat(max(info)/4-1/4)+4*nat(max(info)/7-1/7)+3*nat(max(info)/7-1/7)+2*nat(max(booksS)/2-1/2)+nat(max(booksDB)/4-1/4)+6*nat(max(booksDB)/2-1/2)+2*nat(max(booksDB)/4-1/4)+5*nat(max(booksS)/2-1/2)+nat(max(booksS)/2+max(countriesS)/2-2)+nat(max(booksS)/2+max(countriesS)/2-2)+2*nat(cDB/4-1/4)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  5
+Total UBs         :  11
+Time              :  292
++ UB for AgentImp.init = 3
++ UB for DatabaseImp.init = 5
++ UB for SyncClient.init = 9
++ UB for SessionImp.init = 8
++ UB for AgentImp.getsession = 20
+- UB for DatabaseImp.getInfo = 11+nat(books/2-1/2)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))
+- UB for DatabaseImp.confirmOrder = 7+nat(books/2-1/2)* (18+c(maximize_failed)* (13+9*c(maximize_failed))+9*c(maximize_failed))
+- UB for AgentImp.free = 10+5*c(maximize_failed)
+- UB for SessionImp.order = 35+nat(books/2-1/2)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed)
+- UB for SyncClient.run2 = 142+5*c(maximize_failed)+5*c(maximize_failed)+c(maximize_failed)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed)
+- UB for Main.main = 20+nat(nclients)* (165+5*nat(cDB/4-1/4)+5*c(maximize_failed)+5*c(maximize_failed)+c(maximize_failed)* (24+5*c(maximize_failed)+7*c(maximize_failed)+4*c(maximize_failed))+5*c(maximize_failed))
+
+
+
+Comparison
+~~~~~~~~~~~
+AgentImp.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+DatabaseImp.init :  RG == OC,constant
+    RG: 5
+    OC: 5
+
+SyncClient.init :  RG == OC,constant
+    RG: 9
+    OC: 9
+
+SessionImp.init :  RG == OC,constant
+    RG: 8
+    OC: 8
+
+AgentImp.getsession :  RG <= OC,constant
+    RG: 19
+    OC: 20
+
+RESUMEN
+#Constantes: 5
+#Comparables: 0
+#Incomparables: 0
+(8, 8, '459', {'BoundedBuffer.append': (True, '18+nat(max(buffer)/2-3/2)'), 'BoundedBuffer.remove': (True, '17'), 'ConsumerImpl.init': (True, '2'), 'Main.main': (True, '89+3*nat(mcons)+3*nat(mreq)+3*nat(nprod)+3*nat(nreq)+nat(max(buffer)/2-3/2)'), 'ProducerImpl.loop': (True, '29+3*nat(nreq)+nat(max(buffer)/2-3/2)'), 'ConsumerImpl.loop': (True, '28+3*nat(mreq)'), 'ProducerImpl.init': (True, '2'), 'BoundedBuffer.init': (True, '4')})
+(8, 5, 118, {'BoundedBuffer.append': (False, '14+5*c(maximize_failed)'), 'BoundedBuffer.remove': (True, '17'), 'ConsumerImpl.init': (True, '2'), 'Main.main': (False, '17+nat(nprod)* (18+nat(nreq)* (22+5*c(maximize_failed)))+nat(mcons)* (18+25*nat(mreq))'), 'ProducerImpl.loop': (False, '6+nat(d)* (22+5*c(maximize_failed))'), 'ConsumerImpl.loop': (True, '6+25*nat(d)'), 'ProducerImpl.init': (True, '2'), 'BoundedBuffer.init': (True, '4')})
+===============================================================
+BOUNDEDBUFFER
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  8
+Total UBs        :  8
+Time             :  459
++ UB for BoundedBuffer.init = 4
++ UB for ProducerImpl.init = 2
++ UB for BoundedBuffer.append = 18+nat(max(buffer)/2-3/2)
++ UB for ProducerImpl.loop = 29+3*nat(nreq)+nat(max(buffer)/2-3/2)
++ UB for ConsumerImpl.init = 2
++ UB for BoundedBuffer.remove = 17
++ UB for ConsumerImpl.loop = 28+3*nat(mreq)
++ UB for Main.main = 89+3*nat(mcons)+3*nat(mreq)+3*nat(nprod)+3*nat(nreq)+nat(max(buffer)/2-3/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  5
+Total UBs         :  8
+Time              :  118
++ UB for BoundedBuffer.init = 4
++ UB for ProducerImpl.init = 2
+- UB for BoundedBuffer.append = 14+5*c(maximize_failed)
+- UB for ProducerImpl.loop = 6+nat(d)* (22+5*c(maximize_failed))
++ UB for ConsumerImpl.init = 2
++ UB for BoundedBuffer.remove = 17
++ UB for ConsumerImpl.loop = 6+25*nat(d)
+- UB for Main.main = 17+nat(nprod)* (18+nat(nreq)* (22+5*c(maximize_failed)))+nat(mcons)* (18+25*nat(mreq))
+
+
+
+Comparison
+~~~~~~~~~~~
+BoundedBuffer.init :  RG == OC,constant
+    RG: 4
+    OC: 4
+
+ProducerImpl.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+ConsumerImpl.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+BoundedBuffer.remove :  RG == OC,constant
+    RG: 17
+    OC: 17
+
+ConsumerImpl.loop :  different_vars,incomparable([mreq],[d])
+    RG: 28+3*nat(mreq)
+    OC: 6+25*nat(d)
+
+RESUMEN
+#Constantes: 4
+#Comparables: 0
+#Incomparables: 1
+(34, 34, '7914', {'ClientGUIImpl.init': (True, '7'), 'TextFieldImpl.getText': (True, '2'), 'ClientImpl.receive': (True, '32+2*nat(max(sessions)/2-1/2)'), 'ServerImpl.sessionClosed': (True, '12+2*nat(max(sessions)/2-1/2)'), 'TextFieldImpl.init': (True, '2'), 'ClientGUIImpl.getClientIntern': (True, '2'), 'ClientGUIImpl.getTextFieldText': (True, '6'), 'ServerImpl.start': (True, '3'), 'ClientImpl.setServer': (True, '3'), 'SendButtonListener.pressed': (True, '24'), 'ButtonImpl.press': (True, '43+4*nat(max(listener)/2-1/2)* (1+nat(nclients))'), 'ServerImpl.init': (True, '3'), 'UserImpl.use': (True, '68+4*nat(max(listener)/2-1/2)* (1+nat(nclients))'), 'SendButtonListener.init': (True, '2'), 'ButtonImpl.init': (True, '4'), 'TextFieldImpl.setText': (True, '3'), 'WindowImpl.newButton': (True, '7'), 'ClientImpl.sendText': (True, '9'), 'ClientImpl.init': (True, '2'), 'UserImpl.init': (True, '1'), 'SessionImpl.init2': (True, '37+2*nat(max(sessions)/2-1/2)'), 'ClientImpl.start': (True, '55+2*nat(max(sessions)/2-1/2)'), 'WindowImpl.init': (True, '1'), 'SessionImpl.receive': (True, '2'), 'ClientGUIImpl.getTextField': (True, '3'), 'SessionImpl.close': (True, '16+2*nat(max(sessions)/2-1/2)'), 'Main.main': (True, '219+3*nat(nclients)+4*nat(max(listener)/2-1/2)* (1+nat(nclients))+nat(max(listener)/2-1)+2*nat(max(sessions)/2-1/2)'), 'ClientGUIImpl.init2': (True, '44+nat(max(listener)/2-1)'), 'SessionImpl.init': (True, '3'), 'ClientImpl.getGUI': (True, '63+nat(max(listener)/2-1)'), 'ButtonImpl.registerListener': (True, '14+nat(max(listener)/2-1)'), 'ClientGUIImpl.getSendButton': (True, '3'), 'ServerImpl.connect': (True, '47+2*nat(max(sessions)/2-1/2)'), 'WindowImpl.newTextField': (True, '5')})
+(34, 22, 87, {'ClientGUIImpl.init': (True, '8'), 'TextFieldImpl.getText': (True, '2'), 'ClientImpl.receive': (False, '28+6*c(maximize_failed)'), 'ServerImpl.sessionClosed': (False, '8+6*c(maximize_failed)'), 'TextFieldImpl.init': (True, '2'), 'ClientGUIImpl.getClientIntern': (True, '2'), 'ClientGUIImpl.getTextFieldText': (True, '6'), 'ServerImpl.start': (True, '3'), 'ClientImpl.setServer': (True, '3'), 'SendButtonListener.pressed': (True, '24'), 'ButtonImpl.press': (False, '3+c(failed(no_rf,[scc=11,cr=entrywhile_0/2]))'), 'ServerImpl.init': (True, '3'), 'UserImpl.use': (False, '28+c(failed(no_rf,[scc=11,cr=entrywhile_0/2]))'), 'SendButtonListener.init': (True, '2'), 'ButtonImpl.init': (True, '4'), 'TextFieldImpl.setText': (True, '3'), 'WindowImpl.newButton': (True, '8'), 'ClientImpl.sendText': (True, '9'), 'ClientImpl.init': (True, '2'), 'UserImpl.init': (True, '1'), 'SessionImpl.init2': (False, '33+6*c(maximize_failed)'), 'ClientImpl.start': (False, '52+6*c(maximize_failed)'), 'WindowImpl.init': (True, '1'), 'SessionImpl.receive': (True, '2'), 'ClientGUIImpl.getTextField': (True, '3'), 'SessionImpl.close': (False, '12+6*c(maximize_failed)'), 'Main.main': (False, '16+nat(nclients)* (167+6*c(maximize_failed)+5*c(maximize_failed)+c(failed(no_rf,[scc=11,cr=entrywhile_0/2])))'), 'ClientGUIImpl.init2': (False, '43+5*c(maximize_failed)'), 'SessionImpl.init': (True, '3'), 'ClientImpl.getGUI': (False, '64+5*c(maximize_failed)'), 'ButtonImpl.registerListener': (False, '10+5*c(maximize_failed)'), 'ClientGUIImpl.getSendButton': (True, '3'), 'ServerImpl.connect': (False, '44+6*c(maximize_failed)'), 'WindowImpl.newTextField': (True, '6')})
+===============================================================
+CHAT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  34
+Total UBs        :  34
+Time             :  7914
++ UB for ServerImpl.init = 3
++ UB for ServerImpl.start = 3
++ UB for WindowImpl.init = 1
++ UB for ClientGUIImpl.init = 7
++ UB for ButtonImpl.registerListener = 14+nat(max(listener)/2-1)
++ UB for SendButtonListener.init = 2
++ UB for ButtonImpl.init = 4
++ UB for WindowImpl.newButton = 7
++ UB for TextFieldImpl.init = 2
++ UB for WindowImpl.newTextField = 5
++ UB for ClientGUIImpl.init2 = 44+nat(max(listener)/2-1)
++ UB for ClientImpl.getGUI = 63+nat(max(listener)/2-1)
++ UB for ClientImpl.init = 2
++ UB for ClientImpl.setServer = 3
++ UB for SessionImpl.init = 3
++ UB for ServerImpl.sessionClosed = 12+2*nat(max(sessions)/2-1/2)
++ UB for SessionImpl.close = 16+2*nat(max(sessions)/2-1/2)
++ UB for SessionImpl.receive = 2
++ UB for ClientImpl.receive = 32+2*nat(max(sessions)/2-1/2)
++ UB for SessionImpl.init2 = 37+2*nat(max(sessions)/2-1/2)
++ UB for ServerImpl.connect = 47+2*nat(max(sessions)/2-1/2)
++ UB for ClientImpl.start = 55+2*nat(max(sessions)/2-1/2)
++ UB for UserImpl.init = 1
++ UB for ClientGUIImpl.getClientIntern = 2
++ UB for TextFieldImpl.getText = 2
++ UB for ClientGUIImpl.getTextFieldText = 6
++ UB for ClientImpl.sendText = 9
++ UB for SendButtonListener.pressed = 24
++ UB for ButtonImpl.press = 43+4*nat(max(listener)/2-1/2)* (1+nat(nclients))
++ UB for ClientGUIImpl.getSendButton = 3
++ UB for ClientGUIImpl.getTextField = 3
++ UB for TextFieldImpl.setText = 3
++ UB for UserImpl.use = 68+4*nat(max(listener)/2-1/2)* (1+nat(nclients))
++ UB for Main.main = 219+3*nat(nclients)+4*nat(max(listener)/2-1/2)* (1+nat(nclients))+nat(max(listener)/2-1)+2*nat(max(sessions)/2-1/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  22
+Total UBs         :  34
+Time              :  87
++ UB for ServerImpl.init = 3
++ UB for ServerImpl.start = 3
++ UB for WindowImpl.init = 1
++ UB for ClientGUIImpl.init = 8
+- UB for ButtonImpl.registerListener = 10+5*c(maximize_failed)
++ UB for SendButtonListener.init = 2
++ UB for ButtonImpl.init = 4
++ UB for WindowImpl.newButton = 8
++ UB for TextFieldImpl.init = 2
++ UB for WindowImpl.newTextField = 6
+- UB for ClientGUIImpl.init2 = 43+5*c(maximize_failed)
+- UB for ClientImpl.getGUI = 64+5*c(maximize_failed)
++ UB for ClientImpl.init = 2
++ UB for ClientImpl.setServer = 3
++ UB for SessionImpl.init = 3
+- UB for ServerImpl.sessionClosed = 8+6*c(maximize_failed)
+- UB for SessionImpl.close = 12+6*c(maximize_failed)
++ UB for SessionImpl.receive = 2
+- UB for ClientImpl.receive = 28+6*c(maximize_failed)
+- UB for SessionImpl.init2 = 33+6*c(maximize_failed)
+- UB for ServerImpl.connect = 44+6*c(maximize_failed)
+- UB for ClientImpl.start = 52+6*c(maximize_failed)
++ UB for UserImpl.init = 1
++ UB for ClientGUIImpl.getClientIntern = 2
++ UB for TextFieldImpl.getText = 2
++ UB for ClientGUIImpl.getTextFieldText = 6
++ UB for ClientImpl.sendText = 9
++ UB for SendButtonListener.pressed = 24
+- UB for ButtonImpl.press = 3+c(failed(no_rf,[scc=11,cr=entrywhile_0/2]))
++ UB for ClientGUIImpl.getSendButton = 3
++ UB for ClientGUIImpl.getTextField = 3
++ UB for TextFieldImpl.setText = 3
+- UB for UserImpl.use = 28+c(failed(no_rf,[scc=11,cr=entrywhile_0/2]))
+- UB for Main.main = 16+nat(nclients)* (167+6*c(maximize_failed)+5*c(maximize_failed)+c(failed(no_rf,[scc=11,cr=entrywhile_0/2])))
+
+
+
+Comparison
+~~~~~~~~~~~
+ServerImpl.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+ServerImpl.start :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+WindowImpl.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+ClientGUIImpl.init :  RG <= OC,constant
+    RG: 7
+    OC: 8
+
+SendButtonListener.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+ButtonImpl.init :  RG == OC,constant
+    RG: 4
+    OC: 4
+
+WindowImpl.newButton :  RG <= OC,constant
+    RG: 7
+    OC: 8
+
+TextFieldImpl.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+WindowImpl.newTextField :  RG <= OC,constant
+    RG: 5
+    OC: 6
+
+ClientImpl.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+ClientImpl.setServer :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+SessionImpl.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+SessionImpl.receive :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+UserImpl.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+ClientGUIImpl.getClientIntern :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+TextFieldImpl.getText :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+ClientGUIImpl.getTextFieldText :  RG == OC,constant
+    RG: 6
+    OC: 6
+
+ClientImpl.sendText :  RG == OC,constant
+    RG: 9
+    OC: 9
+
+SendButtonListener.pressed :  RG == OC,constant
+    RG: 24
+    OC: 24
+
+ClientGUIImpl.getSendButton :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+ClientGUIImpl.getTextField :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+TextFieldImpl.setText :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+RESUMEN
+#Constantes: 22
+#Comparables: 0
+#Incomparables: 0
+(10, 10, '420', {'Test.m': (True, '351+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)'), 'Node.init': (True, '2'), 'Node.putData': (True, '13+4*nat(max(map)/4-1/4)'), 'DistHT.init': (True, '3'), 'Main.main': (True, '712+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)'), 'DistHT.putData': (True, '33+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)'), 'Test.init': (True, '1'), 'Node.getData': (True, '8+nat(max(map)/4-1/4)'), 'DistHT.getAllData': (True, '87+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)'), 'DistHT.lookupNode': (True, '16+4*nat(max(nodes)/2-3/2)')})
+(10, 3, 81, {'Test.m': (False, '160+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))'), 'Node.init': (True, '2'), 'Node.putData': (False, '10+7*c(maximize_failed)'), 'DistHT.init': (True, '3'), 'Main.main': (False, '332+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))'), 'DistHT.putData': (False, '25+9*c(maximize_failed)+7*c(maximize_failed)'), 'Test.init': (True, '1'), 'Node.getData': (False, '5+4*c(maximize_failed)'), 'DistHT.getAllData': (False, '6+nat(keys/2-1/2)* (37+9*c(maximize_failed)+4*c(maximize_failed))'), 'DistHT.lookupNode': (False, '11+9*c(maximize_failed)')})
+===============================================================
+DISTHT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  10
+Total UBs        :  10
+Time             :  420
++ UB for Test.init = 1
++ UB for DistHT.lookupNode = 16+4*nat(max(nodes)/2-3/2)
++ UB for Node.getData = 8+nat(max(map)/4-1/4)
++ UB for DistHT.getAllData = 87+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)
++ UB for DistHT.init = 3
++ UB for Node.putData = 13+4*nat(max(map)/4-1/4)
++ UB for DistHT.putData = 33+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)
++ UB for Node.init = 2
++ UB for Test.m = 351+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)
++ UB for Main.main = 712+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)+4*nat(max(map)/4-1/4)+4*nat(max(nodes)/2-3/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  3
+Total UBs         :  10
+Time              :  81
++ UB for Test.init = 1
+- UB for DistHT.lookupNode = 11+9*c(maximize_failed)
+- UB for Node.getData = 5+4*c(maximize_failed)
+- UB for DistHT.getAllData = 6+nat(keys/2-1/2)* (37+9*c(maximize_failed)+4*c(maximize_failed))
++ UB for DistHT.init = 3
+- UB for Node.putData = 10+7*c(maximize_failed)
+- UB for DistHT.putData = 25+9*c(maximize_failed)+7*c(maximize_failed)
++ UB for Node.init = 2
+- UB for Test.m = 160+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))
+- UB for Main.main = 332+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+9*c(maximize_failed)+7*c(maximize_failed)+3/2* (37+9*c(maximize_failed)+4*c(maximize_failed))+7* (37+9*c(maximize_failed)+4*c(maximize_failed))
+
+
+
+Comparison
+~~~~~~~~~~~
+Test.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+DistHT.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+Node.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+RESUMEN
+#Constantes: 3
+#Comparables: 0
+#Incomparables: 0
+(9, 9, '457', {'MailServerImp.init': (True, '3'), 'MailServerImp.addUser': (True, '18+4*nat(max(users)/2-1/2)'), 'UserImp.receive': (True, '4'), 'AddressBookImp.getUserAddress': (True, '8+nat(max(users)/4-1/4)'), 'MailServerImp.notify': (True, '34+3*nat(max(listUsers)/2-1/2)+nat(max(users)/4-1/4)'), 'UserImp.init': (True, '2'), 'AddressBookImp.addUser': (True, '12+4*nat(max(users)/2-1/2)'), 'AddressBookImp.init': (True, '2'), 'Main.main': (True, '90+3*nat(mssg/2-1/2)+3*nat(max(listUsers)/2-1/2)+nat(max(users)/4-1/4)+3*nat(nUsers)+4*nat(max(users)/2-1/2)')})
+(9, 4, 124, {'MailServerImp.init': (True, '3'), 'MailServerImp.addUser': (False, '16+6*c(maximize_failed)'), 'UserImp.receive': (True, '4'), 'AddressBookImp.getUserAddress': (False, '5+4*c(maximize_failed)'), 'MailServerImp.notify': (False, '9+c(maximize_failed)* (25+4*c(maximize_failed))'), 'UserImp.init': (True, '2'), 'AddressBookImp.addUser': (False, '10+6*c(maximize_failed)'), 'AddressBookImp.init': (True, '2'), 'Main.main': (False, '22+nat(nUsers)* (29+6*c(maximize_failed))+nat(mssg/2-1/2)* (21+c(maximize_failed)* (25+4*c(maximize_failed)))')})
+===============================================================
+MAILSERVER
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  9
+Total UBs        :  9
+Time             :  457
++ UB for AddressBookImp.init = 2
++ UB for MailServerImp.init = 3
++ UB for AddressBookImp.addUser = 12+4*nat(max(users)/2-1/2)
++ UB for MailServerImp.addUser = 18+4*nat(max(users)/2-1/2)
++ UB for UserImp.init = 2
++ UB for AddressBookImp.getUserAddress = 8+nat(max(users)/4-1/4)
++ UB for UserImp.receive = 4
++ UB for MailServerImp.notify = 34+3*nat(max(listUsers)/2-1/2)+nat(max(users)/4-1/4)
++ UB for Main.main = 90+3*nat(mssg/2-1/2)+3*nat(max(listUsers)/2-1/2)+nat(max(users)/4-1/4)+3*nat(nUsers)+4*nat(max(users)/2-1/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  4
+Total UBs         :  9
+Time              :  124
++ UB for AddressBookImp.init = 2
++ UB for MailServerImp.init = 3
+- UB for AddressBookImp.addUser = 10+6*c(maximize_failed)
+- UB for MailServerImp.addUser = 16+6*c(maximize_failed)
++ UB for UserImp.init = 2
+- UB for AddressBookImp.getUserAddress = 5+4*c(maximize_failed)
++ UB for UserImp.receive = 4
+- UB for MailServerImp.notify = 9+c(maximize_failed)* (25+4*c(maximize_failed))
+- UB for Main.main = 22+nat(nUsers)* (29+6*c(maximize_failed))+nat(mssg/2-1/2)* (21+c(maximize_failed)* (25+4*c(maximize_failed)))
+
+
+
+Comparison
+~~~~~~~~~~~
+AddressBookImp.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+MailServerImp.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+UserImp.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+UserImp.receive :  RG == OC,constant
+    RG: 4
+    OC: 4
+
+RESUMEN
+#Constantes: 4
+#Comparables: 0
+#Incomparables: 0
+(16, 16, '18504', {'DataBaseImpl.listFiles': (True, '9+2*nat(max(dbT)/4-1/4)'), 'Node.setAdmin': (True, '3'), 'Node.run2': (True, '203+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)'), 'Node.getPack': (True, '25+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)'), 'Node.availFiles': (True, '47+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)'), 'DataBaseImpl.storeFile': (True, '5'), 'DataBaseImpl.getLength': (True, '16+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)'), 'OurTopology.init': (True, '5'), 'Node.getLength': (True, '21+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)'), 'DataBaseImpl.getFile': (True, '8+nat(max(dbT)/4-1/4)'), 'Main.main': (True, '1023+2*nat(nruns)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)'), 'Node.reqFile': (True, '75+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)'), 'Node.enquire': (True, '14+2*nat(max(dbT)/4-1/4)'), 'OurTopology.getNeighbors': (True, '42'), 'Node.init': (True, '7'), 'DataBaseImpl.init': (True, '2')})
+(16, 6, 328, {'DataBaseImpl.listFiles': (False, '6+5*c(maximize_failed)'), 'Node.setAdmin': (True, '3'), 'Node.run2': (False, '119+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))'), 'Node.getPack': (False, '17+4*c(maximize_failed)+9*nat(pNbr)'), 'Node.availFiles': (False, '8+nat(sList/2-1/2)* (40+5*c(maximize_failed)+5*c(maximize_failed))'), 'DataBaseImpl.storeFile': (True, '5'), 'DataBaseImpl.getLength': (False, '9+4*c(maximize_failed)+6*c(maximize_failed)'), 'OurTopology.init': (True, '5'), 'Node.getLength': (False, '14+4*c(maximize_failed)+6*c(maximize_failed)'), 'DataBaseImpl.getFile': (False, '5+4*c(maximize_failed)'), 'Main.main': (False, '302+nat(nruns)* (485+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed)))'), 'Node.reqFile': (False, '34+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))'), 'Node.enquire': (False, '11+5*c(maximize_failed)'), 'OurTopology.getNeighbors': (True, '42'), 'Node.init': (True, '7'), 'DataBaseImpl.init': (True, '2')})
+===============================================================
+PEERTOPEER
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  16
+Total UBs        :  16
+Time             :  18504
++ UB for DataBaseImpl.init = 2
++ UB for Node.init = 7
++ UB for Node.setAdmin = 3
++ UB for OurTopology.init = 5
++ UB for DataBaseImpl.listFiles = 9+2*nat(max(dbT)/4-1/4)
++ UB for Node.enquire = 14+2*nat(max(dbT)/4-1/4)
++ UB for Node.availFiles = 47+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)
++ UB for OurTopology.getNeighbors = 42
++ UB for DataBaseImpl.storeFile = 5
++ UB for DataBaseImpl.getLength = 16+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)
++ UB for Node.getLength = 21+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)
++ UB for DataBaseImpl.getFile = 8+nat(max(dbT)/4-1/4)
++ UB for Node.getPack = 25+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)
++ UB for Node.reqFile = 75+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)
++ UB for Node.run2 = 203+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)
++ UB for Main.main = 1023+2*nat(nruns)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)+3*nat(max(file))+4*nat(max(file)-1)+nat(max(dbT)/4-1/4)+2*nat(max(dbT)/2-min(file)/2-2)+nat(max(dbT)/4-1/4)+nat(max(myNeighbors)/4-1/4)* (13+6*nat(max(catalog)/2-5/2))+6*nat(max(catalog)/2-5/2)+8*nat(max(myNeighbors)/2-1/2)+nat(max(myNeighbors)/2-3/2)+2*nat(max(dbT)/4-1/4)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  6
+Total UBs         :  16
+Time              :  328
++ UB for DataBaseImpl.init = 2
++ UB for Node.init = 7
++ UB for Node.setAdmin = 3
++ UB for OurTopology.init = 5
+- UB for DataBaseImpl.listFiles = 6+5*c(maximize_failed)
+- UB for Node.enquire = 11+5*c(maximize_failed)
+- UB for Node.availFiles = 8+nat(sList/2-1/2)* (40+5*c(maximize_failed)+5*c(maximize_failed))
++ UB for OurTopology.getNeighbors = 42
++ UB for DataBaseImpl.storeFile = 5
+- UB for DataBaseImpl.getLength = 9+4*c(maximize_failed)+6*c(maximize_failed)
+- UB for Node.getLength = 14+4*c(maximize_failed)+6*c(maximize_failed)
+- UB for DataBaseImpl.getFile = 5+4*c(maximize_failed)
+- UB for Node.getPack = 17+4*c(maximize_failed)+9*nat(pNbr)
+- UB for Node.reqFile = 34+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))
+- UB for Node.run2 = 119+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))
+- UB for Main.main = 302+nat(nruns)* (485+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed))+c(maximize_failed)* (40+5*c(maximize_failed)+5*c(maximize_failed))+c(maximize_failed)* (15+7*c(maximize_failed))+7*c(maximize_failed)+4*c(maximize_failed)+6*c(maximize_failed)+c(maximize_failed)* (29+4*c(maximize_failed)+9*c(maximize_failed)))
+
+
+
+Comparison
+~~~~~~~~~~~
+DataBaseImpl.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+Node.init :  RG == OC,constant
+    RG: 7
+    OC: 7
+
+Node.setAdmin :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+OurTopology.init :  RG == OC,constant
+    RG: 5
+    OC: 5
+
+OurTopology.getNeighbors :  RG == OC,constant
+    RG: 42
+    OC: 42
+
+DataBaseImpl.storeFile :  RG == OC,constant
+    RG: 5
+    OC: 5
+
+RESUMEN
+#Constantes: 6
+#Comparables: 0
+#Incomparables: 0
+(3, 3, '51', {'Fact.fact': (True, '16+10*nat(main_n)'), 'Main.main': (True, '23+10*nat(main_n)'), 'Fact.init': (True, '1')})
+(3, 3, 21, {'Fact.fact': (True, '10+16*nat(n)'), 'Main.main': (True, '18+16*nat(main_n)'), 'Fact.init': (True, '1')})
+===============================================================
+FACT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  3
+Total UBs        :  3
+Time             :  51
++ UB for Fact.fact = 16+10*nat(main_n)
++ UB for Fact.init = 1
++ UB for Main.main = 23+10*nat(main_n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  3
+Total UBs         :  3
+Time              :  21
++ UB for Fact.fact = 10+16*nat(n)
++ UB for Fact.init = 1
++ UB for Main.main = 18+16*nat(main_n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Fact.fact :  different_vars,incomparable([main_n],[n])
+    RG: 16+10*nat(main_n)
+    OC: 10+16*nat(n)
+
+Fact.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Main.main :  RG != OC,ratio(0.6311163850125494)
+    RG: 23+10*nat(main_n)
+    OC: 18+16*nat(main_n)
+
+RESUMEN
+#Constantes: 1
+#Comparables: 1
+#Incomparables: 1
+(3, 3, '51', {'Fact.fact': (True, '19+10*nat(main_n)'), 'Main.main': (True, '26+10*nat(main_n)'), 'Fact.init': (True, '1')})
+(3, 3, 21, {'Fact.fact': (True, '10+20*nat(n)'), 'Main.main': (True, '18+20*nat(main_n)'), 'Fact.init': (True, '1')})
+===============================================================
+COSTLY FACT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  3
+Total UBs        :  3
+Time             :  51
++ UB for Fact.init = 1
++ UB for Fact.fact = 19+10*nat(main_n)
++ UB for Main.main = 26+10*nat(main_n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  3
+Total UBs         :  3
+Time              :  21
++ UB for Fact.init = 1
++ UB for Fact.fact = 10+20*nat(n)
++ UB for Main.main = 18+20*nat(main_n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Fact.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Fact.fact :  different_vars,incomparable([main_n],[n])
+    RG: 19+10*nat(main_n)
+    OC: 10+20*nat(n)
+
+Main.main :  RG != OC,ratio(0.5088572865794561)
+    RG: 26+10*nat(main_n)
+    OC: 18+20*nat(main_n)
+
+RESUMEN
+#Constantes: 1
+#Comparables: 1
+#Incomparables: 1
+(7, 7, '105', {'WorkerImp.work': (True, '12'), 'DBimp.init': (True, '3'), 'WorkerImp.ping': (True, '2'), 'DBimp.register': (True, '12'), 'DBimp.getData': (True, '7'), 'WorkerImp.init': (True, '2'), 'Main.main': (True, '38')})
+(7, 7, 21, {'WorkerImp.work': (True, '12'), 'DBimp.init': (True, '3'), 'WorkerImp.ping': (True, '2'), 'DBimp.register': (True, '12'), 'DBimp.getData': (True, '7'), 'WorkerImp.init': (True, '2'), 'Main.main': (True, '40')})
+===============================================================
+DB PROTOCOL
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  7
+Total UBs        :  7
+Time             :  105
++ UB for DBimp.init = 3
++ UB for WorkerImp.ping = 2
++ UB for DBimp.register = 12
++ UB for WorkerImp.init = 2
++ UB for DBimp.getData = 7
++ UB for WorkerImp.work = 12
++ UB for Main.main = 38
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  7
+Total UBs         :  7
+Time              :  21
++ UB for DBimp.init = 3
++ UB for WorkerImp.ping = 2
++ UB for DBimp.register = 12
++ UB for WorkerImp.init = 2
++ UB for DBimp.getData = 7
++ UB for WorkerImp.work = 12
++ UB for Main.main = 40
+
+
+
+Comparison
+~~~~~~~~~~~
+DBimp.init :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+WorkerImp.ping :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+DBimp.register :  RG == OC,constant
+    RG: 12
+    OC: 12
+
+WorkerImp.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+DBimp.getData :  RG == OC,constant
+    RG: 7
+    OC: 7
+
+WorkerImp.work :  RG == OC,constant
+    RG: 12
+    OC: 12
+
+Main.main :  RG <= OC,constant
+    RG: 38
+    OC: 40
+
+RESUMEN
+#Constantes: 7
+#Comparables: 0
+#Incomparables: 0
+(10, 10, '87', {'Barber.cuts': (True, '2'), 'Client.init': (True, '1'), 'Barber.sleeps': (True, '10'), 'Chair.init': (True, '1'), 'Chair.iscleaned': (True, '2'), 'Client.wakesup': (True, '9'), 'Client.sits': (True, '2'), 'Main.main': (True, '42'), 'Chair.takenby': (True, '6'), 'Barber.init': (True, '1')})
+(10, 10, 34, {'Barber.cuts': (True, '2'), 'Client.init': (True, '1'), 'Barber.sleeps': (True, '10'), 'Chair.init': (True, '1'), 'Chair.iscleaned': (True, '2'), 'Client.wakesup': (True, '9'), 'Client.sits': (True, '2'), 'Main.main': (True, '45'), 'Chair.takenby': (True, '6'), 'Barber.init': (True, '1')})
+===============================================================
+SLEEPING BARBER
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  10
+Total UBs        :  10
+Time             :  87
++ UB for Barber.init = 1
++ UB for Chair.init = 1
++ UB for Client.sits = 2
++ UB for Chair.takenby = 6
++ UB for Barber.sleeps = 10
++ UB for Client.init = 1
++ UB for Barber.cuts = 2
++ UB for Chair.iscleaned = 2
++ UB for Client.wakesup = 9
++ UB for Main.main = 42
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  10
+Total UBs         :  10
+Time              :  34
++ UB for Barber.init = 1
++ UB for Chair.init = 1
++ UB for Client.sits = 2
++ UB for Chair.takenby = 6
++ UB for Barber.sleeps = 10
++ UB for Client.init = 1
++ UB for Barber.cuts = 2
++ UB for Chair.iscleaned = 2
++ UB for Client.wakesup = 9
++ UB for Main.main = 45
+
+
+
+Comparison
+~~~~~~~~~~~
+Barber.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Chair.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Client.sits :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+Chair.takenby :  RG == OC,constant
+    RG: 6
+    OC: 6
+
+Barber.sleeps :  RG == OC,constant
+    RG: 10
+    OC: 10
+
+Client.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Barber.cuts :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+Chair.iscleaned :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+Client.wakesup :  RG == OC,constant
+    RG: 9
+    OC: 9
+
+Main.main :  RG <= OC,constant
+    RG: 42
+    OC: 45
+
+RESUMEN
+#Constantes: 10
+#Comparables: 0
+#Incomparables: 0
+(6, 6, '118', {'Node.receivePair': (True, '3'), 'Node.makePair': (True, '22'), 'Factory.init': (True, '2'), 'Node.init': (True, '1'), 'Factory.pairs': (True, '18'), 'Main.main': (True, '40+2*nat(main_n)')})
+(6, 6, 35, {'Node.receivePair': (True, '3'), 'Node.makePair': (True, '22'), 'Factory.init': (True, '2'), 'Node.init': (True, '1'), 'Factory.pairs': (True, '18'), 'Main.main': (True, '12+32*nat(main_n)')})
+===============================================================
+PAIRING PROBLEM
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  118
++ UB for Factory.init = 2
++ UB for Node.init = 1
++ UB for Node.receivePair = 3
++ UB for Factory.pairs = 18
++ UB for Node.makePair = 22
++ UB for Main.main = 40+2*nat(main_n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  6
+Total UBs         :  6
+Time              :  35
++ UB for Factory.init = 2
++ UB for Node.init = 1
++ UB for Node.receivePair = 3
++ UB for Factory.pairs = 18
++ UB for Node.makePair = 22
++ UB for Main.main = 12+32*nat(main_n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Factory.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+Node.init :  RG == OC,constant
+    RG: 1
+    OC: 1
+
+Node.receivePair :  RG == OC,constant
+    RG: 3
+    OC: 3
+
+Factory.pairs :  RG == OC,constant
+    RG: 18
+    OC: 18
+
+Node.makePair :  RG == OC,constant
+    RG: 22
+    OC: 22
+
+Main.main :  RG != OC,ratio(0.06999143426341187)
+    RG: 40+2*nat(main_n)
+    OC: 12+32*nat(main_n)
+
+RESUMEN
+#Constantes: 5
+#Comparables: 1
+#Incomparables: 0
+(6, 6, '194', {'TaskQueue.init': (True, '2'), 'ProcC.startTask': (True, '2'), 'TaskQueue.consumeAsync': (True, '32+4*nat(max(pending)/2-1/2)+3*nat(ps/2-1/2)'), 'TaskQueue.addTasks': (True, '29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)'), 'TaskQueue.addTask': (True, '14+nat(max(pending)/2-3/2)'), 'Main.main': (True, '69+4*nat(max(pending)/2-1/2)+3*nat(ps/2-1/2)+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)')})
+(6, 2, 64, {'TaskQueue.init': (True, '2'), 'ProcC.startTask': (True, '2'), 'TaskQueue.consumeAsync': (False, '7+c(maximize_failed)* (19+13*nat(ps/2-1/2))'), 'TaskQueue.addTasks': (False, '6+nat(list/2-1/2)* (22+5*c(maximize_failed))'), 'TaskQueue.addTask': (False, '10+5*c(maximize_failed)'), 'Main.main': (False, '22+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(maximize_failed)* (19+13*nat(ps/2-1/2))')})
+===============================================================
+RUNNING1
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  194
++ UB for TaskQueue.addTask = 14+nat(max(pending)/2-3/2)
++ UB for TaskQueue.addTasks = 29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
++ UB for ProcC.startTask = 2
++ UB for TaskQueue.consumeAsync = 32+4*nat(max(pending)/2-1/2)+3*nat(ps/2-1/2)
++ UB for TaskQueue.init = 2
++ UB for Main.main = 69+4*nat(max(pending)/2-1/2)+3*nat(ps/2-1/2)+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  2
+Total UBs         :  6
+Time              :  64
+- UB for TaskQueue.addTask = 10+5*c(maximize_failed)
+- UB for TaskQueue.addTasks = 6+nat(list/2-1/2)* (22+5*c(maximize_failed))
++ UB for ProcC.startTask = 2
+- UB for TaskQueue.consumeAsync = 7+c(maximize_failed)* (19+13*nat(ps/2-1/2))
++ UB for TaskQueue.init = 2
+- UB for Main.main = 22+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(maximize_failed)* (19+13*nat(ps/2-1/2))
+
+
+
+Comparison
+~~~~~~~~~~~
+ProcC.startTask :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+TaskQueue.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+RESUMEN
+#Constantes: 2
+#Comparables: 0
+#Incomparables: 0
+(6, 6, '169', {'TaskQueue.init': (True, '2'), 'TaskQueue.consumeSync': (True, '24+4*nat(max(pending)/2-1/2)'), 'ProcC.startTask': (True, '2'), 'TaskQueue.addTasks': (True, '29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)'), 'TaskQueue.addTask': (True, '14+nat(max(pending)/2-3/2)'), 'Main.main': (True, '62+4*nat(max(pending)/2-1/2)+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)')})
+(6, 2, 41, {'TaskQueue.init': (True, '2'), 'TaskQueue.consumeSync': (False, '3+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))'), 'ProcC.startTask': (True, '2'), 'TaskQueue.addTasks': (False, '6+nat(list/2-1/2)* (22+5*c(maximize_failed))'), 'TaskQueue.addTask': (False, '10+5*c(maximize_failed)'), 'Main.main': (False, '19+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))')})
+===============================================================
+RUNNING2
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  169
++ UB for TaskQueue.addTask = 14+nat(max(pending)/2-3/2)
++ UB for TaskQueue.addTasks = 29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
++ UB for ProcC.startTask = 2
++ UB for TaskQueue.consumeSync = 24+4*nat(max(pending)/2-1/2)
++ UB for TaskQueue.init = 2
++ UB for Main.main = 62+4*nat(max(pending)/2-1/2)+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  2
+Total UBs         :  6
+Time              :  41
+- UB for TaskQueue.addTask = 10+5*c(maximize_failed)
+- UB for TaskQueue.addTasks = 6+nat(list/2-1/2)* (22+5*c(maximize_failed))
++ UB for ProcC.startTask = 2
+- UB for TaskQueue.consumeSync = 3+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))
++ UB for TaskQueue.init = 2
+- UB for Main.main = 19+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))
+
+
+
+Comparison
+~~~~~~~~~~~
+ProcC.startTask :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+TaskQueue.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+RESUMEN
+#Constantes: 2
+#Comparables: 0
+#Incomparables: 0
+(6, 6, '195', {'TaskQueue.init': (True, '2'), 'TaskQueue.consumeSync': (True, '24+4*nat(max(pending)/2-1/2)* (1+nat(l/2-1/2))'), 'ProcC.startTask': (True, '2'), 'TaskQueue.addTasks': (True, '29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)'), 'TaskQueue.addTask': (True, '14+nat(max(pending)/2-3/2)'), 'Main.main': (True, '61+4*nat(max(pending)/2-1/2)* (1+nat(l/2-1/2))+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)')})
+(6, 2, 41, {'TaskQueue.init': (True, '2'), 'TaskQueue.consumeSync': (False, '3+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))'), 'ProcC.startTask': (True, '2'), 'TaskQueue.addTasks': (False, '6+nat(list/2-1/2)* (22+5*c(maximize_failed))'), 'TaskQueue.addTask': (False, '10+5*c(maximize_failed)'), 'Main.main': (False, '18+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))')})
+===============================================================
+RUNNING3
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  195
++ UB for TaskQueue.addTask = 14+nat(max(pending)/2-3/2)
++ UB for TaskQueue.addTasks = 29+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
++ UB for ProcC.startTask = 2
++ UB for TaskQueue.consumeSync = 24+4*nat(max(pending)/2-1/2)* (1+nat(l/2-1/2))
++ UB for TaskQueue.init = 2
++ UB for Main.main = 61+4*nat(max(pending)/2-1/2)* (1+nat(l/2-1/2))+3*nat(l/2-1/2)+nat(max(pending)/2-3/2)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  2
+Total UBs         :  6
+Time              :  41
+- UB for TaskQueue.addTask = 10+5*c(maximize_failed)
+- UB for TaskQueue.addTasks = 6+nat(list/2-1/2)* (22+5*c(maximize_failed))
++ UB for ProcC.startTask = 2
+- UB for TaskQueue.consumeSync = 3+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))
++ UB for TaskQueue.init = 2
+- UB for Main.main = 18+nat(l/2-1/2)* (22+5*c(maximize_failed))+c(failed(no_rf,[scc=10,cr=entrywhile_1/3]))
+
+
+
+Comparison
+~~~~~~~~~~~
+ProcC.startTask :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+TaskQueue.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+RESUMEN
+#Constantes: 2
+#Comparables: 0
+#Incomparables: 0
+(6, 6, '153', {'A.g': (True, '2'), 'A.m2': (True, '14+3*nat(x)'), 'A.m3': (True, '17+3*nat(y)'), 'A.m1': (True, '16+4*nat(max(f))* (1+nat(x))'), 'Main.main': (True, '56+3*nat(y)+3*nat(x)+4*nat(max(f))* (1+nat(x))'), 'A.init': (True, '2')})
+(6, 4, 39, {'A.g': (True, '2'), 'A.m2': (True, '6+11*nat(m)'), 'A.m3': (True, '6+14*nat(n)'), 'A.m1': (False, '3+c(failed(no_rf,[scc=2,cr=entrywhile_0/3]))'), 'Main.main': (False, '25+c(failed(no_rf,[scc=2,cr=entrywhile_0/3]))+11*nat(x)+14*nat(y)'), 'A.init': (True, '2')})
+===============================================================
+INTERLEAVINGS
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  153
++ UB for A.init = 2
++ UB for A.g = 2
++ UB for A.m1 = 16+4*nat(max(f))* (1+nat(x))
++ UB for A.m2 = 14+3*nat(x)
++ UB for A.m3 = 17+3*nat(y)
++ UB for Main.main = 56+3*nat(y)+3*nat(x)+4*nat(max(f))* (1+nat(x))
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  4
+Total UBs         :  6
+Time              :  39
++ UB for A.init = 2
++ UB for A.g = 2
+- UB for A.m1 = 3+c(failed(no_rf,[scc=2,cr=entrywhile_0/3]))
++ UB for A.m2 = 6+11*nat(m)
++ UB for A.m3 = 6+14*nat(n)
+- UB for Main.main = 25+c(failed(no_rf,[scc=2,cr=entrywhile_0/3]))+11*nat(x)+14*nat(y)
+
+
+
+Comparison
+~~~~~~~~~~~
+A.init :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+A.g :  RG == OC,constant
+    RG: 2
+    OC: 2
+
+A.m2 :  different_vars,incomparable([x],[m])
+    RG: 14+3*nat(x)
+    OC: 6+11*nat(m)
+
+A.m3 :  different_vars,incomparable([y],[n])
+    RG: 17+3*nat(y)
+    OC: 6+14*nat(n)
+
+RESUMEN
+#Constantes: 2
+#Comparables: 0
+#Incomparables: 2

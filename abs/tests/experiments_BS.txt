@@ -1,0 +1,218 @@
+For each method/function I put: 
+    - The set of considered inputs (as term-sizes). 
+    - the real consumptions (number of cons's)
+    - The evaluation of the UB for each input. 
+    - To evaluate an UB:
+        ?- use_module(stdlib(utils)). 
+	?- B = 10,ut_arithmetic_eval(9*nat(B),Z).
+
+
+E.g.
+
+* m <5,5>/<10,10>  25/50  30/60
+
+This means that for the input <5,5> (there are two inputs) the real
+consumption is 25 and the UB says 30, and for the input <10,10> the
+real consumption is 50 and the UB says 60. An '_' on an input
+indicates that it does not affect the cost.
+
+
+main:
+-----
+
+* <3,22,19>  336  3544
+
+
+Functions:
+----------
+
+Sets
+----
+
+* set <11>/<21>/<41>  6/11/21  6/11/21
+
+6 rewrites
+6 counts
+
+11 rewrites
+11 counts
+
+21 rewrites
+21 counts
+
+* contains <11,_>/<21,_>/<41,_>  1/1/1  1/1/1
+
+* lookup <41,_>/<81,_>/<121,_>  0/0/0  0/0/0
+
+Lists
+-----
+
+* list <21>/<41>/<61>  0/0/0  0/0/0
+
+* head <21>/<41>/<61>  0/0/0  0/0/0
+
+* tail <21>/<41>/<61>  0/0/0  0/0/0
+
+* concatenate <11,11>/<21,21>/<41,41> 6/11/21 5/10/20
+
+6 rewrites
+6 counts
+
+11 rewrites
+11 counts
+
+21 rewrites
+21 counts
+
+* appendright <11,1>/<21,1>/<41,1>  8/13/23  7/12/22
+
+8 rewrites
+8 counts
+
+13 rewrites
+13 counts
+
+23 rewrites
+23 counts
+
+* isEmpty <21>/<41>/<81>  0  0
+
+* shuffle <11>/<21>/<41>  6/11/21  6/11/21
+
+1 rewrites
+5 counts
+
+1 rewrites
+15 counts
+
+1 rewrites
+35 counts
+
+* chose <11>/<21>/<41>  0/0/0  0/0/0
+
+* choseN <_,5>/<_,10>/<_,20>  6/11/21  6/11/21
+
+Pair
+----
+
+* info <2>  0  0
+
+Maps
+----
+
+* map <21>/<41>/<61>  11/21/31  11/21/31
+
+11 rewrites
+11 counts
+
+21 rewrites
+21 counts
+
+31 rewrites
+31 counts
+
+* domain <41>/<81>/<121>  11/21/31  11/21/31
+
+11 rewrites
+11 counts
+
+21 rewrites
+21 counts
+
+31 rewrites
+31 counts
+
+* map2list <41>/<81>/<121> 11/21/31  11/21/31
+
+11 rewrites
+11 counts
+
+21 rewrites
+21 counts
+
+31 rewrites
+31 counts
+
+* concatMap <41,41>/<81,81> 21/41 20/40
+
+10 rewrites
+21 counts
+
+20 rewrites
+41 counts
+
+Bookinfo
+--------
+
+* bookweight <1>  1  1
+
+* countryshiptime <1>  1  1
+
+* countryshipcost <1>  1  1
+
+* getBookMap <1>  1  1
+
+* getCountryinfo <1>  2  2
+
+Session
+-------
+
+* calculateweight <41>  0  0
+
+* calculatecost <1,1>  0  0
+
+* calculatetime <41,1>  0  0
+
+* getBooks <71,11> 71  99
+
+* updateBooks <36,11>/<36,11>/<71,11>/<71,7>  95/142/231/320 4117/4117/14355/4306'5
+
+* updateBook <36,_,36>  45  629,5
+
+
+
+
+Rest of methods:
+----------------
+
+
+class AgentImp
+--------------
+
+* init _ 1 1
+
+* free
+(It just calls appendRight, so we take the numbers of appendRight)
+
+* getsession _ 3 3
+
+
+class SessionImp
+----------------
+
+* init _ 2 2
+
+* order <3,1,15,13>/<3,1,15,13>/<3,1,36,31>/<11,1,36,31>  18/29/42/92  415/415/5174/5217
+
+
+class DatabaseImp
+-----------------
+
+* init _ 0 0
+
+* getInfo
+(getInfo(A,B,C) = 5 + getBooks(A,B) + lookup(C))
+(lookup(_) = 0, so we just look at the data for getBooks)
+
+* confirmOrder
+(It just calls updateBooks and return True so we take the data of
+updateBooks and add 1)
+
+
+class SyncClient
+----------------
+
+* init _ 1 1
+
+* run -> It does not work so we ignore it
+

@@ -1,0 +1,8 @@
+To choose which examples must be shown in the web interface write in the
+showWeb.txt lines like this:
+ExampleFileName.abs=-nostdlib
+or 
+ExampleFileName.abs=-stdlib
+in case you want the example to run the abs stdlib or no.
+
+Take in mind that each line count as an example to show in the web.

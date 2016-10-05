@@ -1,0 +1,27 @@
+module Account;
+
+export *;
+import Customer,CorpIndvCustomerImpl from CustomerIF;
+
+interface Account { 
+	Int getAid();
+	Int deposit(Int x); 
+	Int withdraw(Int x);
+}
+
+class AccountImpl(Int aid, Int balance, Customer owner) implements Account { // Core Product
+
+	Int getAid() { return aid; }
+	Int deposit(Int x) { balance = balance + x; return balance;}
+	Int withdraw(Int x) { 
+		if (balance - x >= 0) {
+			balance = balance - x;
+		} 
+		return balance;
+	}
+}
+
+{
+	Customer c = new local CorpIndvCustomerImpl(17);
+	new local AccountImpl(1,1,c);
+}

@@ -1,0 +1,27 @@
+module Deadlock;
+
+interface C {
+	C m1(C b, C c);
+	C m2(C c);
+	C m3();
+}
+
+class C implements C {
+	C m1(C b, C c) {
+		Fut<C> r = b!m2(c);
+		return r.get;}
+
+	C m2(C c) {
+		Fut<C> r = c!m3();
+		return r.get;}
+
+	C m3() { return new local C();}
+}
+
+
+{
+	C c = new local C();
+	C d = new C();
+	C e = new local C();
+	c!m1(d,e);
+}

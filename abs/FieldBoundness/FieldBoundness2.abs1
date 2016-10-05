@@ -1,0 +1,116 @@
+module FieldBoundness2;
+
+data List<A> = Nil | Cons(A, List<A>);
+
+type ListInt = List<Int> ;
+
+def Int increment(Int i) =
+  case i>10 {
+    True => i-1;
+    False => i;
+   };
+
+def Int size1(ListInt i) =
+  case i {
+     Nil => 0;
+    Cons(_,a) => 1+size1(a);
+   };
+
+def Bool hasNext1(ListInt i) = case i {
+    Nil => False;
+    Cons(_,_) => True;
+};
+
+interface A {
+  Int dec_int_loop();
+  Int inc_int_loop();
+  Int dec_loop();
+  Int double_dec_loop();
+  Int inc_loop();
+  Int do_nothing(Int n);
+
+}
+
+
+class A1_with_awaits(Int dec_int,Int inc_int, ListInt dec,ListInt complx_dec,ListInt inc) implements A {
+ 
+Int do_nothing(Int n){
+ return n;
+}   
+
+//Success 
+Int dec_int_loop() {
+    Fut<Int> out;
+    while(dec_int>0){
+	dec_int=dec_int-1;
+	out= this!do_nothing(1);await out?;
+    }    
+return 0;
+}
+//Success
+Int inc_int_loop() {
+    Fut<Int> out;
+    while(inc_int<100){
+	inc_int=inc_int+1;
+	out= this!do_nothing(1);await out?;
+    }    
+return 0;
+}
+
+//Success
+ Int dec_loop() {
+  Fut<Int> out;
+  ListInt aux=dec;
+  while (hasNext1(dec)){
+	dec=tail(dec);
+	out= this!do_nothing(1);await out?;
+   }
+return 0;
+}
+
+//Fails: complx_dec is assigned
+ Int double_dec_loop() {
+  Fut<Int> out;
+  ListInt aux=complx_dec;
+  while (hasNext1(complx_dec)){
+	complx_dec=tail(complx_dec);
+	out= this!do_nothing(1);await out?;
+   }
+  complx_dec=aux;
+  while (hasNext1(complx_dec)){
+	if(hasNext1(complx_dec))
+		complx_dec=tail(complx_dec);
+	out= this!do_nothing(1);await out?;
+    }
+return 0;
+}
+
+//Fails: the input_output abstraction of size1 is imprecise
+ Int inc_loop() {
+  Int n=1;
+ Fut<Int> out;
+	while (n<100){
+	
+	inc=Cons(n,inc);
+	n=size1(inc);
+	out= this!do_nothing(1);await out?;
+    }
+
+return 0;
+}
+}
+
+{
+  A x;
+
+  ListInt a=Cons(1,Cons(2,Cons(3,Nil)));
+  ListInt b=Cons(1,Cons(2,Cons(3,Nil)));
+  ListInt c=Cons(1,Cons(2,Cons(3,Nil)));
+  x = new local A1_with_awaits(100,0,a,b,c);
+  x!dec_int_loop();
+  x!inc_int_loop();
+  x!dec_loop();
+  x!double_dec_loop();
+  x!inc_loop();
+
+}

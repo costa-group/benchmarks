@@ -1,0 +1,22 @@
+Termination time of traditional COSTABS: 140 ms
+Termination time of rely-guarantee approach: 490 ms
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| #  | Type         | Nodes                                                             | Terminating OLD   | Termination NEW   | Time    |
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| 0  | recursive    | [entrywhile_0,while_0]                                            | no                | no                | -       | OK
+| 1  | non_recursive| [A1.fun]                                                          | yes               | yes               | -       |
+| 2  | non_recursive| [A1.fun2]                                                         | yes               | yes               | -       |
+| 3  | recursive    | [entrywhile_2,while_2]                                            | yes               | yes               | -       | OK
+| 4  | recursive    | [entrywhile_1,while_1]                                            | no                | no                | -       | OK
+| 5  | non_recursive| [A1.funSamir]                                                     | yes               | yes               | -       |
+| 6  | non_recursive| [A1.init]                                                         | yes               | yes               | -       |
+| 7  | recursive    | [entrywhile_4,while_4]                                            | no                | yes               | -       | OK
+| 8  | non_recursive| [A1.si_se_puede]                                                  | yes               | yes               | -       |
+| 9  | recursive    | [entrywhile_3,while_3]                                            | no                | no                | -       | OK
+| 10 | non_recursive| [A1.todo]                                                         | yes               | yes               | -       |
+| 11 | non_recursive| [B1.init]                                                         | yes               | yes               | -       |
+| 12 | recursive    | [entrywhile_5,while_5]                                            | yes               | yes               | -       | OK
+| 13 | non_recursive| [B1.loop_local]                                                   | yes               | yes               | -       |
+| 14 | non_recursive| [main]                                                            | yes               | yes               | -       |
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+

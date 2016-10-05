@@ -1,0 +1,98 @@
+module Paper_dead2;
+
+interface Ai{
+    Unit loopA(Ci a);
+    Unit qA();
+    Unit emptA();
+    Unit empt2A();
+    Unit slow();
+}
+interface Bi{
+    Unit loopB(Ai a,Int n);
+    Unit qB();
+    Unit emptB();
+    Unit empt2B();
+}
+interface Ci{
+    Unit loopC(Bi a);
+    Unit qC();
+    Unit emptC();
+    Unit empt2C();
+}
+class A implements Ai{
+Unit loopA(Ci a){
+ Fut<Unit> f1;
+ f1=a!qC();
+ Ai b = new A();
+ b!slow();
+ f1.get;
+}
+Unit qA(){
+   Ai a = new A();
+   Fut<Unit> f2 = a!emptA();
+   await f2?;
+ }
+
+Unit slow(){
+ Int n = 0;
+ while(n < 3){
+   Fut<Unit> f = this!empt2A();
+   await f?;
+   n = n +1;
+ }
+}
+Unit empt2A(){}
+Unit emptA(){
+ Fut<Unit>f3 = this!empt2A();
+ await f3?;
+}
+}class B implements Bi{
+Unit loopB(Ai a,Int n){
+ Fut<Unit> f1;
+ f1=a!qA();
+ if(n > 0) f1.get;
+}
+Unit qB(){
+   Ai a = new A();
+   Fut<Unit> f2 = a!emptA();
+   await f2?;
+ }
+
+Unit empt2B(){}
+Unit emptB(){
+ Fut<Unit>f3 = this!empt2B();
+ await f3?;
+}
+}
+class C implements Ci{
+Unit loopC(Bi a){
+ Fut<Unit> f1;
+ f1=a!qB();
+ f1.get;
+}
+Unit qC(){
+   Ai a = new A();
+   Fut<Unit> f2 = a!emptA();
+   await f2?;
+ }
+
+Unit emptC(){
+ Fut<Unit>f3 = this!empt2C();
+ await f3?;
+}
+
+Unit empt2C(){}
+}
+
+{
+Int n = 0;
+while(n < 1){
+    Ai a = new A();
+    Bi b = new  B();
+    Ci c = new C();
+    a!loopA(c);
+    b!loopB(a,10);
+    c!loopC(b);
+    n = n+1;
+    }
+} 

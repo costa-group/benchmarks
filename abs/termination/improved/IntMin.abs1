@@ -1,0 +1,32 @@
+module IntMin;
+
+interface A{
+  Unit f();
+}
+
+class AImpl implements A {
+  Int counter = 0;
+  
+Unit f(){
+  while (counter > 0) {
+    counter = counter - 1;
+    suspend;
+  }
+}
+
+}
+
+interface M{
+  Unit main();
+}
+
+class Main implements M{
+  Unit main(){
+    Int l = 1;
+    A q = new local  AImpl();
+  
+    q ! f();
+    // 2nd call
+    q ! f();
+  }
+}

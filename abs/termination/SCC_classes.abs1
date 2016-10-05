@@ -1,0 +1,64 @@
+module SCC_classes;
+
+// SCC with nodes in different classes and release points also in different classes
+
+
+interface A {
+  Bool even(Int n);
+}
+
+interface B {
+  Bool odd(Int n);
+}
+
+class A1 implements A{
+  
+  Bool even( Int n ){
+    Bool res;
+  
+    if ( n == 0 )
+      res = True;
+    else {
+      B b = new local B1();
+      Fut<Bool> x = b ! odd(n-1);
+      await x?;
+      res = x.get;
+    }
+    
+    return res;
+  }
+  
+}
+
+class B1 implements B{
+  
+  Bool odd( Int n ){
+    Bool res;
+    
+    if ( n == 1 )
+      res = True;
+    else {
+      A a = new local A1();
+      Fut<Bool> x = a ! even(n-1);
+      await x?;
+      res = x.get;
+    }
+    
+    return res;
+  }
+  
+}
+
+
+{
+  A x;
+  B y;
+  Int n;
+
+  x = new local A1();
+  y = new local B1();
+  n = 5;
+  
+  x ! even(n);
+  y ! odd(n);
+}

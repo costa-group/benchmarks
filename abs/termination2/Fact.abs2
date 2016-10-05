@@ -1,0 +1,34 @@
+// Cossimo's factorial from PPDP'15
+
+module Fact;
+
+interface FactI{
+    Int fact(Int n);
+}
+
+interface MainI{
+    Unit main(Int main_n);
+}
+
+class Fact implements FactI {
+    Int fact(Int n){
+        Int ret = 0;
+        if (n == 0) { 
+            ret = 1; 
+        } else if (n > 0){ 
+            Fut<Int> x = this ! fact(n-1); 
+            await x?;
+            Int m = x.get; 
+            ret = m*n; 
+        }
+        return ret;
+    }
+}
+
+class Main implements MainI {
+    Unit main(Int main_n){
+        FactI fobj = new Fact();
+        Fut<Int> f = fobj ! fact(main_n);
+        await f?;
+    }
+}

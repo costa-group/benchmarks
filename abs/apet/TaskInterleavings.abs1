@@ -1,0 +1,24 @@
+module TaskInterleavings;
+import * from ABS.StdLib;
+
+interface I1 {
+    Int m();
+    Unit p();
+    Unit q();
+}
+
+class A() implements I1 {
+    Int n = 1;
+
+    Int m(){
+	n = 10;
+	I1 ob = new A();
+	Fut<Unit> f = ob!p();
+	await f?;
+	return n;
+    }
+
+    Unit p(){n = n*10;}
+
+    Unit q(){n = -1;}
+} 

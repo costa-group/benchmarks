@@ -1,0 +1,373 @@
+/*
+ * A working version of a program with two producers and 
+ * two consumers comunicating via a shared bounded-buffer
+ *
+ */
+
+module ProducerConsumer;
+import * from ABS.StdLib;
+
+type Data = Int ;
+//type Buffer = DataList
+data DataList = DataNil | ConsData(Data, DataList) ;
+
+def Data dataHead(DataList dl) = case dl { ConsData(d,l) => d ; };  
+def DataList dataTail(DataList dl) = case dl { ConsData(d,l) => l ; }; 
+
+def DataList appendData(Data d, DataList list)
+  = concat(list, ConsData(d,DataNil));
+
+def DataList concat(DataList l1 , DataList l2) = 
+case l1 { 
+    DataNil => l2 ; 
+    ConsData(hd,tl) => ConsData(hd, concat(tl,l2)) ; 
+};
+    
+interface BufferInt {
+    Unit put(Data d);
+    Data take();
+}
+
+interface Consumer {
+    Unit loop(Data d);
+} 
+
+interface Producer {
+    Unit loop(Data d);
+}
+
+class Buffer implements BufferInt {    
+    //A bounded buffer
+    DataList buffer = DataNil; 
+    Int max = 10;
+    Int n = 0;
+
+    Unit put(Data d){
+	    await (n < max) ; 
+        buffer = appendData(d,buffer);
+        n = n + 1 ; 
+    }
+    
+    Data take() {
+        Data d = 0;
+        await n > 0 ; 
+        d = dataHead(buffer);
+        buffer = dataTail(buffer);
+        n = n - 1 ; 
+        return d ; 
+    }
+}
+
+class ProducerImpl (BufferInt b) implements Producer {
+    
+    Unit loop(Data d) {
+        if (d > 0) {
+            b!put(d);
+            this!loop(d - 1);
+        }
+    }
+}
+
+class ConsumerImpl (BufferInt b) implements Consumer {
+    
+    Unit loop(Data d) {
+        if (d > 0) {
+            b!take();
+            this!loop(d - 1);
+        }
+    }
+}
+
+//Main
+{
+    BufferInt buff;
+    Producer p1;
+    Producer p2;
+    Consumer c1;
+    Consumer c2;  
+    buff = new cog Buffer(); 
+    p1 = new cog ProducerImpl(buff);   
+    p2 = new cog ProducerImpl(buff); 
+    c1 = new cog ConsumerImpl(buff);
+    c2 = new cog ConsumerImpl(buff);
+    p1!loop(5);
+    p2!loop(5);
+    c1!loop(5);
+    c2!loop(5);
+}
+
+
+
+module AbsUnit.Hamcrest.Core;
+
+export *;
+
+import * from AbsUnit; 
+import * from AbsUnit.Hamcrest;
+
+
+class Is(Comparator comp) implements Matcher {
+	Bool matches() {
+		Int result = comp.compare();
+		return result == 0;
+	}
+}
+
+class LessThan(Comparator comp) implements Matcher {
+	Bool matches() {
+		Int result = comp.compare();
+		return result < 0;
+	}
+}
+
+class MoreThan(Comparator comp) implements Matcher {
+	Bool matches() {
+		Int result = comp.compare();
+		return result > 0;
+	}
+}
+
+class CoreMatcher(Formula formula) implements Matcher {
+
+	Bool matches() {
+		return this.eval(formula);
+	}
+	
+	Bool eval(Formula formula) {
+		Bool result = True;
+		if (isAnd(formula)) {
+			result = this.and(formula);
+		} else if (isOr(formula)) {
+			result = this.or(formula);
+		} else if (isNot(formula)) {
+			result = this.not(formula);
+		} else if (isAllOf(formula)) {
+			result = this.allOf(formula);
+		} else if (isAnyOf(formula)) {
+			result = this.anyOf(formula);
+		} else {
+			result = matcher(formula).matches();
+		} 
+		return result;
+	}
+	
+	Bool and(Formula formula) {
+		Pair<Formula,Formula> pair = binary(formula);
+		Bool result = this.eval(fst(pair));
+		if (result) {
+			result = this.eval(snd(pair));
+		}
+		return result;
+	}
+	
+	Bool or(Formula formula) {
+		Pair<Formula,Formula> pair = binary(formula);
+		Bool result = this.eval(fst(pair));
+		if (~result) {
+			result = this.eval(snd(pair));
+		}
+		return result;
+	}
+	
+	Bool not(Formula formula) {
+		Formula f = unary(formula);
+		Bool result = this.eval(f);
+		return ~result;
+	}
+	
+	/**
+ 	 * Calculates the logical conjunction of a set of matchers. Evaluation is
+ 	 * shortcut, so that the n+1th matcher is not called if nth matcher
+ 	 * returns False.
+ 	 */
+	Bool allOf(Formula formula) {
+		Set<Formula> fs = nary(formula);
+		Bool result = False;
+		while (hasNext(fs) && result) {
+			Pair<Set<Formula>,Formula> nt = next(fs);
+			fs = fst(nt);
+			result = this.eval(snd(nt));
+		}
+		return result;
+	}
+	
+	/**
+ 	 * Calculates the logical disjunction of a set of matchers. Evaluation is
+ 	 * shortcut, so that the n+1th matcher is not called if nth matcher
+ 	 * returns True.
+ 	 */
+	Bool anyOf(Formula formula) {
+		Set<Formula> fs = nary(formula);
+		Bool result = True;
+		while (hasNext(fs) && ~result) {
+			Pair<Set<Formula>,Formula> nt = next(fs);
+			fs = fst(nt);
+			result = this.eval(snd(nt));
+		}
+		return result;
+	}
+
+} 
+
+
+module AbsUnit.Hamcrest;
+
+export *;
+
+data Formula = Formula(Matcher) | 
+			   And(Formula,Formula) | 
+			   Or(Formula,Formula) |
+			   AllOf(Set<Formula>) | 
+			   AnyOf(Set<Formula>) |
+			   Not(Formula);
+
+//exclusive or
+def Formula xor(Formula a, Formula b) = And(Or(a,b),Not(And(a,b)));
+// implication
+def Formula impl(Formula a, Formula b) = Or(Not(a),b);
+// equivalence
+def Formula equiv(Formula a, Formula b) = And(impl(a,b),impl(b,a));
+
+def Formula fm(Matcher m) = Formula(m);
+def Matcher matcher(Formula f) = case f { Formula(m) => m; };
+
+def Bool isAllOf(Formula f) = 
+	case f {
+		AllOf(_) => True;
+		_ => False;
+	};
+	
+def Bool isAnyOf(Formula f) = 
+	case f {
+		AnyOf(_) => True;
+		_ => False;
+	};
+
+def Bool isAnd(Formula f) = 
+	case f {
+		And(_,_) => True;
+		_ => False;
+	};
+	
+def Bool isOr(Formula f) = 
+	case f {
+		Or(_,_) => True;
+		_ => False;
+	};
+	
+def Bool isNot(Formula f) = 
+	case f {
+		Not(_) => True;
+		_ => False;
+	};
+	
+def Formula unary(Formula f) =
+	case f {
+		Not(g) => g;
+	};
+	
+def Set<Formula> nary(Formula f) =
+	case f {
+		AllOf(fs) => fs;
+		AnyOf(fs) => fs;
+	};	
+	
+def Pair<Formula,Formula> binary(Formula f) = 
+	case f {
+		And(x,y) => Pair(x,y);
+		Or(x,y) => Pair(x,y);
+	};
+	
+interface Matcher {
+	[Near] Bool matches();
+}
+
+module AbsUnit;
+
+export *;
+
+import Matcher from AbsUnit.Hamcrest;
+
+[TypeAnnotation]
+data DataPoint = DataPoint; //data function
+
+[TypeAnnotation]
+data Test = Test; //test method
+
+[TypeAnnotation]
+data Fixture = Fixture; //fixture
+
+[TypeAnnotation]
+data Suite = Suite; //test suite
+
+// deprecated use Fixture
+[TypeAnnotation]
+data TestClass = TestClass; //test class
+
+// deprecated use TestImpl
+[TypeAnnotation]
+data TestClassImpl = TestClassImpl; //test class implementation
+
+[TypeAnnotation]
+data Ignored = Ignored; // ignore test method
+
+[TypeAnnotation]
+data Before = Before; // set up fixture
+
+[TypeAnnotation]
+data After = After; // tear down fixture
+
+interface Comparator { 
+	Int compare(); 
+}
+
+interface ABSAssert {
+	Unit assertTrue(Bool value);
+	Unit assertFalse(Bool value);
+	Unit assertEquals(Comparator comp);
+	Unit assertNotEquals(Comparator comp);	
+	Unit assertThat(Matcher matcher);
+}
+
+class ABSAssertImpl implements ABSAssert {
+	
+	Unit assertTrue(Bool value) {
+		if (~value) {
+			// collect result
+			assert False;
+		} 
+	}
+	
+	Unit assertFalse(Bool value) {
+		if (value) {
+			// collect result
+			assert False;
+		} 
+	}
+	
+	Unit assertEquals(Comparator comp) {
+		Int result = comp.compare();
+		if (result != 0) {
+			// collect result
+			assert False;
+		}
+	}
+	
+	Unit assertNotEquals(Comparator comp) {
+		Int result = comp.compare();
+		if (result == 0) {
+			// collect result
+			assert False;
+		}		
+	}
+	
+	Unit assertThat(Matcher matcher) {
+		Bool result = matcher.matches();
+		if (~result) {
+			// collect result
+			assert False;
+		}
+	}
+	
+}
+

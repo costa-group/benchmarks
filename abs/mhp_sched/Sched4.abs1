@@ -1,0 +1,46 @@
+module Sched4;
+
+interface A{
+  Unit f();
+  Unit g();
+  Unit h();
+}
+
+class AImpl(Int myfield) implements A {
+  
+// prio=0
+[priority(0)] Unit f(){
+  Fut<Unit> x = this ! h();
+  await x?;
+  this ! g();
+  await x?;
+  this ! h();
+  await x?;
+  this ! g();
+  // g cannot happen in parallel wiht itself or h, 
+  // h cannot happen in parallel with itself
+}
+
+// prio=1
+[priority(1)] Unit g(){
+  Int i = 0;
+  Int j = 100;
+  while( i < j )
+  {
+    i = i + 1;
+    myfield = myfield + 1;
+    suspend; //This point cannot happen in parallel with itself
+  }
+}
+
+// prio = 1
+[priority(1)] Unit h(){
+  Int i = 0;
+}
+
+}
+
+{
+  A q = new local AImpl(123);
+  q ! f();
+}

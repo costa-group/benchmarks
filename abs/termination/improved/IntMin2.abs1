@@ -1,0 +1,41 @@
+module IntMin;
+
+interface A{
+  Unit f();
+  Unit g();
+}
+
+class AImpl implements A {
+  Int a = 0;
+  Int b = 100;
+  
+  
+Unit f(){
+  while (a < b ) {
+    a = a + 1;
+    suspend;
+  }
+}
+
+Unit g(){
+  while (a < b ) {
+    b = b - 1;
+    suspend;
+  }
+}
+
+}
+
+interface M{
+  Unit main();
+}
+
+class Main implements M{
+  Unit main(){
+    Int l = 1;
+    A q = new local  AImpl();
+  
+    q ! f();
+    q ! g();
+  }
+}

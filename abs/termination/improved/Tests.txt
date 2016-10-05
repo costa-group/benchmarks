@@ -1,0 +1,56 @@
+TERMINATION
+===========
+
+costabs(['termination/improved/Running.abs'],['Main.main1'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Running.abs'],['Main.main2'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Running.abs'],['Main.main3'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Running.abs'],['Main.main4'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/SyncCall.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/SyncCall.abs'],['Main.main2'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/InnerLoop.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/InnerLoop.abs'],['Main.main2'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/IntMin.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/IntMin2.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/ListMin.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/improved/Lists.abs'],['Main.main1'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Lists.abs'],['Main.main2'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Lists.abs'],['Main.main3'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/Lists.abs'],['Main.main4'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/Ex1.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/Ex2.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/Ex3.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/Ex4.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/BadMin.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/Test.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/Test2.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['termination/NewMod_replicationSystem.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+costabs(['deliverable/BookShop.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['deliverable/BoundedBuffer.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['deliverable/Chat.abs'],['Main.main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['deliverable/MailServer.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['deliverable/PeerToPeer.abs'],['main'],[cost_model = termination, rely_guarantee = yes, absc_version=2013 ]).
+
+
+
+
+
+
+COST
+====
+
+costabs(['termination/improved/BoundMin1.abs'],['Main.main'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/BoundMin2.abs'],['Main.main'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/BoundMin3.abs'],['Main.main'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+costabs(['termination/improved/BoundMin4.abs'],['Main.main'],[cost_model = steps, rely_guarantee = yes, absc_version=2013 ]).
+

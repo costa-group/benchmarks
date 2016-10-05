@@ -1,0 +1,18 @@
+* method createSolution in class Solver
+  	 L345: n = size(vm_ids)->maximize error when we try to
+  	 calculate the size of a set. SOLVED!
+
+	 L339: assigned = put(assigned, vm_id, Pair(vm_info, requests))->
+	 
+* method crossover in class Solver
+  	 L254: Int n = random(length(old_maps)) -> Removing random it wokrs.
+	 L258: new_maps = appendright(new_maps, map)
+	 
+	 L266: Bool already_used = this.contains(used, fst(map)) ->
+	 Method contais fails.
+	 L268: appendright -> same as before.
+
+*method mutate in class Solver
+	L217: random-> same as before.
+	L228: appendright->
+	L233: appendright->

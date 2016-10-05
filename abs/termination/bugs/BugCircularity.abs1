@@ -1,0 +1,54 @@
+/*
+ * BUG
+ * Detección incorrecta de ciclos: "Exception: circularity_niter(1,[3,1])"
+ * El bucle "loop_local" no debe crear un ciclo ya que 'x' no es modificada
+ * en loop()
+*/
+
+module VendingMachine;
+
+interface VendingMachine {
+  Unit loop();
+  Unit loop_local();
+}
+
+interface Main{
+  Unit main(Int a, Int b);
+}
+
+
+class IVendingMachine( Int f, Int x ) implements VendingMachine{
+
+  Unit loop_local(){
+    while( x > 0 ){
+      x = x - 1;
+      f = 100;
+      suspend;
+    }
+  }
+ 
+  Unit loop(){
+    while( f > 0 ){
+      f = f - 1;
+      suspend;
+    }
+  }
+}
+
+
+class IMain implements Main{
+  Unit main(Int a, Int b){
+    VendingMachine v = new local IVendingMachine( a, b );
+
+    v ! loop_local();
+    v ! loop();
+  }
+}
+
+{
+  Main m = new local IMain();
+  m ! main(7,17);  
+}
+
+
+

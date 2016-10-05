@@ -1,0 +1,285 @@
+===============================================================
+FACT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  3
+Total UBs        :  3
+Time             :  51
++ UB for Fact.fact = 16+10*nat(n)
++ UB for Fact.init = 1
++ UB for Main.main = 23+10*nat(n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  3
+Total UBs         :  3
+Time              :  21
++ UB for Fact.fact = 10+16*nat(n)
++ UB for Fact.init = 1
++ UB for Main.main = 18+16*nat(n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Fact.fact
+    RG: 16+10*nat(n)
+    OC: 10+16*nat(n)
+
+Fact.init
+    RG: 1
+    OC: 1
+
+Main.main
+    RG: 23+10*nat(n)
+    OC: 18+16*nat(n)
+
+===============================================================
+COSTLY FACT
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  3
+Total UBs        :  3
+Time             :  51
++ UB for Fact.init = 1
++ UB for Fact.fact = 19+10*nat(n)
++ UB for Main.main = 26+10*nat(n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  3
+Total UBs         :  3
+Time              :  23
++ UB for Fact.init = 1
++ UB for Fact.fact = 10+20*nat(n)
++ UB for Main.main = 18+20*nat(n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Fact.init
+    RG: 1
+    OC: 1
+
+Fact.fact
+    RG: 19+10*nat(n)
+    OC: 10+20*nat(n)
+
+Main.main
+    RG: 26+10*nat(n)
+    OC: 18+20*nat(n)
+
+===============================================================
+DB PROTOCOL
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  7
+Total UBs        :  7
+Time             :  107
++ UB for DBimp.init = 3
++ UB for WorkerImp.ping = 2
++ UB for DBimp.register = 12
++ UB for WorkerImp.init = 2
++ UB for DBimp.getData = 7
++ UB for WorkerImp.work = 12
++ UB for Main.main = 38
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  7
+Total UBs         :  7
+Time              :  23
++ UB for DBimp.init = 3
++ UB for WorkerImp.ping = 2
++ UB for DBimp.register = 12
++ UB for WorkerImp.init = 2
++ UB for DBimp.getData = 7
++ UB for WorkerImp.work = 12
++ UB for Main.main = 40
+
+
+
+Comparison
+~~~~~~~~~~~
+DBimp.init
+    RG: 3
+    OC: 3
+
+WorkerImp.ping
+    RG: 2
+    OC: 2
+
+DBimp.register
+    RG: 12
+    OC: 12
+
+WorkerImp.init
+    RG: 2
+    OC: 2
+
+DBimp.getData
+    RG: 7
+    OC: 7
+
+WorkerImp.work
+    RG: 12
+    OC: 12
+
+Main.main
+    RG: 38
+    OC: 40
+
+===============================================================
+SLEEPING BARBER
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  10
+Total UBs        :  10
+Time             :  89
++ UB for Barber.init = 1
++ UB for Chair.init = 1
++ UB for Client.sits = 2
++ UB for Chair.takenby = 6
++ UB for Barber.sleeps = 10
++ UB for Client.init = 1
++ UB for Barber.cuts = 2
++ UB for Chair.iscleaned = 2
++ UB for Client.wakesup = 9
++ UB for Main.main = 42
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  10
+Total UBs         :  10
+Time              :  33
++ UB for Barber.init = 1
++ UB for Chair.init = 1
++ UB for Client.sits = 2
++ UB for Chair.takenby = 6
++ UB for Barber.sleeps = 10
++ UB for Client.init = 1
++ UB for Barber.cuts = 2
++ UB for Chair.iscleaned = 2
++ UB for Client.wakesup = 9
++ UB for Main.main = 45
+
+
+
+Comparison
+~~~~~~~~~~~
+Barber.init
+    RG: 1
+    OC: 1
+
+Chair.init
+    RG: 1
+    OC: 1
+
+Client.sits
+    RG: 2
+    OC: 2
+
+Chair.takenby
+    RG: 6
+    OC: 6
+
+Barber.sleeps
+    RG: 10
+    OC: 10
+
+Client.init
+    RG: 1
+    OC: 1
+
+Barber.cuts
+    RG: 2
+    OC: 2
+
+Chair.iscleaned
+    RG: 2
+    OC: 2
+
+Client.wakesup
+    RG: 9
+    OC: 9
+
+Main.main
+    RG: 42
+    OC: 45
+
+===============================================================
+PAIRING PROBLEM
+===============================================================
+
+RELY GUARANTEE COST
+--------------
+Valid UBs        :  6
+Total UBs        :  6
+Time             :  114
++ UB for Factory.init = 2
++ UB for Node.init = 1
++ UB for Node.receivePair = 3
++ UB for Factory.pairs = 18
++ UB for Node.makePair = 22
++ UB for Main.main = 40+2*nat(n)
+
+
+
+ORIGINAL COST
+-----------------------------
+Valid UBs         :  6
+Total UBs         :  6
+Time              :  33
++ UB for Factory.init = 2
++ UB for Node.init = 1
++ UB for Node.receivePair = 3
++ UB for Factory.pairs = 8
++ UB for Node.makePair = 12
++ UB for Main.main = 12+22*nat(n)
+
+
+
+Comparison
+~~~~~~~~~~~
+Factory.init
+    RG: 2
+    OC: 2
+
+Node.init
+    RG: 1
+    OC: 1
+
+Node.receivePair
+    RG: 3
+    OC: 3
+
+Factory.pairs
+    RG: 18
+    OC: 8
+
+Node.makePair
+    RG: 22
+    OC: 12
+
+Main.main
+    RG: 40+2*nat(n)
+    OC: 12+22*nat(n)
+
+

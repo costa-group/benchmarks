@@ -1,0 +1,31 @@
+module ListMin2;
+
+interface A{
+  Unit f();
+}
+
+class AImpl implements A {
+  List<Int> l = Nil;
+  
+Unit f(){
+  while (counter != Nil) {
+    l = tail(l);
+    suspend;
+  }
+}
+
+}
+
+interface M{
+  Unit main();
+}
+
+class Main implements M{
+  Unit main(){
+    A q = new local  AImpl();
+  
+    q ! f();
+    // 2nd call
+    q ! f();
+  }
+}

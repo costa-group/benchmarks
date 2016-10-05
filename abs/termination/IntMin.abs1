@@ -1,0 +1,22 @@
+module IntMin;
+
+interface A{
+  Unit f(Int l);
+}
+
+class AImpl implements A {
+  
+Unit f(Int l){
+  while (l > 0) {
+    l = l - 1;
+  }
+}
+
+}
+
+{
+  Int l = 1;
+  A q = new local AImpl();
+  
+  q ! f(l);
+}

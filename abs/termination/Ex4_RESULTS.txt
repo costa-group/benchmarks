@@ -1,0 +1,23 @@
+Termination time of traditional COSTABS: 130 ms
+Termination time of rely-guarantee approach: 280 ms
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| #  | Type         | Nodes                                                             | Terminating OLD   | Termination NEW   | Time    |
++-----------------------------------------------------------------------------------------------------------------------------------------+ 
+| 0  | non_recursive| [TaskImpl.init]                                                   | yes               | yes               | -       |
+| 1  | non_recursive| [TaskImpl.start]                                                  | yes               | yes               | -       |
+| 2  | recursive    | [case_0,concatenate]                                              | yes               | yes               | -       | OK
+| 3  | non_recursive| [appendright]                                                     | yes               | yes               | -       |
+| 4  | non_recursive| [TaskQueue.addTask]                                               | yes               | yes               | -       |
+| 5  | non_recursive| [case_1]                                                          | yes               | yes               | -       |
+| 6  | non_recursive| [head]                                                            | yes               | yes               | -       |
+| 7  | non_recursive| [case_2]                                                          | yes               | yes               | -       |
+| 8  | non_recursive| [tail]                                                            | yes               | yes               | -       |
+| 9  | recursive    | [entrywhile_0,while_0]                                            | yes               | yes               | -       | OK
+| 10 | non_recursive| [TaskQueue.addTasks]                                              | yes               | yes               | -       |
+| 11 | recursive    | [entrywhile_1,while_1]                                            | no                | yes               | -       | OK
+| 12 | non_recursive| [TaskQueue.consumeSync]                                           | yes               | yes               | -       | 
+| 13 | non_recursive| [TaskQueue.init]                                                  | yes               | yes               | -       |
+| 14 | recursive    | [entrywhile_2,while_2]                                            | no                | no                | -       | OK
+| 15 | non_recursive| [main]                                                            | yes               | yes               | -       |
++-----------------------------------------------------------------------------------------------------------------------------------------+
+

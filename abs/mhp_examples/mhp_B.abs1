@@ -1,0 +1,57 @@
+module Mhp_B;
+
+
+
+interface A {
+  Unit m();
+  Unit r();
+}
+interface B {
+  Int p();
+  Int q();
+}
+
+class A1() implements A {
+ 
+Unit m(){
+	Fut<Int> y;
+	Fut<Int> z;
+	B x=new local B1(this);
+	y=this!r();
+	z=x!p();
+	z=x!p();
+	z=x!q();
+
+	z.get;
+
+	await y?;
+}   
+
+Int r(){
+ 	return 0;
+}
+
+}
+
+class B1(A x) implements B {
+ 
+Int p(){
+	Fut<Int> y;
+	y=x!r();
+ 	return 0;
+}
+Int q(){
+	Fut<Int> y;
+ 	y=x!r();
+ 	await y?;
+ 	return 0;
+}
+
+}
+
+//main
+{
+	A x=new local A1();
+	x!m();
+
+}
