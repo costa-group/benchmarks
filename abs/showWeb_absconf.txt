@@ -1,9 +1,0 @@
-tutorial/ECOOP-pointsto.abs=-stdlib
-tutorial/AccountWeb.abs=-nostdlib
-absconf/BoundedBuffer.abs=-stdlib
-absconf/BookShop.abs=-stdlib
-absconf/MailServer.abs=-stdlib
-absconf/Chat.abs=-stdlib
-absconf/DistHT.abs=-stdlib
-absconf/PeerToPeer.abs=-stdlib
-absconf/TCS.abs=-stdlib
