@@ -1,4 +1,4 @@
-module module Sum_Fact_Fields_1;
+module Sum_Fact_Fields_1;
 import * from ABS.StdLib;
 
 interface A {

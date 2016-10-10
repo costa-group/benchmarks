@@ -4,7 +4,7 @@ interface A{
   Unit f(Int n);
 }
 
-class AImpl(int field) implements A {
+class AImpl(Int field) implements A {
   
 Unit f(){
   Int i = 0;

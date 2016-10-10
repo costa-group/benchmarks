@@ -85,11 +85,11 @@ class ConsumerImpl (BufferInt b) implements Consumer {
     Producer p2;
     Consumer c1;
     Consumer c2;  
-    buff = new cog Buffer(); 
-    p1 = new cog ProducerImpl(buff);   
-    p2 = new cog ProducerImpl(buff); 
-    c1 = new cog ConsumerImpl(buff);
-    c2 = new cog ConsumerImpl(buff);
+    buff = new Buffer(); 
+    p1 = new ProducerImpl(buff);   
+    p2 = new ProducerImpl(buff); 
+    c1 = new ConsumerImpl(buff);
+    c2 = new ConsumerImpl(buff);
     p1!loop(5);
     p2!loop(5);
     c1!loop(5);

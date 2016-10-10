@@ -38,12 +38,12 @@ interface Problemi{
 
 class ProblemImp(Int n) implements Problemi{
       Unit run(){
-         Tablei tab = new cog TableImp(n);
+         Tablei tab = new TableImp(n);
          Fut<Unit> f = tab!run();
          await f?;
          Int i = 0;
          while(i < n){
-             Philosopheri phi = new cog PhilosopherImp(n,i,tab);
+             Philosopheri phi = new PhilosopherImp(n,i,tab);
              phi!run();
              i=i+1;
          }
@@ -96,6 +96,6 @@ class PhilosopherImp(Int n,Int i,Tablei tab) implements Philosopheri{
 
 {
       Int n = 2;
-      Problemi m = new cog ProblemImp(n);
+      Problemi m = new ProblemImp(n);
       m!run(); 
 }

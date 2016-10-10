@@ -18,7 +18,7 @@ class ReplicationSystemMain {
     Set<ClientId> cids = this.getCids();
     Int maxJobs = this.getMaxJobs();
     Int maxUpdates = this.getMaxUpdates();
-    new cog ReplicationSystem(maxUpdates, schedules, maxJobs, cids);
+    new ReplicationSystem(maxUpdates, schedules, maxJobs, cids);
   }
   Int getMaxJobs(){
     return 5;
@@ -764,8 +764,8 @@ class SyncServerAcceptorImpl([Final] [Near]SyncServer server) implements SyncSer
   Resource r1;
   Resource r2;
   {
-    r1 = new cog Resource();
-    r2 = new cog Resource();
+    r1 = new Resource();
+    r2 = new Resource();
   }
   
   [( accept <= max(accept) )] [( current <= max(current) )] [( threads <= max(threads) )] [( rb <= max(rb) )] [( r1 <= max(r1) )] [( r2 <= max(r2) )]
@@ -786,7 +786,7 @@ class SyncServerAcceptorImpl([Final] [Near]SyncServer server) implements SyncSer
     Bool shutdown = server.isShutdownRequested();
     if ( ~ shutdown ){
       Resource resource = this.getResource();
-      thread = new cog ConnectionThreadImpl(job, server, resource, threads, cost);
+      thread = new ConnectionThreadImpl(job, server, resource, threads, cost);
       threads = ( threads + 1 );
     }
     return thread;
@@ -919,7 +919,7 @@ class Network([Far] [Final]SyncServer server, Set<[Far]SyncClient> clients, [Far
     Set<SyncClient> cs = clients;
     while (hasNext(cs)) {
       Pair<Set<SyncClient>, SyncClient> nt = next(cs);
-      Tester tester = new cog TesterImpl(server, snd(nt));
+      Tester tester = new TesterImpl(server, snd(nt));
       testers = Insert( tester, testers );
       cs = fst(nt);
     }
@@ -928,7 +928,7 @@ class Network([Far] [Final]SyncServer server, Set<[Far]SyncClient> clients, [Far
     Set<SyncClient> cs = clients;
     while (hasNext(clients)) {
       Pair<Set<SyncClient>, SyncClient> nt = next(clients);
-      Tester tester = new cog TesterImpl(server, snd(nt));
+      Tester tester = new TesterImpl(server, snd(nt));
       testers = Insert( tester, testers );
       clients = fst(nt);
       suspend;
@@ -1137,7 +1137,7 @@ class SyncServerImpl(Schedules schedules, Set<ClientId> clients) implements Sync
   Map<String, Schedule> scheduleMap = schedulemap(schedules);
   ReplicationSnapshot snapshot;
   {
-    db = new DataBaseImpl();
+    db = new local DataBaseImpl();
   }
   
   [( shutDown <= max(shutDown) )] [( coordinator <= max(coordinator) )] [( acceptor <= max(acceptor) )] [( db <= max(db) )] [( scheduleMap <= max(scheduleMap) )]
@@ -1176,11 +1176,11 @@ class SyncServerImpl(Schedules schedules, Set<ClientId> clients) implements Sync
     return acceptor;
   }
   Unit run(){
-    snapshot = new ReplicationSnapshotImpl(db, schedules);
-    coordinator = new cog SyncServerClientCoordinatorImpl(this, clients);
+    snapshot = new local ReplicationSnapshotImpl(db, schedules);
+    coordinator = new SyncServerClientCoordinatorImpl(this, clients);
     Fut<Unit> f = coordinator!setSnapshot(snapshot);
     f.get;
-    acceptor = new SyncServerAcceptorImpl(this);
+    acceptor = new local SyncServerAcceptorImpl(this);
   }
   ReplicationSnapshot getReplicationSnapshot(){
     return snapshot;
@@ -1194,14 +1194,14 @@ class ReplicationSystem([Final]Int maxUpdates, [Final]List<Schedule> schedules, 
   SyncServer getSyncServer(){
     DeploymentComponent s = this.getServerDeployment();
     [DC : s]
-    SyncServer syncserver = new cog SyncServerImpl(schedules, cids);
+    SyncServer syncserver = new SyncServerImpl(schedules, cids);
     return syncserver;
   }
   
   SyncClient getSyncClient(ClientId id){
     DeploymentComponent c = this.getClientDeployment();
     [DC : c]
-    SyncClient syncclient = new cog SyncClientImpl(maxJobs, id);
+    SyncClient syncclient = new SyncClientImpl(maxJobs, id);
     return syncclient;
   }
   
@@ -1222,8 +1222,8 @@ class ReplicationSystem([Final]Int maxUpdates, [Final]List<Schedule> schedules, 
       syncclients = insertElement(syncclients, syncclient);
       iterator = fst(nt);
     }*/
-    Updater updater = new cog UpdaterImpl(maxUpdates, syncserver);
-    Network network = new cog Network(syncserver, syncclients, updater);
+    Updater updater = new  UpdaterImpl(maxUpdates, syncserver);
+    Network network = new  Network(syncserver, syncclients, updater);
     Fut<SyncServerAcceptor> acc = syncserver!getAcceptor();
     await acc?;
     [Far]
@@ -1240,15 +1240,15 @@ class ReplicationSystem([Final]Int maxUpdates, [Final]List<Schedule> schedules, 
   }
   
   DeploymentComponent getServerDeployment(){
-    DeploymentComponent s = new cog DeploymentComponent("s1", CPU( 1 ));
+    DeploymentComponent s = new  DeploymentComponent("s1", CPU( 1 ));
     return s;
   }
   DeploymentComponent getClientDeployment(){
-    DeploymentComponent c = new cog DeploymentComponent("c1", CPU( 1 ));
+    DeploymentComponent c = new DeploymentComponent("c1", CPU( 1 ));
     return c;
   }
   DeploymentComponent changeDC(DeploymentComponent dc, String name, Int cpu){
-    DeploymentComponent deployment = new DeploymentComponent(name, CPU( cpu ));
+    DeploymentComponent deployment = new local DeploymentComponent(name, CPU( cpu ));
     return deployment;
   }
   }
@@ -1387,7 +1387,7 @@ class ReplicationSnapshotImpl(ServerDataBase db, Schedules schedules) implements
   ServerReplicationItem replicationItem(Item i){
     ServerReplicationItem item = this.replicationItemORIGIN_FileDelta(i);
     if ( ( ( item == null ) && isLogItem(i) ) ){
-      item = new ReplicationLogItem(left(item(i)), db);
+      item = new local ReplicationLogItem(left(item(i)), db);
     }
     return item;
   }
@@ -1407,7 +1407,7 @@ class ReplicationSnapshotImpl(ServerDataBase db, Schedules schedules) implements
   ServerReplicationItem replicationItemORIGIN_DirDelta(Item i){
     ServerReplicationItem item = this.replicationItemORIGIN_ReplicationItemDelta(i);
     if ( ( ( item == null ) && isSearchItem(i) ) ){
-      item = new SearchDirectoryItem(left(item(i)), db);
+      item = new local SearchDirectoryItem(left(item(i)), db);
     }
     return item;
   }
@@ -1416,7 +1416,7 @@ class ReplicationSnapshotImpl(ServerDataBase db, Schedules schedules) implements
     ServerReplicationItem item = this.replicationItemORIGIN_DirDelta(i);
     if ( ( ( item == null ) && isFileItem(i) ) ){
       Pair<FileId, String> it = right(item(i));
-      item = new ReplicationFilePattern(fst(it), snd(it), db);
+      item = new local ReplicationFilePattern(fst(it), snd(it), db);
     }
     return item;
   }
@@ -1454,7 +1454,7 @@ class BasicReplicationItemImpl(FileId qualified, ServerDataBase db) implements I
 class SearchDirectoryItem(FileId qualified, ServerDataBase db) implements ServerReplicationItem {
   InternalItem internal;
   {
-    internal = new BasicReplicationItemImpl(qualified, db);
+    internal = new local BasicReplicationItemImpl(qualified, db);
   }
   
   FileEntry getContents(){
@@ -1533,8 +1533,8 @@ class SyncClientImpl([Final]Int maxJobs, [Final]ClientId id) implements Internal
   State state = Start;
   Bool next = False;
   {
-    db = new DataBaseImpl();
-    recorder = new Recorder(id);
+    db = new local DataBaseImpl();
+    recorder = new local Recorder(id);
   }
   
   [Atomic]
@@ -1558,7 +1558,7 @@ class SyncClientImpl([Final]Int maxJobs, [Final]ClientId id) implements Internal
   }
   [( maxJobs <= max(maxjobs) )] [( jobHistories <= max(jobHistories) )] [( jobDatas <= max(jobDatas) )]
   Unit makeJob(JobType jb, Schedule schedule){
-    ClientJob job = new cog ClientJobImpl(maxJobs, this, jb, schedule, length(jobHistories));
+    ClientJob job = new  ClientJobImpl(maxJobs, this, jb, schedule, length(jobHistories));
     [Deadline : deadline()]
     job!executeJob();
     jobHistories = Cons( job, jobHistories );
@@ -2080,7 +2080,7 @@ class SyncServerClientCoordinatorImpl([Far]SyncServer server, Set<ClientId> clie
 class ReplicationFilePattern(FileId qualified, String pattern, ServerDataBase db) implements ServerReplicationItem {
   InternalItem internal;
   {
-    internal = new BasicReplicationItemImpl(qualified, db);
+    internal = new local BasicReplicationItemImpl(qualified, db);
   }
   
   FileEntry getContents(){
@@ -2130,7 +2130,7 @@ class ReplicationLogItem(FileId qualified, ServerDataBase db) implements ServerR
   Directory snapshot = rootDir();
   InternalItem internal;
   {
-    internal = new BasicReplicationItemImpl(qualified, db);
+    internal = new local BasicReplicationItemImpl(qualified, db);
   }
   
   FileEntry getContents(){
@@ -2174,5 +2174,5 @@ def Set<DCData> modifyCPU(Set<DCData> ds, Int cpu) =
 
 // Main block
 {
-  new ReplicationSystemMain();
+  new local ReplicationSystemMain();
 }

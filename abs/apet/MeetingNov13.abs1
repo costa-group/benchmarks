@@ -53,7 +53,7 @@ class Prior implements Priority {
 
 {
     Int n = 0;
-    Priority ob = new cog Prior();
+    Priority ob = new Prior();
     Fut<Int> nf = ob!m2();
     n = nf.get;
     ob!setF(n);

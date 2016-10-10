@@ -53,10 +53,10 @@ class PhilosopherImp(Int n,Int i,Tablei tab) implements Philosopheri{
 
 {
    Int n = 2;
-   Tablei tab = new cog TableImp(True,True,True,n);
-   Philosopheri phi = new cog PhilosopherImp(n,0,tab);
-   Philosopheri phi2 = new cog PhilosopherImp(n,1,tab);
-//   Philosopheri phi3 = new cog PhilosopherImp(n,2,tab);
+   Tablei tab = new TableImp(True,True,True,n);
+   Philosopheri phi = new PhilosopherImp(n,0,tab);
+   Philosopheri phi2 = new PhilosopherImp(n,1,tab);
+//   Philosopheri phi3 = new PhilosopherImp(n,2,tab);
    phi!take1();
    phi2!take2();
 //   phi3!run();

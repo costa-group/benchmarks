@@ -25,8 +25,8 @@ class A implements AInt{
 }
 
 {
-    AInt a1 = new cog A();
-    AInt a2 = new cog A();
+    AInt a1 = new A();
+    AInt a2 = new A();
     a1!m(a2);
 }
 

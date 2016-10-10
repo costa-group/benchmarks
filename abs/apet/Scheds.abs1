@@ -15,7 +15,7 @@ class A() implements B {
 	Fut<Int> f;
 	Fut<Int> g;
 	B a;
-	a = new cog A();
+	a = new A();
 	f = a ! m();
 	g = a ! l();  
 	await f?;
