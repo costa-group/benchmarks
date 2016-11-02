@@ -1,5 +1,0 @@
-
-
-* main _  18  4
-Costabs here is wrong. It abstracts all kind of messages to
-1. Actually it should not be able to prove termination!
