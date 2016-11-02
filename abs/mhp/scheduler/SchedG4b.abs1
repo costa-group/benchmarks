@@ -1,0 +1,55 @@
+module SchedG4b;
+
+interface A{
+  Unit f();
+  Unit g();
+  Unit h();
+  Unit ff();
+  Unit my_main();
+}
+
+class AImpl(Int myfield) implements A {
+  
+[priority(10)] Unit f(){
+  while( myfield > 0 ){
+    myfield = myfield - 1;
+    suspend;
+  }
+}
+
+[priority(5)] Unit g(){
+  while( myfield < 0 ){
+    myfield = myfield + 1;
+    suspend;
+  }
+}
+
+[priority(5)] Unit h(){
+  while( myfield < 0 ){
+    myfield = myfield + 1;
+    suspend;
+  }
+}
+
+[priority(7)] Unit ff(){
+  while( myfield > 0 ){
+    myfield = myfield - 1;
+    suspend;
+  }
+}
+
+[priority(0)] Unit my_main(){
+  A o = new local AImpl(7);
+  Fut<Unit> x = this ! f();
+  x = this ! g();
+  x = this ! h();
+  x = o ! ff();
+  suspend;
+}
+
+}
+
+{
+  A q = new local AImpl(123);
+  q ! my_main();
+}
