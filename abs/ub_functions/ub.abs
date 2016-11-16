@@ -1,0 +1,137 @@
+module Ub;
+
+def Rat ub__test4(List<Rat> l) =
+  3+nat__(size__list_rat__list_rat(l)-1)* (10+8*nat__(size__list_rat__rat(l)));
+
+def Rat ub__test(List<List<Rat>> l) =
+  3+nat__(size__list_list_rat__list_list_rat(l)-1)* (9+6*nat__(size__list_list_rat__list_rat(l)-1));
+
+def Rat ub__test2(List<List<List<Rat>>> l) =
+  3+nat__(size__list_list_list_rat__list_list_list_rat(l)-1)* (9+nat__(size__list_list_list_rat__list_list_rat(l)-1)* (9+6*nat__(size__list_list_list_rat__list_rat(l)-1)));
+
+def Rat ub__test3(List<List<Rat>> l) =
+  3+6*nat__(size__list_list_rat__list_list_rat(l)-1);
+
+def Rat ub__C_powlist(List<Rat> list, Rat n) =
+  6+nat__(size__list_rat__list_rat(list)-1)* (19+6*nat__(n));
+
+def Rat ub__C_oye(List<List<Rat>> l) =
+  5;
+
+def Rat ub__C_pow(Rat elem, Rat n) =
+  6+6*nat__(n);
+
+def Rat size__list_rat__rat(List<Rat> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(x1, size__list_rat__rat(x2));
+  };
+
+def Rat size__rat__list_rat(Rat x) =
+    0;
+
+def Rat size__list_rat__list_rat(List<Rat> x) =
+  case x {
+    Nil => 1;
+    Cons(x1,x2) => 1 + size__rat__list_rat(x1) + size__list_rat__list_rat(x2);
+  };
+
+def Rat size__list_list_rat__list_rat(List<List<Rat>> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__list_rat__list_rat(x1), size__list_list_rat__list_rat(x2));
+  };
+
+def Rat size__rat__list_list_rat(Rat x) =
+    0;
+
+def Rat size__list_rat__list_list_rat(List<Rat> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__rat__list_list_rat(x1), size__list_rat__list_list_rat(x2));
+  };
+
+def Rat size__list_list_rat__list_list_rat(List<List<Rat>> x) =
+  case x {
+    Nil => 1;
+    Cons(x1,x2) => 1 + size__list_rat__list_list_rat(x1) + size__list_list_rat__list_list_rat(x2);
+  };
+
+def Rat size__list_list_list_rat__list_rat(List<List<List<Rat>>> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__list_list_rat__list_rat(x1), size__list_list_list_rat__list_rat(x2));
+  };
+
+def Rat size__rat__list_list_list_rat(Rat x) =
+    0;
+
+def Rat size__list_rat__list_list_list_rat(List<Rat> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__rat__list_list_list_rat(x1), size__list_rat__list_list_list_rat(x2));
+  };
+
+def Rat size__list_list_rat__list_list_list_rat(List<List<Rat>> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__list_rat__list_list_list_rat(x1), size__list_list_rat__list_list_list_rat(x2));
+  };
+
+def Rat size__list_list_list_rat__list_list_list_rat(List<List<List<Rat>>> x) =
+  case x {
+    Nil => 1;
+    Cons(x1,x2) => 1 + size__list_list_rat__list_list_list_rat(x1) + size__list_list_list_rat__list_list_list_rat(x2);
+  };
+
+def Rat size__list_list_list_rat__list_list_rat(List<List<List<Rat>>> x) =
+  case x {
+    Nil => 0;
+    Cons(x1,x2) => max(size__list_list_rat__list_list_rat(x1), size__list_list_list_rat__list_list_rat(x2));
+  };
+
+def Rat nat__(Rat a) =
+  max(a, 0);
+
+def Rat rat_div__(Rat a, Rat b) =
+  case a < b {
+    True  => 0;
+    False => 1 + rat_div__(a-b, b);
+  };
+
+def Rat log__(Rat base, Rat n) =
+  case n < base {
+    True  => 0;
+    False => 1 + log__(base, rat_div__(n,base));
+  };
+
+
+  
+def Rat doubleR(Rat x) = x + x;
+def Rat doubleI(Int x) = x + x;
+
+def Rat j1(Int x) = doubleR(x);
+def Rat j2(Int x) = doubleI(x);
+def Rat j3(Rat x) = doubleR(x);
+def Rat j4(Rat x) = doubleI(x);
+
+{
+  Rat x1 = 0;
+  
+  x1 = log__(2, 2);
+  println(toString(x1));
+  x1 = log__(2, 4);
+  println(toString(x1));
+  x1 = log__(2, 8);
+  println(toString(x1));
+  x1 = log__(2, 16);
+  println(toString(x1));  
+  x1 = log__(2, 7);
+  println(toString(x1));
+  x1 = log__(2, 15);
+  println(toString(x1));
+ 
+    
+  println("***************************************");
+  println("***************************************");
+}

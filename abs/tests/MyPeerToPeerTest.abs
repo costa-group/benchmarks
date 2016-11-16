@@ -1,0 +1,576 @@
+//$id: Peertopeer.abs 5108 2010-07-17 20:14:12Z jschaefer $ 
+
+// We replicate here all the necessary code from the standard library
+// This way the program can be compiled with the -nostdlib flag
+module ABS.StdLib;
+export *;
+
+
+data Unit = Unit;               // builtin  
+data String;                    // builtin  
+data Int;                       // builtin
+data Bool = True | False;       // builtin
+data Fut<A>;                    // builtin
+
+data Pair<A, B> = Pair(A, B); // pair
+
+// lists
+data List<A> = Nil | Cons(A, List<A>);
+
+def Int count1() = 1;
+def Int count2() = 1;
+def Int count3() = 1;
+
+def List<A> list<A>(List<A> l) = l; // list constructor helper
+
+/**
+ * Returns the length of list 'list'.
+ */
+def Int length<A>(List<A> list) = case list { Nil => 0 ; Cons(p, l) => 1 + length(l) ; };
+
+/**
+ * Returns the first element of list 'list'.
+ */
+def A head<A>(List<A> list) = case list { Cons(p,l) => p ; };
+
+/**
+ * Returns a (possibly empty) list containing all elements of 'list'
+ * except the first one.
+ */
+def List<A> tail<A>(List<A> list) = case list { Cons(p,l) => l ; };
+
+/**
+ * Returns element 'n' of list 'list'.
+ */
+def A nth<A>(List<A> list, Int n) = 
+  case n { 0 => head(list) ; _ => nth(tail(list), n-1); };
+
+/**
+ * Returns the concatenation of lists 'list1' and 'list2'
+ */
+def List<A> concatenate<A>(List<A> list1, List<A> list2) =
+  let (Int x) = count1() in
+  case list1 { Nil => list2 ; Cons(head, tail) =>  Cons(head, concatenate(tail, list2)); };
+
+/**
+ * Returns a list containing all elements of list 'list' followed by 'p'.
+ */
+def List<A> appendright<A>(List<A> list, A p) = 
+  let (Int x) = count2() in concatenate(list, Cons(p, Nil));
+
+
+// Maps
+data Map<A, B> = EmptyMap | InsertAssoc(Pair<A, B>, Map<A, B>);
+
+// map constructor helper (does not preserve injectivity)
+def Map<A, B> map<A, B>(List<Pair<A, B>> l) =
+  let (Int x) = count1() in
+  case l { Nil => EmptyMap; Cons(hd, tl) => InsertAssoc(hd, map(tl)); };
+
+/**
+ * Returns the value associated with key 'k' in map 'ms'.
+ */
+def B lookup<A, B>(Map<A, B> ms, A k) = // retrieve from the map
+  case ms {
+  	InsertAssoc(Pair(k, y), _) => y;
+        InsertAssoc(_, tm) => lookup(tm, k);
+  };
+
+
+// Sets
+data Set<A> = EmptySet | Insert(A, Set<A>);
+
+/**
+ * Returns a set containing all keys of map 'map'.
+ */
+def Set<A> keys<A, B>(Map<A, B> map) =
+  let (Int x) = count1() in
+  case map { 
+    EmptyMap => EmptySet ;
+    InsertAssoc(Pair(a, _), tail) => Insert(a, keys(tail)); 
+  };
+    
+/**
+ * Returns True if set 'ss' contains element 'e', False otherwise.
+ */
+def Bool contains<A>(Set<A> ss, A e) =
+  case ss {
+    EmptySet => let (Int x) = count1() in False ;
+    Insert(e, _) => let (Int x) = count1() in True;
+    Insert(_, xs) => contains(xs, e);
+  };
+  
+
+
+
+module MyPeerToPeerTest;
+import * from ABS.StdLib;
+
+//type synonyms  
+type Filename = String ;
+type Filenames = Set<String> ;
+type Packet = String ;
+type File = List<Packet> ;
+type Catalog = List<Pair<Peer, Filenames> > ;
+
+ 
+// Application functions
+def Peer findServer(Filename file, Catalog catalog) =
+  case catalog {
+    Nil => null;
+    Cons(Pair(server, files), rest) =>
+      case contains(files, file) { True => server;
+                                   False => findServer(file, rest); };
+  };
+
+interface Server {
+  Filenames enquire();
+  Int getLength(Filename fId);
+  Packet getPack(Filename fId, Int pNbr);
+  List<Packet> getPacks(Filename fId, Int numpacks, Int pNbr);
+}
+ 
+ 
+interface Peer extends Client, Server { 
+   Unit setAdmin(Network admin);
+   Unit searchFile(Filename file);
+}
+
+interface Network {
+  List<Peer> getNeighbors(Peer caller);
+}
+
+interface DataBase {
+  File getFile(Filename fId);
+  Int getLength(Filename fId);
+  Unit storeFile(Filename fId, File file);
+  Filenames listFiles();
+}
+
+interface Client {
+  Unit reqFile(Server sId, Filename fId);
+}
+
+interface PTPTest {
+	Unit testConcatenate();
+	Unit testLength();
+	Unit testHead();
+	Unit testTail();
+	Unit testNth();
+	Unit testAppendRight();
+	Unit testMap();
+	Unit testKeys();
+	Unit testContains();
+	Unit testFindServer();
+}
+
+class PTPTestImp implements PTPTest {
+
+	Unit testConcatenate() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		List<Int> d = concatenate(a, b);
+		List<Int> e = concatenate(c, d);
+		List<Int> f = concatenate(c, d);
+		List<Int> g = concatenate(e, f);
+	}
+
+	Unit testLength() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		Int test1 = length(c);
+		List<Int> e = concatenate(c, c);
+		Int test2 = length(e);
+		List<Int> g = concatenate(e, e);
+		Int test3 = length(g);
+	}
+	
+	Unit testHead() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		Int test1 = head(c);
+		List<Int> e = concatenate(c, c);
+		Int test2 = head(e);
+		List<Int> g = concatenate(e, e);
+		Int test3 = head(g);
+	}
+	
+	Unit testTail() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		List<Int> test1 = tail(c);
+		List<Int> e = concatenate(c, c);
+		List<Int> test2 = tail(e);
+		List<Int> g = concatenate(e, e);
+		List<Int> test3 = tail(g);
+	}
+	
+	Unit testNth() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		Int test1 = nth(c,9);
+		List<Int> e = concatenate(c, c);
+		Int test2 = nth(c,19);
+		List<Int> g = concatenate(e, e);
+		Int test3 = nth(c,29);
+	}
+	
+	Unit testAppendRight() {
+		List<Int> a = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))));
+		List<Int> a2 = appendright(a, 6);
+		List<Int> b = Cons(6, Cons(7, Cons(8, Cons(9, Cons(10, Nil)))));
+		List<Int> c = concatenate(a, b);
+		List<Int> c2 = appendright(c, 11);
+		List<Int> d = concatenate(a, b);
+		List<Int> e = concatenate(c, d);
+		List<Int> e2 = appendright(e, 11);
+	}
+	
+	Unit testMap() {
+		List<Pair<Int,Int>> a = Cons(Pair(1,1), Cons(Pair(2,2), Cons(Pair(3,3), Cons(Pair(4,4), Cons(Pair(5,5), Nil)))));
+		List<Pair<Int,Int>> b = Cons(Pair(6,6), Cons(Pair(7,7), Cons(Pair(8,8), Cons(Pair(9,9), Cons(Pair(10,10), Nil)))));
+		List<Pair<Int,Int>> c = concatenate(a, b);
+		Map<Int,Int> m = map(c);
+		List<Pair<Int,Int>> d = Cons(Pair(101,1), Cons(Pair(20,2), Cons(Pair(30,3), Cons(Pair(40,4), Cons(Pair(50,5), Nil)))));
+		List<Pair<Int,Int>> e = Cons(Pair(60,6), Cons(Pair(70,7), Cons(Pair(80,8), Cons(Pair(90,9), Cons(Pair(100,10), Nil)))));
+		Map<Int,Int> m2 = map(e);
+		List<Pair<Int,Int>> f = Cons(Pair(1010,1), Cons(Pair(200,2), Cons(Pair(300,3), Cons(Pair(400,4), Cons(Pair(500,5), Nil)))));
+		List<Pair<Int,Int>> g = Cons(Pair(600,6), Cons(Pair(700,7), Cons(Pair(800,8), Cons(Pair(900,9), Cons(Pair(1000,10), Nil)))));
+		Map<Int,Int> m3 = map(g);
+	}
+	
+	Unit testKeys() {
+		List<Pair<Int,Int>> a = Cons(Pair(1,1), Cons(Pair(2,2), Cons(Pair(3,3), Cons(Pair(4,4), Cons(Pair(5,5), Nil)))));
+		List<Pair<Int,Int>> b = Cons(Pair(6,6), Cons(Pair(7,7), Cons(Pair(8,8), Cons(Pair(9,9), Cons(Pair(10,10), Nil)))));
+		List<Pair<Int,Int>> c = concatenate(a, b);
+		Map<Int,Int> m = map(c);
+		Set<Int> k = keys(m);
+		List<Pair<Int,Int>> d = Cons(Pair(101,1), Cons(Pair(20,2), Cons(Pair(30,3), Cons(Pair(40,4), Cons(Pair(50,5), Nil)))));
+		List<Pair<Int,Int>> e = Cons(Pair(60,6), Cons(Pair(70,7), Cons(Pair(80,8), Cons(Pair(90,9), Cons(Pair(100,10), Nil)))));
+		List<Pair<Int,Int>> e2 = concatenate(d,e);
+		List<Pair<Int,Int>> e3 = concatenate(c,e2);
+		Map<Int,Int> m2 = map(e3);
+		Set<Int> k2 = keys(m2);
+		List<Pair<Int,Int>> f = Cons(Pair(1010,1), Cons(Pair(200,2), Cons(Pair(300,3), Cons(Pair(400,4), Cons(Pair(500,5), Nil)))));
+		List<Pair<Int,Int>> g = Cons(Pair(600,6), Cons(Pair(700,7), Cons(Pair(800,8), Cons(Pair(900,9), Cons(Pair(1000,10), Nil)))));
+		List<Pair<Int,Int>> g2 = concatenate(f,g);
+		List<Pair<Int,Int>> g3 = concatenate(e3,g2);
+		Map<Int,Int> m3 = map(g3);
+		Set<Int> k3 = keys(m3);
+	}
+	
+	Unit testContains() {
+		List<Pair<Int,Int>> a = Cons(Pair(1,1), Cons(Pair(2,2), Cons(Pair(3,3), Cons(Pair(4,4), Cons(Pair(5,5), Nil)))));
+		List<Pair<Int,Int>> b = Cons(Pair(6,6), Cons(Pair(7,7), Cons(Pair(8,8), Cons(Pair(9,9), Cons(Pair(10,10), Nil)))));
+		List<Pair<Int,Int>> c = concatenate(a, b);
+		Map<Int,Int> m = map(c); 
+		Set<Int> k1 = keys(m); 
+		Bool test1 = contains(k1,20);
+		List<Pair<Int,Int>> d = Cons(Pair(101,1), Cons(Pair(20,2), Cons(Pair(30,3), Cons(Pair(40,4), Cons(Pair(50,5), Nil)))));
+		List<Pair<Int,Int>> e = Cons(Pair(60,6), Cons(Pair(70,7), Cons(Pair(80,8), Cons(Pair(90,9), Cons(Pair(100,10), Nil)))));
+		List<Pair<Int,Int>> e2 = concatenate(d, e);
+		List<Pair<Int,Int>> e3 = concatenate(c, e2);
+		Map<Int,Int> m2 = map(e3);
+		Set<Int> k2 = keys(m2); 
+		Bool test2 = contains(k2,20);
+		List<Pair<Int,Int>> f = Cons(Pair(1010,1), Cons(Pair(200,2), Cons(Pair(300,3), Cons(Pair(400,4), Cons(Pair(500,5), Nil)))));
+		List<Pair<Int,Int>> g = Cons(Pair(600,6), Cons(Pair(700,7), Cons(Pair(800,8), Cons(Pair(900,9), Cons(Pair(1000,10), Nil)))));
+		List<Pair<Int,Int>> g2 = concatenate(f, g);
+		List<Pair<Int,Int>> g3 = concatenate(e3, g2);
+		Map<Int,Int> m3 = map(g3);
+		Set<Int> k3 = keys(m3); 
+		Bool test3 = contains(k3,20);
+	}
+
+	Unit testFindServer() {
+		Filename file = "file0";
+		
+		Map<String,List<String>> db = 
+    		InsertAssoc (
+      			Pair ("file0", 
+		               Cons ("a", Cons ("b", Cons ("c", Nil )))), 
+		    InsertAssoc (
+		      Pair ("file1", 
+		               Cons ("a", Cons ("b", Cons ("c", Nil )))), 
+		    InsertAssoc (
+		      Pair ("file2", 
+		               (Cons ("d", Nil ))), 
+		    InsertAssoc (
+		      Pair ("file3", 
+		               Cons ("a", Cons ("b", Cons ("e", Nil )))),
+		    InsertAssoc (
+		      Pair ("file4", 
+		               Cons ("a", Cons ("c", Cons ("e", Nil )))),
+		    InsertAssoc (
+		      Pair ("file5", 
+		               Cons ("b", Cons ("d", Cons ("e", Nil )))),
+		    InsertAssoc (
+		      Pair ("file6", 
+		               Cons ("a", Cons ("b", Cons ("c", Nil )))),
+		   	InsertAssoc (
+		      Pair ("file7", 
+		               Cons ("a", Cons ("d", Cons ("e", Nil )))), 
+		    InsertAssoc (
+		      Pair ("file8", 
+		              Cons ("b", Cons ("c", Cons ("d", Nil )))),
+		    EmptyMap ))))))))
+		    );
+		
+		DataBase db1;
+  		db1 = new DataBaseImpl(EmptyMap); 
+
+  		DataBase db2;
+		db2 = new DataBaseImpl(db); 
+		
+		Peer n1;
+		n1 = new Node(db1,2);
+		
+		Peer n2;
+		n2 = new Node(db1,1);
+		
+		Peer n3;
+		n3 = new Node(db2,1);
+		
+		Filenames f1 = Insert("file0", Insert("file1", Insert("file2", EmptySet)));
+		Filenames f2 = Insert("file3", Insert("file4", Insert("file5", EmptySet)));
+		Filenames f3 = Insert("file6", Insert("file7", Insert("file8", EmptySet)));
+		
+		Catalog cat = Cons( Pair(n1, f3), Cons(Pair(n2, f2), Cons(Pair(n3,f1), Nil)));
+		
+		Peer r = findServer("file8", cat);
+	}
+}
+
+class DataBaseImpl(Map<Filename, File> db) implements DataBase {
+   File getFile(Filename fId) {
+     return lookup(db, fId);
+  }
+
+  Int getLength(Filename fId) {
+    return length(lookup(db,fId));
+  }
+
+  Unit storeFile(Filename fId, File file) {
+    Int x = count2();
+    db = InsertAssoc(Pair(fId,file), db);
+  } 
+
+  Filenames listFiles() {
+    return keys(db);
+  }
+}
+
+class Node(DataBase db, Int size) implements Peer {
+  Catalog catalog = Nil;
+  List<Peer> myNeighbors = Nil;
+  Network admin = null;
+
+  Unit searchFile(Filename file) {
+    Fut<Catalog> c ; 
+    Fut<List<Peer>> f;
+    Server server ; 
+
+    await admin != null;
+    f = admin!getNeighbors(this);   // Asynchronous call to admin
+    await f?;
+    myNeighbors = f.get;
+    c = this!availFiles(myNeighbors); // Asynchronous call
+    await c?;               // Allow other peers to call in the meantime
+    catalog = c.get;        // Build the catalog
+    server = findServer(file, catalog); // Find the server for the requested file
+    if (server != null) {
+      this.reqFile(server,file) ;        // Download file
+    }
+  }
+
+  Unit setAdmin(Network admin) {
+    this.admin = admin;
+  }
+
+  Filenames enquire() { 
+    Fut<Filenames> f ;  
+    f = db!listFiles();
+    await f?;
+    return f.get;
+  }
+
+  Int getLength(Filename fId) {
+    Fut<Int> length ; 
+    length = db!getLength(fId);
+    await length?;
+    return length.get;
+  }
+
+  Packet getPack(Filename fId, Int pNbr) {
+    File f = Nil;
+    Int x = count1();
+    Fut<File> ff;
+    ff = db!getFile(fId);
+    await ff?;
+    f = ff.get;
+    return nth(f, pNbr);
+  }
+
+  List<Packet> getPacks(Filename fId, Int numpacks, Int pNbr) {
+    File f = Nil;
+    File res = Nil;
+    Int x = count2();
+    Fut<File> ff;
+    ff = db!getFile(fId);
+    await ff?;
+    f = ff.get;
+    while(numpacks > 0) {
+     Int x = count1();
+     res = Cons(nth(f, pNbr+numpacks-1),res);
+     numpacks = numpacks - 1;
+    }
+
+    return res;
+  }
+
+
+  Catalog availFiles (List<Peer> sList) {
+    Catalog cat = Nil;
+    Filenames fNames = EmptySet; 
+    Fut<Filenames> fN;
+    Catalog catList = Nil; 
+    Fut<Catalog> cL;
+    Int x = count3();
+
+    if (sList != Nil) {
+      fN = head(sList)!enquire();
+      cL = this!availFiles(tail(sList));
+      await fN? & cL?;
+      catList = cL.get;
+      fNames = fN.get;
+      cat = appendright(catList, Pair(head(sList), fNames)); 
+      x = count1();
+    }
+    return cat; 
+  }
+
+  Unit reqFile(Server sId, Filename fId) {
+    File file = Nil;
+    List<Packet> packs = Nil;
+    Int x = count2();
+    Int lth = 0;
+    Fut<Int> l1;
+    Fut<List<Packet>> l2;
+    Int incr = 0;
+
+    l1 = sId!getLength(fId);
+    await l1?;
+    lth = l1.get; 
+    while (lth > 0) {
+      if (size > lth) {
+         incr = lth;
+      }
+      else {
+         incr = size;
+      }
+      lth = lth - incr;            
+      l2 = sId!getPacks(fId, incr, lth);
+      await l2?;
+      packs = l2.get ;
+      file = concatenate(packs, file); 
+    } 
+    db!storeFile(fId, file);
+  }
+}
+
+class OurTopology( Peer node1, Peer node2,   Peer node3 )
+implements Network
+{
+  List<Peer> getNeighbors(Peer caller) {
+    List<Peer> res = Nil;
+    Int x = count1();
+//     if (caller == node0) { res = Cons(node1, Cons(node2,Nil)); }
+//     if (caller == node1) { res = Cons(node3,Nil); }
+//     if (caller == node2) { res = Cons(node0, Cons(node1,Cons(node3,Nil))); }
+//     if (caller == node3) { res = Cons(node0, Cons(node2,Nil)); }
+    if (caller == node1) { res = Cons(node2, Cons(node3,Nil)); Int x = count3();}
+    if (caller == node2) { res = Cons(node3,Nil); Int x = count2(); }
+    if (caller == node3) { res = Nil; Int x = count1();}
+    return res;
+  }
+}
+
+{ 
+/*
+   Peer node0;
+   Peer node1;
+   Peer node2;
+   Peer node3;
+   DataBase db0;
+   DataBase db1;
+   DataBase db2;
+   Network admin;
+   // Map<Filename, File>
+   db0 = new DataBaseImpl(map(Cons(Pair("file0",Cons("file",Cons("from",Cons("db0",Nil)))),Nil)));
+   db1 = new DataBaseImpl(map(Cons(Pair("file1",Cons("file",Cons("from",Cons("db1",Nil)))),Nil)));
+   db2 = new DataBaseImpl(map(Cons(Pair("file2",Cons("file",Cons("from",Cons("db2",Nil)))),Nil)));
+   node0 = new Node(db0, "file2");
+   node1 = new Node(db1, "file2");
+   node2 = new Node(db2, "file1");
+   node3 = new Node(db2, "file0");
+   admin = new OurTopology(node0, node1, node2, node3);
+   node0!setAdmin(admin);
+   node1!setAdmin(admin);
+   node2!setAdmin(admin);
+   node3!setAdmin(admin);
+   
+   node0!searchFile();
+   node1!searchFile();
+   node2!searchFile();
+   node3!searchFile();
+*/
+  Map<String,List<String>> db = 
+    InsertAssoc (
+      Pair ("file0", 
+               Cons ("a", Cons ("b", Cons ("c", Nil )))), 
+    InsertAssoc (
+      Pair ("file1", 
+               (Cons ("d", Nil ))), 
+    InsertAssoc (
+      Pair ("file1", Nil),
+    InsertAssoc (
+      Pair ("file1", Nil),
+    EmptyMap )))
+    );
+    
+  Int x = count3(); x = count3(); x = count3(); x = count3();
+  
+  DataBase db1;
+  db1 = new DataBaseImpl(EmptyMap); 
+
+  DataBase db2;
+  db2 = new DataBaseImpl(db); 
+
+  Peer n1;
+  n1 = new Node(db1,1);
+  x = count2(); // Because of Node.init
+
+  Peer n2;
+  n2 = new Node(db1,1);
+  x = count2(); // Because of Node.init
+
+  Peer n3;
+  n3 = new Node(db2,1);
+  x = count2(); // Because of Node.init
+
+  Network admin;
+  admin = new OurTopology(n1, n2, n3);
+
+  n1!setAdmin(admin);
+  n2!setAdmin(admin);
+  n3!setAdmin(admin);
+
+  n1!searchFile("file0");
+  n2!searchFile("file1");
+
+ }

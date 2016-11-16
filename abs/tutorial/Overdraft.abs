@@ -1,0 +1,7 @@
+delta DOverdraft;
+uses Account;
+modifies class AccountImpl {
+	modifies Int withdraw(Int x) { 
+		balance = balance - x; return balance;
+	}	
+}

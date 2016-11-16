@@ -1,0 +1,93 @@
+module QuickSort;
+import * from ABS.StdLib;
+
+// Auxiliary functions
+
+def List<Int> getEqual(Int pivot,List<Int> unsorted) =
+  case unsorted {
+      Nil => Nil;
+      Cons(x,tail) =>
+          case (x == pivot) {
+	      True => Cons(x,getEqual(pivot,tail));
+	      False => getEqual(pivot,tail);
+	  };
+  };
+
+def List<Int> getLarger(Int pivot,List<Int> unsorted) =
+  case unsorted {
+      Nil => Nil;
+      Cons(x,tail) =>
+          case (x > pivot) {
+	      True => Cons(x,getLarger(pivot,tail));
+	      False => getLarger(pivot,tail);
+	  };
+  };
+
+def List<Int> getLess(Int pivot,List<Int> unsorted) =
+  case unsorted {
+      Nil => Nil;
+      Cons(x,tail) =>
+          case (x < pivot) {
+	      True => Cons(x,getLess(pivot,tail));
+	      False => getLess(pivot,tail);
+	  };
+  };
+
+
+interface QSortInt{
+    Unit sort(QSortInt caller,List<Int> unsorted);
+    Unit done(List<Int> sorted);
+}
+
+class QSort implements QSortInt{
+    Int pings = 0;
+    QSortInt caller = null;
+    List<Int> half = Nil;
+    
+    Unit sort(QSortInt caller, List<Int> unsorted){
+	this.caller = caller;
+	Int n = length(unsorted);
+	// Here they look if all numbers in the list are the same. I skip it
+	if (n <= 1) {
+	    if (caller != null) caller!done(unsorted);
+	}
+	else if (n > 1) {
+	    Int pivot = head(unsorted);
+	    List<Int> middle = getEqual(pivot, unsorted);
+	    List<Int> right = getLarger(pivot, unsorted);
+	    List<Int> left = getLess(pivot, unsorted);
+	    // if only 2 unique ints, either right or left will be empty
+	    // pass middle as substitute in that case
+	    if (isEmpty(right)) right = middle;
+	    else if (isEmpty(left)) left = middle;
+	    else { // otherwise add middle to one
+		if (length(right) <= length(left)) right = concatenate(right,middle);
+		else left = concatenate(left,middle);
+	    }
+	    
+	    QSortInt lh = new QSort();
+	    QSortInt rh = new QSort();
+	    lh!sort(this,left);
+	    rh!sort(this,right);
+	}
+    }
+
+    Unit done(List<Int> sorted) {
+	pings = pings + 1;
+	List<Int> full = Nil;
+	if (pings == 1) half = sorted;
+	else if (pings == 2) {
+	    if (isEmpty(half)) full = sorted;
+	    else if (isEmpty(sorted)) full = half;
+	    else if (head(half) > head(sorted)) full = concatenate(sorted,half);
+	    else if (head(half) < head(sorted)) full = concatenate(half,sorted);
+	    if (caller != null) caller!done(full);
+	}
+    }
+}
+
+{
+    QSortInt qsort = new QSort();
+    List<Int> list = list[7,2,5,1,3];
+    qsort!sort(null,list);
+}

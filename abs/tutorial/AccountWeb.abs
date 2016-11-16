@@ -1,0 +1,63 @@
+module Account;
+
+export *;
+
+def Level createLevel() = Standard;
+
+
+interface Customer {
+	Int getId();
+	Customer findCustomer(CustomerList cl);
+}
+
+interface IndvCustomer extends Customer {
+}
+
+interface CorpCustomer extends Customer {
+	Level getLevel();
+}
+
+type CustomerList = List<Customer>;
+
+class CorpIndvCustomerImpl(Int id) implements IndvCustomer, CorpCustomer{
+	Level lv = createLevel();
+
+	Level getLevel() { return lv; }
+	Int getId() { return id; }
+	
+	Customer findCustomer(CustomerList cl) {
+		Customer result;
+		Int i = 0;
+		while (i<length(cl)) {
+			Customer curCust = nth(cl,i);
+			Int curId = curCust.getId();
+			if (id==curId) {result = curCust;}
+			i = i + 1;
+		}
+		return result;
+	} 
+}
+
+
+interface Account { 
+	Int getAid();
+	Int deposit(Int x); 
+	Int withdraw(Int x);
+}
+
+class AccountImpl(Int aid, Int balance, Customer owner) implements Account { // Core Product
+
+	Int getAid() { return aid; }
+	Int deposit(Int x) { balance = balance + x; return balance;}
+	Int withdraw(Int x) { 
+		if (balance - x >= 0) {
+			balance = balance - x;
+		} 
+		return balance;
+	}
+}
+
+{
+	Customer c = new local CorpIndvCustomerImpl(17);
+	new local AccountImpl(1,1,c);
+}

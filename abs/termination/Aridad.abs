@@ -1,0 +1,21 @@
+module Aridad;
+
+def Int f( Int x ) = x;
+
+interface A {
+  Int fun(Int n);
+}
+
+class A1(Int my_field) implements A {
+
+  Int fun(Int n){
+    return my_field + f(n);
+  }
+}
+
+{
+  A q = new local A1(10);
+  
+  q.fun(2);
+  q!fun(4);
+}

@@ -1,0 +1,6 @@
+delta DSave (Int i);
+uses Account;
+modifies class AccountImpl {
+	removes Int interest;
+	adds Int interest = i;	
+}

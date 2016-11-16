@@ -1,0 +1,24 @@
+module Bound1;
+
+interface A{
+  Unit f(Int n);
+}
+
+class AImpl implements A {
+  
+Unit f(Int n){
+  Int i = 0;
+  while (i < n) {
+    i = i + 1;
+  }
+}
+
+}
+
+{
+  A q = new local AImpl();
+  Int ohio = 1001;
+  
+  q ! f(ohio);
+  q ! f(987);
+}

@@ -1,0 +1,32 @@
+module Foo;
+import * from ABS.StdLib;
+
+interface AInt{
+    Int m(AInt a);
+    Int p(AInt a);
+}
+
+class A implements AInt{
+    Int m(AInt a){
+	Fut<Int> f;
+	Int n = 0;
+	f = a!p(this);
+	n = f.get;
+	return n;
+    }
+
+    Int p(AInt a){
+	Fut<Int> f;
+	Int n = 0;
+	f = a!m(this);
+	n = f.get;
+	return n;
+    }
+}
+
+{
+    AInt a1 = new A();
+    AInt a2 = new A();
+    a1!m(a2);
+}
+

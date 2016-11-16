@@ -1,0 +1,47 @@
+module CustomerIF;
+
+export *;
+import Level, createLevel from CustomerData;
+
+interface Customer {
+	Int getId();
+	Customer findCustomer(CustomerList cl);
+}
+
+interface IndvCustomer extends Customer {
+}
+
+interface CorpCustomer extends Customer {
+	Level getLevel();
+}
+
+type CustomerList = List<Customer>;
+
+class CorpIndvCustomerImpl(Int id) implements IndvCustomer, CorpCustomer{
+	Level lv = createLevel();
+
+	Level getLevel() { return lv; }
+	Int getId() { return id; }
+	
+	Customer findCustomer(CustomerList cl) {
+		Customer result;
+		Int i = 0;
+		while (i<length(cl)) {
+			Customer curCust = nth(cl,i);
+			Int curId = curCust.getId();
+			if (id==curId) {result = curCust;}
+			i = i + 1;
+		}
+		return result;
+	} 
+}
+
+{
+	Customer c = new local CorpIndvCustomerImpl(17);
+	Customer d = new local CorpIndvCustomerImpl(16);
+	Int n = c.getId();
+	CustomerList l = Cons(c,Cons(d,Nil));
+	Fut<Customer> e = c!findCustomer(l);
+	await e?;
+	Customer f = e.get;
+}

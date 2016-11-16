@@ -1,0 +1,44 @@
+module Mult_paths;
+
+// An SCC has multiple calls to other SCC
+// To check that the multiset of paths is correctly computed
+
+
+interface A {
+  Int f(Int n);
+  Int g(Int n);
+  Int h(Int n);
+}
+
+
+class A1 implements A{
+  
+  Int f( Int n ){
+    this ! g(1);
+    this ! g(2);
+    
+    return 3;
+  }
+  
+  Int g( Int n ){
+    this ! h(1);
+    this ! h(2);
+    this ! h(3);
+    
+    return 4;
+  }
+  
+  Int h( Int n ){
+    return 0;
+  }  
+  
+}
+
+
+{
+  A x;
+
+  x = new local A1();
+  
+  x ! f(0);
+}

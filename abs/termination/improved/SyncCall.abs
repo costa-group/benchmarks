@@ -1,0 +1,56 @@
+module SyncCall;
+
+// Example with inner loops
+
+interface T {
+  Unit loop();
+  Unit loop2();
+  Unit call();
+  Unit call2();
+}
+
+class Test implements T {
+  Int count = 0;
+
+  Unit loop(){
+		while ( count > 0 ){
+		  count = count - 1;
+			this.call();
+		}
+	}
+	
+  Unit loop2(){
+		while ( count > 0 ){
+		  count = count - 1;
+			this.call2();
+		}
+	}
+
+	Unit call() {
+    count = count - 1;
+	}
+	
+	Unit call2() {
+    count = count + 1;
+	}
+}
+
+interface M {
+	Unit  main();
+	Unit  main2();
+}
+
+class Main implements M {
+
+  // Everything terminating
+	Unit  main(){
+		T t = new local  Test();
+		t ! loop();
+	}
+	
+	// The loop is not terminating
+	Unit  main2(){
+		T t = new local  Test();
+		t ! loop2();
+	}
+}

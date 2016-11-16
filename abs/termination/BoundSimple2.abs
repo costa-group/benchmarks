@@ -1,0 +1,30 @@
+module BoundSimple2;
+
+interface A{
+  Unit f(List<Int> list);
+  Unit g();
+}
+
+class AImpl(List<Int> mylist) implements A {
+  
+  Unit f(List<Int> list){
+    while( list != Nil ){
+      Int head = head(list);
+      list = tail(list);
+    }
+  }
+  
+  Unit g(){
+    this ! f(mylist);
+  }
+
+}
+
+{
+  List<Int> l = Cons( 1, Cons( 2, Cons( 3, Nil)));
+  A q = new local AImpl(l);
+  
+  q ! g();
+}
+// ub($pubs_aux_entry$(_G11246),1*max([20+ (0+ (nat(-1*min(field)+1004)*max([2+0])+max([6+0]))+ (nat(1*max(field))*max([2+0])+max([6+0]))+ (nat(1001)*max([2+0])+max([6+0])))])+max([]))
+

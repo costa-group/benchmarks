@@ -1,0 +1,76 @@
+module Dining_Philosophers;
+import * from ABS.StdLib;
+
+type Fork = Int ;
+type Available = Bool;
+
+interface Tablei{
+      Unit request(Int n,Philosopheri phil, Int j);     
+}
+
+interface Philosopheri{
+      Unit run();
+      Unit take1();
+      Unit take2();
+}
+
+interface Forki{
+      Unit take(Philosopheri phil,Int i);
+}
+
+class Fork implements Forki{
+      Unit take(Philosopheri phil,Int i){
+          Fut<Unit> f;
+          if(i != 1){
+              f = phil!take2();
+              f.get;
+          }
+      }
+}
+class TableImp(Forki b1, Forki b2, Forki b3, Int n) implements Tablei{
+
+    Unit request(Int i,Philosopheri phil, Int j){ 
+        Fut<Unit> f;
+        if (i == 0){
+           f = b1!take(phil,j);
+           await f?;
+        }else if (i == 1){
+           f = b2!take(phil,j);
+           await f?;
+        }else{
+           f = b3!take(phil,j);
+           await f?;
+        }
+    }
+    
+}
+
+class PhilosopherImp(Int n,Int i,Tablei tab) implements Philosopheri{
+     Unit run(){
+
+     }
+     Unit take1(){
+          Fut<Unit> f;
+          f = tab!request(i,this,0);
+          await f?;
+     }
+     Unit take2(){
+          Fut<Unit> f;
+          f = tab!request((i+1)%n,this,1);
+          f.get;
+     }
+}
+
+{
+   Int n = 2;
+   Forki f1 = new cog Fork();
+   Forki f2 = new cog Fork();
+   Forki f3 = new cog Fork();
+   Tablei tab = new cog TableImp(f1,f2,f3,n);
+   Philosopheri phi = new cog PhilosopherImp(n,0,tab);
+   Philosopheri phi2 = new cog PhilosopherImp(n,1,tab);
+   //Philosopheri phi3 = new cog PhilosopherImp(n,2,tab);
+   phi!take1();
+   phi2!take1();   
+   //phi3!take1();
+}

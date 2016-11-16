@@ -1,0 +1,34 @@
+module AntonioBounds;
+
+// Example to prove that mhp_reachable_paths is not sound for UB
+
+interface M {
+  Unit main(Int a);
+  Unit m(Int a);
+  Unit reset();
+}
+
+class Main implements M {
+  Int f;
+  
+  Unit main(Int a) {
+    Fut<Unit> y = this!m(a);
+    await y?;
+    while( f > 0 ){
+      f = f - 1;
+      suspend; // At this point we can have 'a' field updates although 'm'
+               // cannot happen in parallel
+    }
+  }
+  
+  Unit m( Int a ){
+    while( a > 0 ){
+      this!reset();
+      a = a - 1;
+    }
+  }
+  
+  Unit reset() {
+    f = 99;
+  }
+}

@@ -1,0 +1,28 @@
+// cd Systems/costa/costabs/src/
+// swipl
+// compile(costabs_driver).
+// costabs( ['Fac.abs'], [main], [rely_guarantee = yes, cost_model = termination]).
+
+module Fac;
+
+interface IFac {
+  Int fac(Int n);
+}
+
+class Fac implements IFac{
+	Int fac(Int n){
+		Int res = 1;
+  	if(n != 0) {
+  		Fut<Int> futRes = this!fac(n-1);
+  		await futRes?;
+  		res = futRes.get;
+  		res = n*res;
+  	}
+  	return res;
+  }
+}
+
+{
+IFac obj = new local Fac();
+obj ! fac(3);
+}

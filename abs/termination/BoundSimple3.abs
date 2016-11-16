@@ -1,0 +1,29 @@
+module BoundSimple3;
+
+interface A{
+  Unit f();
+}
+
+interface B{
+  Unit f();
+}
+
+class AImpl(Int hello) implements A {
+  
+  Unit f(){}
+
+}
+
+class BImpl(Unit hello) implements B {
+  
+  Unit f(){}
+
+}
+
+{
+  A a = new local AImpl();
+  B b = new local BImpl();
+  
+  a ! f();
+  b ! f();
+}

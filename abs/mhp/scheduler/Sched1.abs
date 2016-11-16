@@ -1,0 +1,39 @@
+// Para probar el resultado del analisis:
+// 1.- abs2rbr(['/home/kike/Systems/costa/costabs/examples/mhp_sched/Sched1.abs'],main).
+// 2.- parse_params(['-type','full','-mode','complete','-lines','-v',3]).
+// 3.- main(mhp_sched,main).
+
+
+module Sched1;
+
+interface A{
+  Unit f();
+  Unit g(Int n);
+}
+
+class AImpl implements A {
+  
+[priority(0)] Unit f(){
+  Fut<Unit> x = this ! g(100);
+  suspend;
+  this ! g(50);
+  suspend;
+  this ! g(10);  
+}
+
+[priority(1)] Unit g(Int n){
+  Int i = 0;
+  while( i < n )
+  {
+    i = i + 1;
+  }
+}
+
+}
+
+// No line of g() can happen in parallel with other line of g()
+
+{
+  A q = new local AImpl();
+  q ! f();
+}

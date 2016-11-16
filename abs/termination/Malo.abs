@@ -1,0 +1,20 @@
+module Malo;
+
+interface A{
+  Unit f(Int n);
+}
+
+class AImpl implements A {
+  
+Unit f(Int n){
+  while ( n < 5 )
+    n = n + 1;
+}
+
+}
+
+{
+  A q = new local AImpl();
+  
+  q ! f(0);
+}

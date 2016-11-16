@@ -1,0 +1,43 @@
+module FieldBoundness5;
+
+interface A {
+  Int mut_recursive(Int i);
+}
+interface B {
+  Int mut_recursive(Int i);
+}
+//Success
+class A1(Int rec,B other) implements A {
+ 
+Int mut_recursive(Int i) {
+    Fut<Int> out;
+    	if(i>0){
+	rec=rec+1;
+	out= other!mut_recursive(i-1);
+	}   
+return 0;
+}
+
+}
+class B1(Int rec,A other) implements B {
+ 
+Int mut_recursive(Int i) {
+    Fut<Int> out;
+    	if(i>0){
+	rec=rec+1;
+	out= other!mut_recursive(i-1);
+	}   
+return 0;
+}
+
+}
+
+{
+  A x;
+  B y;
+  x = new local A1(100,y);
+  y = new local B1(100,x); 
+  x!mut_recursive(100);
+
+
+}

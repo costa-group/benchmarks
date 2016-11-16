@@ -1,0 +1,7 @@
+productline Accounts;
+	features Fee, Overdraft, Check, Save, Type;
+	delta DType(Type.i) when Type;	
+	delta DFee(Fee.amount) when Fee;
+	delta DOverdraft after DCheck when Overdraft;
+	delta DSave(Type.i) after DType when Save;
+	delta DCheck after DType when Check;

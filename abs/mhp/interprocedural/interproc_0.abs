@@ -1,0 +1,40 @@
+module Mhf_0;
+
+
+
+interface A {
+  Unit m();
+  Unit g();
+}
+
+class A1(Int y) implements A {
+ 
+Unit m(){
+	Int i= 10;
+	Fut<Unit> x;
+	A j=new local A1(this.y);
+	while(i>0){
+	i = i-y;
+	x=j!g();
+	await x?;}
+}  
+
+Unit g(){
+	y=-1;
+}
+
+
+}
+
+
+
+
+
+
+//main
+{
+	Int y = 1;
+	A l=new local A1(y);
+	l!m();
+
+}

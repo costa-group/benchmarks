@@ -1,0 +1,45 @@
+module Bound4;
+
+interface A{
+  Unit f1();
+  Unit f2();
+  Unit f3();
+  Unit g();
+}
+
+class AImpl(Int field) implements A {
+
+  Unit f1(){
+    Int n = 0;
+    while( n < 3 ){
+      n = n + 1;
+      this ! f2();
+    }
+  }
+  
+  Unit f2(){
+    Int n = 0;
+    while( n < 14 ){
+      n = n + 1;
+      this ! f3();
+    }
+  }
+  
+  Unit f3(){
+    field = 9000;
+  }
+  
+  Unit g(){
+    while (field > 0) {
+  	  field = field - 1;
+ 	  	suspend;
+  	}
+  }
+}
+
+{
+  A q = new local AImpl(0);
+  
+  q ! f1();
+  q ! g();
+}

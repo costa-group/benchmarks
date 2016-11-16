@@ -1,0 +1,37 @@
+module While;
+
+// Program to check that task must happen in parallel with task2
+// Only the entry point of task2 MHP with an instruction of task.
+// The exit point of task MHP with any instruction of task2
+// BUG: it should mark that task2 MHP with itself
+
+interface Object{
+  Unit task(Int val);
+  Unit task2(Int val);
+}
+
+class ObjectImpl implements Object {
+
+  // priority low
+  [priority(5)] Unit task( Int val){
+    Int i = 0;
+    while (i < val){
+      this ! task2(i);
+      i = i + 1;
+      suspend;
+    }
+  }
+
+  // priority low  
+  [priority(0)] Unit task2(Int val){
+    //Some computation
+    Int i = val;
+    suspend;
+    i = i + val;
+  }
+}
+
+{
+  Object o = new local ObjectImpl();
+  o ! task(100);
+}
