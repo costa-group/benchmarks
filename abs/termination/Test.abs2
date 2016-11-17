@@ -86,8 +86,8 @@ class B1 implements B{
   A x;
   B y;
 
-  x = new A1(100,50,7);
-  y = new B1();
+  x = new local A1(100,50,7);
+  y = new local B1();
   
   Fut<Int> f1 = x!f_myfield();
   Fut<Int> f2 = x!f2_myfield();
