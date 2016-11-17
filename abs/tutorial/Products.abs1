@@ -1,8 +1,0 @@
-// basic product
-product CheckingAccount (Type{i=0},Check);
-// Account with Fee and parameter
-product AccountWithFee (Type{i=0},Check,Fee{amount=1});
-// Account with overdraft
-product AccountWithOverdraft (Type{i=0},Check,Overdraft);
-// should be refused
-// product SavingAccountWithOverdraft (Type{i=1},Save,Overdraft);

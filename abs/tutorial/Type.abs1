@@ -1,5 +1,0 @@
-delta DType (Int i);
-uses Account;
-modifies class AccountImpl {
-	adds Int interest = i;	
-}
