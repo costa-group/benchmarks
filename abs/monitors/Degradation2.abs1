@@ -101,5 +101,3 @@ class DegradationMonitorImpl(Deploy deployer) implements DegradationMonitorIf {
    }
    
 }
-	
-	
