@@ -2,6 +2,8 @@
 /*****
 ****** Entry method: main
 ****** Number of UB Input Arguments: 4 (example: 5,5,5,5 )
+****** A working version of a program with two producers and 
+****** two consumers comunicating via a shared bounded-buffer
 ******/
 
 module BoundedBuffer;
