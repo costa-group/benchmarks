@@ -4,7 +4,7 @@ module Mhp_A;
 
 interface A {
   Unit m();
-  Unit r();
+  Int r();
 }
 interface B {
   Int p();
