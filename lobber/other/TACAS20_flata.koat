@@ -1,0 +1,16 @@
+# Example in page 73 (Sec)
+
+# 
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z)
+(RULES
+
+f0(x, y, z) -> f(x, y, z)
+
+f(x, y, z) -> f(x+1, y-x, z+y)  :|: z > 0
+
+f(x, y, z) -> fexit(x, y, z) :|: z <= 0
+
+)

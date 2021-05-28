@@ -1,0 +1,39 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L M N O u1 u2 u3 u4 u5)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O))
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(lbl71(u1+1,B,u2,D,2*N-u3-4,F,u4+1,H,u5,J,E+1,E,M,N,O)) :|: 1*G >= 2 && -1*E+2*N >= 0 && 1*E-1*G >= 0 && -1*G+1*N >= 0 && 1*E-1*K = -1 && 1*E-1*I = 0 && 1*u1 >= 0 && 1*u3 >= 0 && 1*u4 >= 0 && 1*u5 >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(lbl71(A,B,u1,D,I+1,F,G,H,I+1,J,K,I,M,N,O)) :|: -1*I+1*K >= 2 && -1*K+2*N >= -1 && -1*G+1*N >= 0 && -1*G+1*I >= 0 && 1*G >= 1 && -1*E+1*I = 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(lbl71(u1+1,B,u2,D,-2*G+2*N-u3+2,F,u4+1,H,-2*G+2*N-u5+2,J,E+1,E,M,N,O)) :|: 1*K >= 1 && -1*K+2*N >= -1 && -1*G+1*N >= 0 && 1*G >= 2 && -1*E+1*K = 1 && -1*I+1*K = 1 && 1*u1 >= 0 && 1*u3 >= 0 && 1*u4 >= 0 && 1*u5 >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(lbl71(A,B,u1,D,I+1,F,G,H,I+1,J,K,I,M,N,O)) :|: 1*G >= 1 && -1*K+2*N >= -1 && -1*G+1*N >= 0 && -1*I+1*K >= 2 && 1*I >= 0 && -1*E+1*I = 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*I-1*K >= -1 && -1*G >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*K-2*N >= 2 && -1*G >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*G-1*I >= 1 && -1*I >= 1 && -1*G >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*G >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*I >= 1 && -1*G >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*E+1*I >= 1 && -1*G >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-2*N >= 1 && 1*I-1*K >= -1 && -1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-2*N >= 1 && 1*I-1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-2*N >= 1 && 1*K-2*N >= 2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-2*N >= 1 && 1*G-1*I >= 1 && -1*K >= 0 && -1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-2*N >= 1 && 1*G-1*I >= 1 && -1*I+1*K >= 2 && -1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*E+1*G >= 1 && 1*I-1*K >= -1 && -1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*E+1*G >= 1 && 1*I-1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*E+1*G >= 1 && 1*K-2*N >= 2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*G-1*I >= 1 && -1*E+1*G >= 1 && -1*K >= 0 && -1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*G-1*I >= 1 && -1*E+1*G >= 1 && -1*I+1*K >= 2 && -1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*G-1*N >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*K-2*N >= 2 && -1*E+1*K >= 2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*G-1*I >= 1 && -1*I >= 1 && -1*E+1*K >= 2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*E+1*K >= 2 && -1*E+1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*K >= 0 && 1*I-1*K >= -1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*K >= 0 && 1*G-1*I >= 1 && -1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*I >= 1 && 1*E-1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*I-1*K >= 0 && -1*E+1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*K-2*N >= 2 && -1*E+1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: -1*K >= 0 && -1*E+1*I >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*I >= 1 && 1*K-2*N >= 2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*I >= 1 && -1*K >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O)) :|: 1*E-1*I >= 1 && -1*I+1*K >= 2
+)

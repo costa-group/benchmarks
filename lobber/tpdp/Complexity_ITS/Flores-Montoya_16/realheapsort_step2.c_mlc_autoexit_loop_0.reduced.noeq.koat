@@ -1,0 +1,13 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E)
+(RULES
+ init_node(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,C,D,E))
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,B-D-2,B-2*C-3,B-D-2)) :|: 1*B-2*C-1*D = 3
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,B,B-2*C-3,B-D-2)) :|: 1*B-2*C-1*D = 3
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,2*C+1,D,2*C+1)) :|: 1*B-2*C-1*D >= 4
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,B,D,2*C+1)) :|: 1*B-2*C-1*D >= 4
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,2*C+2,D,2*C+2)) :|: 1*B-2*C-1*D >= 4
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(eval_realheapsort_step2_bb4_in(A,B,B,D,2*C+2)) :|: 1*B-2*C-1*D >= 4
+ eval_realheapsort_step2_bb4_in(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: -1*B+2*C+1*D >= -2
+)

@@ -1,0 +1,10 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D)
+(RULES
+ init_node(A,B,C,D) -> Com_1(eval5(A,B,C,D))
+ eval5(A,B,C,D) -> Com_1(eval5(A-10,B,1,A-20)) :|: 1*A >= 111 && 1*C = 2
+ eval5(A,B,C,D) -> Com_1(eval5(A-9,B,C-1,D)) :|: 1*C >= 2 && 1*A >= 111
+ eval5(A,B,C,D) -> Com_1(eval5(A+1,B,C,D)) :|: 1*C >= 2 && -1*A >= -110
+ eval5(A,B,C,D) -> Com_1(exit_node(A,B,C,D)) :|: -1*C >= -1
+)

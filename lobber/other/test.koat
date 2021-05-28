@@ -1,0 +1,13 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS main))
+(VAR x)
+(RULES
+
+main(x) -> f0(x)
+
+#e1
+f0(x) -> fin(x)  :|: x < 1  
+
+#t1
+f0(x) -> f0(x-1) :|: x >= 1  
+)

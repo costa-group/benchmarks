@@ -1,0 +1,10 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I) -> Com_1(eval_sipma91_bb3_in(A,B,C,D,E,F,G,H,I))
+ eval_sipma91_bb3_in(A,B,C,D,E,F,G,H,I) -> Com_1(eval_sipma91_bb3_in(A,B,C,D,E-10,F,G,1,I)) :|: 1*E >= 111 && 1*H = 2
+ eval_sipma91_bb3_in(A,B,C,D,E,F,G,H,I) -> Com_1(eval_sipma91_bb3_in(E-10,H-1,C,D,E+1,E-10,G,H,H-1)) :|: 1*H >= 2 && -1*E >= -110
+ eval_sipma91_bb3_in(A,B,C,D,E,F,G,H,I) -> Com_1(eval_sipma91_bb3_in(E-10,H-1,C,D,E-9,E-20,G,H-1,H-2)) :|: 1*H >= 3 && 1*E >= 111
+ eval_sipma91_bb3_in(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: -1*H >= -1
+)

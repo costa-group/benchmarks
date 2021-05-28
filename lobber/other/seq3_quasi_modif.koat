@@ -1,0 +1,39 @@
+# Example that need quasi-invariants
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z)
+(RULES
+
+# Similar to seq3_quasi but with y>0 in t1--t3 instead of y>=0
+
+# t1
+f0(x, y, z) -> f0(x, y, z-1)  :|: x > 0 && y > 0 && z >= 0
+
+# t2
+f0(x, y, z) -> f0(x, y-1, z)  :|: x > 0 && y > 0 && z >= 0
+
+# t3
+f0(x, y, z) -> f0(x-1, y, z)  :|: x > 0 && y > 0 && z >= 0
+
+# e4
+f0(x, y, z) -> f1(x, y, z)  :|: z < 0
+
+# e5
+f0(x, y, z) -> f1(x, y, z)  :|: y <= 0
+
+# e6
+f0(x, y, z) -> f1(x, y, z)  :|: x <= 0
+
+)
+
+# Las dos versiones de LoAT obtienen OMEGA(n).
+
+# GOAL: Q = z>=0 && y>z && x+1>=y      C1=z>0       C2 = y > z+1      C3 = x+2 >= y     MF = x+y+z-1
+#
+# Step #1: M = z>=0      C1 = z>0      MF = z                <<-- (4) holds in e4 TRIVIALLY; t1 decreases ~~ 2
+# Step #2: M = y>z       C2 = y>z+1    MF = z+y              <<-- (4) holds in e4, e5 TRIVIALLY; t1 and t2 decrease ~~ 4
+# Step #3: M = x+1>=y    C3 = x+2>=y   MF = x+y+z-1          <<-- (4) holds in e4, e5 (TRIVIALLY), and e6; t1-t3 decrease ~~ 6, best possible progress
+#
+# Other MF would be valid from step #1: x, y-1, z, x+y-1, x+z, y+z-1, x+y+z-1. Only x+y+z-K decreases in t1--t3
+

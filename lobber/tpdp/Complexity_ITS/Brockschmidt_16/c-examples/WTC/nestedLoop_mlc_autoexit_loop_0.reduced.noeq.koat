@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H)
+(RULES
+ init_node(A,B,C,D,E,F,G,H) -> Com_1(evalnestedLoopbb6in(A,B,C,D,E,F,G,H))
+ evalnestedLoopbb6in(A,B,C,D,E,F,G,H) -> Com_1(evalnestedLoopbb6in(A,B,C,D,E,F,G,H+1)) :|: 1*C-1*H >= 1
+ evalnestedLoopbb6in(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: -1*C+1*H >= 0
+)

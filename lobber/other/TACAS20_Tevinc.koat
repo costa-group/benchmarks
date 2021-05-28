@@ -1,0 +1,16 @@
+# Example in page 68 of TACAS20 (T_ev-inc)
+
+# 
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+f0(x, y) -> f(x, y)
+
+f(x, y) -> f(x+y, y+1)  :|: x > 0
+
+f(x, y) -> fexit(x, y) :|: x <= 0
+
+)

@@ -1,0 +1,17 @@
+# Ex. 3.13 (Instantiation of Fresh Temporary Variables) in TOPLAS
+
+# MF = x but the update of y must be quadratic
+
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z t)
+(RULES
+
+f0(x, y, z, t) -> f1(x, y, z, t)
+
+f1(x, y, z, t) -> f1(x-1, y+x, z, t) :|: x > 0
+
+f1(x, y, z, t) -> fexit(x, y, z, t)  :|: x <= 0
+
+)

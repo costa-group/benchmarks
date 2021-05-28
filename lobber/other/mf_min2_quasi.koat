@@ -1,0 +1,20 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+# t1
+f0(x, y) -> f0(x-1, y-1) :|: x>0 && y>0
+
+# e2
+f0(x, y) -> f1(x, y) :|: x <= 0
+
+# e3
+f0(x, y) -> f1(x, y) :|: y <= 0
+
+
+)
+
+# Different MF depending on the quasi-invariant
+# Q = x>=y     MF = y   <<-- decreasing in t1, (4) holds in e2-e3
+# Q = y>=x     MF = x   <<-- decreasing in t1, (4) holds in e2-e3

@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H u1)
+(RULES
+ init_node(A,B,C,D,E,F,G,H) -> Com_1(eval_realheapsort_bb1_in(A,B,C,D,E,F,G,H))
+ eval_realheapsort_bb1_in(A,B,C,D,E,F,G,H) -> Com_1(eval_realheapsort_bb1_in(F+1,B,C,F-u1,E,F+1,G,H)) :|: 1*C-1*F >= 1 && 1*u1 >= 0
+ eval_realheapsort_bb1_in(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: -1*C+1*F >= 0
+)

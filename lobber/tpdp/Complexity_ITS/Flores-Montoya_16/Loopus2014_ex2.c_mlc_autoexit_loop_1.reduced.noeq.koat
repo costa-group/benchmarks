@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G u1 u2 u3 u4)
+(RULES
+ init_node(A,B,C,D,E,F,G) -> Com_1(eval_start__critedge_in(A,B,C,D,E,F,G))
+ eval_start__critedge_in(A,B,C,D,E,F,G) -> Com_1(eval_start__critedge_in(D-1,u1+1,C,D-1,E,F+1,G)) :|: 1*D >= 1 && 1*u1 >= 0
+ eval_start__critedge_in(A,B,C,D,E,F,G) -> Com_1(eval_start__critedge_in(D-1,-u1,u2,D-1,E,F-u3,F-u4)) :|: 1*D >= 1 && 1*u1 >= 0 && 1*u3 >= 0 && 1*u4 >= 0
+ eval_start__critedge_in(A,B,C,D,E,F,G) -> Com_1(exit_node(A,B,C,D,E,F,G)) :|: -1*D >= 0
+)

@@ -1,0 +1,42 @@
+# Dos bucles seguidos. El primero se puede abandonar en cualquier momento 
+# pero es menos costoso agotar todas sus iteraciones porque luego le sigue
+# uno cuadrático
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z)
+(RULES
+
+f0(x,y,z) -> f(x,y,z)
+
+f(x,y,z) -> f(x-1,y,z)      :|: x > 0
+f(x,y,z) -> fase2(x,y,z)    :|: x <= 0
+# Pero también podría terminar en cualquier momento
+f(x,y,z) -> fase2(x,y,z)
+
+fase2(x,y,z) -> cuadratico(x,y,z)
+
+# Bucle anidado con coste x^2 (ignora los valores iniciales de 'y','z')
+# La 'z' no cambia y almacena el valor inicial de 'x'
+cuadratico(x, y, z) -> loop_outer(x, 0, x)
+
+loop_outer(x, y, z) -> loop_inner(x, z, z)   :|: x > 0
+
+loop_inner(x, y, z) -> loop_inner(x, y-1, z) :|: y > 0
+loop_inner(x, y, z) -> loop_outer(x-1, y, z) :|: y <= 0
+
+)
+
+# Durante el proceso acelera todo el bucle cuadrático y el lineal de f, y 
+# y se queda con 3 transiciones
+#    f0 -> fase2 : [], cost: 2
+#    f0 -> fase2 : x'=0, [ x>=0 ], cost: 2+x
+#    fase2 -> loop_outer : x'=0, y'=0, z'=x, [ x>=1 ], cost: 2+x^2+2*x
+# Es decir, **nunca itera en f** o **agota las iteraciones de f**
+#
+# Después las combina en 2 por "Eliminated locations (on tree-shaped paths)"
+#    f0 -> loop_outer : x'=0, y'=0, z'=x, [ x>=1 ], cost: 4+x^2+2*x
+#    f0 -> [9] : [ x>=0 ], cost: 2+x
+# 
+# Del problema límite de la 1ª regla se desprende el coste \Omega(n^2)
+

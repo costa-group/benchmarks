@@ -1,0 +1,17 @@
+# Example 3.14 (Instantiation of Other Temporary Variables) in TOPLAS
+
+# MF = x by specializing u1 >= 1 && u1 <= 1
+
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z p u1)
+(RULES
+
+f0(x, y, z, p) -> f(x, y, z, p)
+
+f(x, y, z, p) -> f(x, y, z, p-u1) :|: u1 > 0 && u1 <= p && p > 0
+
+f(x, y, z, p) -> fexit(x, y, z, p) :|: p <= 0
+
+)

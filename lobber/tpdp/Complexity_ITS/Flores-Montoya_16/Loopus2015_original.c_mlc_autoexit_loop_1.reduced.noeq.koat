@@ -1,0 +1,11 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J u1 u2 u3 u4)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J))
+ eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_xnu_bb1_in(H+1,H+1,u1+1,u2+1,u3,H+1,H+1,H+1,H+u4+1,J)) :|: -1*H+1*J >= 1 && 1*u1 >= 0 && 1*u2 >= 0 && 1*u4 >= 0
+ eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_xnu_bb1_in(H+1,H+1,u1+1,-u2,E,F,H+1,H+1,I,J)) :|: -1*H+1*J >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_xnu_bb1_in(G,H+1,-u1,u2+1,u3,H+1,H+1,H+1,F+u4,J)) :|: -1*H+1*J >= 1 && 1*u1 >= 0 && 1*u2 >= 0 && 1*u4 >= 0
+ eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_xnu_bb1_in(G,H+1,-u1,-u2,E,F,G,H+1,I,J)) :|: -1*H+1*J >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ eval_xnu_bb1_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J)) :|: 1*H-1*J >= 0
+)

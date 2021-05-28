@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E u1 u2)
+(RULES
+ init_node(A,B,C,D,E) -> Com_1(evalNestedMultiplebb5in(A,B,C,D,E))
+ evalNestedMultiplebb5in(A,B,C,D,E) -> Com_1(evalNestedMultiplebb5in(A,B+1,C,D+u1,D+u2)) :|: 1*A-1*B >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ evalNestedMultiplebb5in(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: -1*A+1*B >= 0
+)

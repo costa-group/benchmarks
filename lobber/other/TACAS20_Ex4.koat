@@ -1,0 +1,20 @@
+# Example in Ex. 4 of TACAS20 (T_2-c-invs)
+
+# 
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z)
+(RULES
+
+f0(x, y, z) -> f(x, y, z)
+
+f(x, y, z) -> f(x-1, y+x, z-y) :|: x > 0 && y > 0 && z > 0
+
+f(x, y, z) -> fexit(x, y, z) :|: x <= 0
+
+f(x, y, z) -> fexit(x, y, z) :|: y <= 0
+
+f(x, y, z) -> fexit(x, y, z) :|: z <= 0
+
+)

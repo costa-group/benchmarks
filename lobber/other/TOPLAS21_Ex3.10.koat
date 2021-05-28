@@ -1,0 +1,13 @@
+# Ex. 3.10 (Non-Integer Metering Function) in TOPLAS
+
+# MF = x/2
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x)
+(RULES
+
+f0(x) -> f0(x-2) :|: x>0
+f0(x) -> f1(x)   :|: x<=0
+
+)

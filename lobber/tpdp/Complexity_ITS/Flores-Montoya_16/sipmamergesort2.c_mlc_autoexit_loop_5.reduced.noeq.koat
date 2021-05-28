@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L M N O P Q R)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(eval_sipmamergesort2_bb19_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))
+ eval_sipmamergesort2_bb19_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(eval_sipmamergesort2_bb19_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q-1,R)) :|: 1*Q >= 1
+ eval_sipmamergesort2_bb19_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R)) :|: -1*Q >= 0
+)

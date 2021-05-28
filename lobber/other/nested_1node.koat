@@ -1,0 +1,36 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+# t1
+f0(x, y) -> f1(x, y)
+
+# t2
+f1(x, y) -> f2(x, y)    :|: x <= 0 && y <= 0
+
+# t3
+f1(x, y) -> f1(x-1, x)  :|: x > 0 && y <= 0
+# t4
+f1(x, y) -> f1(x, y-1)  :|: x >= 0 && y > 0
+
+)
+
+# Ambos LoAT obtienen OMEGA(n^2) con el truco de "inferir" reglas especiales para bucles anidados
+# Si no hicieran esto, solo serían capaces de acelerar t4 (bucle interno) y obtendrían OMEGA(n)
+
+
+# MF LEXICOGRÁFICA
+# MF(x,y)=<x,y> para T={t3, t4}, con T1={t3} y T2={t4}
+
+# 1)
+# x es MF para T1 asumiendo "NOT guard(T2)" = x<0 \/ y<=0. Es necesario para "at least zero exit"
+
+# 2) 
+# t3 decrece x y habilita alguna de las transiciones de T2 (t4 exactamente, que es la única)
+
+# 3)
+# x no decrece en T2
+
+# 4) t es metering en T2 usando el invariante local "x >= 0" para la location f1
+# El invariante es imprescindible para "at lest zero exit"

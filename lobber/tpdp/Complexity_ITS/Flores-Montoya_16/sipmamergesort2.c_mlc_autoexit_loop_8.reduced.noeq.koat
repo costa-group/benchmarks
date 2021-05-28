@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L M N O P Q R u1 u2 u3 u4 u5 u6 u7 u8 u9 u10)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(eval_sipmamergesort2_bb1_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R))
+ eval_sipmamergesort2_bb1_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(eval_sipmamergesort2_bb1_in(4*I,0,2*I,0,E,2*I-u1,4*I-u2,H,4*I,I-u3,-u4,2*I-u5,-u6,u7,-u8,u9,-u10,R)) :|: 1*H-2*I >= 1 && 1*H-4*I >= 1 && 1*u1 >= 0 && 1*u2 >= 0 && 1*u3 >= 0 && 1*u4 >= 0 && 1*u5 >= 0 && 1*u6 >= 0 && 1*u8 >= 0 && 1*u10 >= 0
+ eval_sipmamergesort2_bb1_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R)) :|: -1*H+2*I >= 0
+ eval_sipmamergesort2_bb1_in(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R)) :|: -1*H+4*I >= 0
+)

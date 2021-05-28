@@ -1,0 +1,13 @@
+# Ex. 2.7 in TOPLAS
+# Unbounded cost but MF = x
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x tv)
+(RULES
+
+f0(x) -{tv}> f0(x-1) :|: x>0
+
+f0(x) ->      f1(x)   :|: x<=0
+
+)

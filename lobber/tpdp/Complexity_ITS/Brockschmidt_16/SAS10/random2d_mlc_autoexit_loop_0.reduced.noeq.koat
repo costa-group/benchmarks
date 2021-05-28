@@ -1,0 +1,17 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I u1)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A,B,C,D,E,F,G,H,I))
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A,B,C,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && -1*E >= 1 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A,B,C,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && 1*E >= 4 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A,B,C+1,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1 && 1*E = 0
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A,B,C-1,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1 && 1*E = 1
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A+1,B,C,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1 && 1*E = 2
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(lbl81(A-1,B,C,D,u1,F,G+1,H,I)) :|: 1*A-1*C+1*G >= 1 && -1*G+1*I >= 1 && -1*A+1*C+1*G >= 1 && -1*A-1*C+1*G >= 1 && 1*A+1*C+1*G >= 1 && 1*E = 3
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: -1*A+1*C-1*G >= 0
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: 1*G-1*I >= 0
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: 1*A-1*C-1*G >= 0
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: 1*A+1*C-1*G >= 0
+ lbl81(A,B,C,D,E,F,G,H,I) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I)) :|: -1*A-1*C-1*G >= 0
+)

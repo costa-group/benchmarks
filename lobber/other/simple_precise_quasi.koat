@@ -1,0 +1,25 @@
+# 
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x)
+(RULES
+
+# t1
+f0(x) -> f0(x-1) :|: x > 0
+
+# t2
+f0(x) -> f0(x-2) :|: x > 0
+
+# e3   
+f0(x) -> f0(x)   :|: x <= 0
+
+)
+
+# Q = true but there are two possible solutions depending on Ci
+# sol #1) C2 = x<=0 (disables t2)     MF = x   <<-- both transitions decrease MF, and (1) is true in both of them (t2 trivially)
+# sol #2) MF = x/2                             <<-- both transitions decrease MF, and (1) is true in both of them
+
+# sol #1 provides a more precise MF for the worst-case lower-bound
+
+

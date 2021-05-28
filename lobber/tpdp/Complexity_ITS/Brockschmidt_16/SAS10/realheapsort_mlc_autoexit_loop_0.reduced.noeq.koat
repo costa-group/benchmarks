@@ -1,0 +1,15 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L M N O P Q u1 u2 u3 u4 u5)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q))
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(lbl71(A,B,u1,D,u2,F,u3,H,u5,J,K,L,M,N,u4,P,Q)) :|: 1*Q >= 3 && -2*I+1*O >= 1 && 2*I-1*O >= -2 && 1*M-1*O >= 0 && 1*O >= 1 && -2*u1+1*O >= 1 && 2*u1-1*O >= -2 && 1*M-1*O >= 0 && -2*u2+1*O >= 1 && 2*u2-1*O >= -2 && 1*M-1*O >= 0 && -2*u3+1*O >= 1 && 2*u3-1*O >= -2 && 1*M-1*O >= 0 && -2*u4+1*O >= 1 && 2*u4-1*O >= -2 && 1*M-1*O >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(lbl71(M,B,C,D,E,F,G,H,u1,J,K,L,M+1,N,M+1,P,Q)) :|: -2*I+1*O >= 1 && 1*M-1*O >= 0 && 2*I-1*O >= -2 && -1*M+1*Q >= 2 && 1*M >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: 1*M-1*Q >= -1 && -1*Q >= -2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: -1*M >= 0 && -1*Q >= -2
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: 2*I-1*O >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: -2*I+1*O >= 3
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: -1*M+1*O >= 1
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: 1*M-1*Q >= -1 && -1*O >= 0
+ lbl71(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q)) :|: -1*M >= 0 && -1*O >= 0
+)

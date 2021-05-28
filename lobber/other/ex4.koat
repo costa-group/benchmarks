@@ -1,0 +1,17 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS main))
+(VAR x y)
+(RULES
+
+main(x,y) -> f0(x,y)
+
+#e1
+f0(x,y) -> fin(x,y)  :|: x <= 0  
+#e2
+f0(x,y) -> fin(x,y)  :|: y <= 0
+
+#t1
+f0(x,y) -> f0(x-1,y) :|: x > 0 && y > 0
+#t2
+f0(x,y) -> f0(x,y-1)  :|: x > 0 && y > 0  
+)

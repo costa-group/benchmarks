@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D)
+(RULES
+ init_node(A,B,C,D) -> Com_1(evalsipma91bb3in(A,B,C,D))
+ evalsipma91bb3in(A,B,C,D) -> Com_1(evalsipma91bb3in(A+1,B+11,C,D)) :|: -1*B >= -100
+ evalsipma91bb3in(A,B,C,D) -> Com_1(exit_node(A,B,C,D)) :|: 1*B >= 101
+)

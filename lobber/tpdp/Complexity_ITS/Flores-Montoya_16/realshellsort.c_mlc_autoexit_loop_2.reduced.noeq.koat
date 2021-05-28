@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G u1 u2 u3 u4 u5 u6)
+(RULES
+ init_node(A,B,C,D,E,F,G) -> Com_1(eval_realshellsort_bb1_in(A,B,C,D,E,F,G))
+ eval_realshellsort_bb1_in(A,B,C,D,E,F,G) -> Com_1(eval_realshellsort_bb1_in(u1+1,u2,u3,D,u4+1,D+u5,u6)) :|: 1*E >= 2 && 1*u1 >= 0 && 1*u4 >= 0 && 1*u5 >= 0
+ eval_realshellsort_bb1_in(A,B,C,D,E,F,G) -> Com_1(exit_node(A,B,C,D,E,F,G)) :|: -1*E >= -1
+)

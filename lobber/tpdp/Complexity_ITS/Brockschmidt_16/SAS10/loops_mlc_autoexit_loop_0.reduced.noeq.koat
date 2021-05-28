@@ -1,0 +1,10 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E)
+(RULES
+ init_node(A,B,C,D,E) -> Com_1(lbl101(A,B,C,D,E))
+ lbl101(A,B,C,D,E) -> Com_1(lbl101(2*A,B,C,D,E)) :|: 1*A >= 2 && -1*C+1*E >= 0 && -1*A+1*C >= 1
+ lbl101(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: -1*A >= -1
+ lbl101(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: 1*C-1*E >= 1
+ lbl101(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: 1*A-1*C >= 0
+)

@@ -1,0 +1,15 @@
+# Example in page 59 of TACAS20 (T_exp)
+# Similar to Ex. 3.9 (Non-Polynomial Arithmetic due to Loop Acceleration) in TOPLAS
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+f0(x, y) -> f(x, y)
+
+f(x, y) -> f(x-1, 2*y) :|: x > 0
+
+f(x, y) -> fexit(x, y) :|: x <= 0
+
+)

@@ -1,0 +1,26 @@
+# Running example with a following loop that decrease z, that can execute x+y times
+
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS l0))
+(VAR x y z)
+(RULES
+
+l0(x,y,z) -> l1(x,y,0)
+
+#e1
+l1(x,y,z) -> l2(x,y,z)  :|: x < 0  
+#e2
+l1(x,y,z) -> l2(x,y,z)  :|: y <= 0
+
+#t1
+l1(x,y,z) -> l1(x-1,y,z+1) :|: x >= 0 && y > 0
+#t2
+l1(x,y,z) -> l1(x,y-1,z+1) :|: x >= 0 && y > 0
+
+#t3
+l2(x,y,z) -> l2(x,y,z-1) :|: z > 0
+l2(x,y,z) -> le(x,y,z)   :|: z <= 0 
+
+)
+

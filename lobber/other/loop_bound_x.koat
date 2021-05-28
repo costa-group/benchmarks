@@ -1,0 +1,17 @@
+# Loop donde solo 5 iteraciones tienen coste N y el resto coste constante
+# ==> \Omega(N)
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR n m x)
+(RULES
+
+f0(n, m, x) -> f2(n, m, x)
+
+f2(n, m, x) -> f13(n, m, x)     :|: n <= 0
+f2(n, m, x) -> f2(n-1, m, x)    :|: n > 0
+f2(n, m, x) -> f5(n-1, n, x-1)  :|: n > 0 && x > 0
+
+f5(n, m, x) -> f5(n, m-1, x)  :|: m >= 1
+f5(n, m, x) -> f2(n, m, x)    :|: m < 1
+)

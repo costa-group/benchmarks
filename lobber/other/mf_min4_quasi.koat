@@ -1,0 +1,29 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z w)
+(RULES
+
+# t1
+f0(x, y, z, w) -> f0(x-1, y-1, z-1, w-1) :|: x>0 && y>0 && z>0 && w>0
+
+# e2
+f0(x, y, z, w) -> f1(x, y, z, w) :|: x<=0
+
+# e3
+f0(x, y, z, w) -> f1(x, y, z, w) :|: y<=0
+
+# e4
+f0(x, y, z, w) -> f1(x, y, z, w) :|: z<=0
+
+# e5
+f0(x, y, z, w) -> f1(x, y, z, w) :|: w<=0
+
+)
+
+
+# We need 3 steps to build a quasi-invariant of 3 terms, for example z>=w, y>=z, x>=y
+
+# Step 1)   M = z>=w    MF = w     <<-- (4) holds in e4 and e5; t1 decreases ~ 3
+# Step 2)   M = y>=z    MF = w     <<-- (4) holds in e4, e5, and e3; t1 decreases ~ 4
+# Step 3)   M = x>=y    MF = w     <<-- (4) holds in e4, e5, e3, and e2; t1 decreases ~ 5 <= maximum progress
+

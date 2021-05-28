@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G u1 u2 u3)
+(RULES
+ init_node(A,B,C,D,E,F,G) -> Com_1(eval_realbubble_bb1_in(A,B,C,D,E,F,G))
+ eval_realbubble_bb1_in(A,B,C,D,E,F,G) -> Com_1(eval_realbubble_bb1_in(A,C-1,C-1,C+u1,E,-u2-1,u3)) :|: 1*C >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ eval_realbubble_bb1_in(A,B,C,D,E,F,G) -> Com_1(eval_realbubble_bb1_in(A,C-1,C-1,C+u1,E,u2+1,u3)) :|: 1*C >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ eval_realbubble_bb1_in(A,B,C,D,E,F,G) -> Com_1(exit_node(A,B,C,D,E,F,G)) :|: -1*C >= 0
+)

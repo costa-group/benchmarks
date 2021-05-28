@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L u1 u2 u3 u4)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(eval_nestedLoop__critedge3_in(A,B,C,D,E,F,G,H,I,J,K,L))
+ eval_nestedLoop__critedge3_in(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(eval_nestedLoop__critedge3_in(u1,B,C,u2+1,I+1,F,G,H+u3,I+1,H+u4,K,L)) :|: -1*I+1*K >= 1 && 1*u2 >= 0 && 1*u3 >= 0 && 1*u4 >= 0
+ eval_nestedLoop__critedge3_in(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L)) :|: 1*I-1*K >= 0
+)

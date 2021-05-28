@@ -1,0 +1,21 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS l0))
+(VAR x m d z)
+(RULES
+	
+
+l0(x,m,d,z) -> Com_1(l1(x,z,d,m))     :|: z>0 && x>0 && m>0 && m<x
+
+l1(x,m,d,z) -> Com_1(l1(x+z,m,d,z-1)) :|: z>0
+l1(x,m,d,z) -> Com_1(l1(x+z,m,d,z-1)) :|: z>0
+l1(x,m,d,z) -> Com_1(l2(x,m,d,1))     :|: z<0 
+
+l2(x,m,d,z) -> Com_1(l2(x-1,m,d-1,z)) :|: x>0  && m>0 && 2*d>m && d<=m
+l2(x,m,d,z) -> Com_1(l2(x-1,m,d-1,z)) :|: x>0  && m>0 && d>0 && 2*d<=m 
+l2(x,m,d,z) -> Com_1(l2(x-1,m,m,z))   :|: x>0  && m>0 && d=0 
+
+l2(x,m,d,z) -> Com_1(exit(x,m,d,z))   :|: x<0 && m>0 
+l2(x,m,d,z) -> Com_1(exit(x,m,d,z))   :|: x>0 && m>0 && d > m
+l2(x,m,d,z) -> Com_1(exit(x,m,d,z))   :|: x>0 && m>0 && d < 0
+
+)

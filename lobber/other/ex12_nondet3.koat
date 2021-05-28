@@ -1,0 +1,25 @@
+# Running example with a previous loop that may increase 'x' or 'y' (or both)
+# The worst case is when u1=z and u2=0 so x'=x+z (quadratic) and y'=y
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS l0))
+(VAR x y z u1 u2)
+(RULES
+
+l0(x,y,z) -> l00(x,y,z)
+
+# Quadratic increase
+l00(x,y,z) -> l00(x+u1,y+u2,z-1) :|: z > 0 && u1+u2 = z && u1 >= 0 && u2 >= 0
+l00(x,y,z) -> l1(x,y,z)          :|: z <= 0
+
+#e1
+l1(x,y,z) -> l2(x,y,z)  :|: x < 0  
+#e2
+l1(x,y,z) -> l2(x,y,z)  :|: y <= 0
+
+#t1
+l1(x,y,z) -> l1(x-1,y,z) :|: x >= 0 && y > 0
+#t2
+l1(x,y,z) -> l1(x,y-1,z) :|: x >= 0 && y > 0
+
+)

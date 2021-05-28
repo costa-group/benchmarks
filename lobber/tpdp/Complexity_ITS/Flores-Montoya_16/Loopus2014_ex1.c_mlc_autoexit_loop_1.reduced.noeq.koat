@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J K L u1 u2 u3 u4 u5 u6 u7 u8)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(eval_start_bb3_in(A,B,C,D,E,F,G,H,I,J,K,L))
+ eval_start_bb3_in(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(eval_start_bb3_in(H-1,u1,C,D-u2,D-u3,u4,G,H+u5-1,H+u6-1,u7,L-u8-1,L)) :|: 1*H >= 1 && 1*u2 >= 0 && 1*u3 >= 0 && 1*u5 >= 0 && 1*u6 >= 0 && 1*u8 >= 0
+ eval_start_bb3_in(A,B,C,D,E,F,G,H,I,J,K,L) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J,K,L)) :|: -1*H >= 0
+)

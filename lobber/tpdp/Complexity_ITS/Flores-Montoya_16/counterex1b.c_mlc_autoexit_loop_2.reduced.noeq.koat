@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H I J u1 u2 u3 u4 u5)
+(RULES
+ init_node(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_counterex1b__critedge2_in(A,B,C,D,E,F,G,H,I,J))
+ eval_counterex1b__critedge2_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(eval_counterex1b__critedge2_in(A-1,u1,B-u2,u3,u4,A-1,u5,H,I,J)) :|: 1*A >= 0 && 1*u2 >= 0
+ eval_counterex1b__critedge2_in(A,B,C,D,E,F,G,H,I,J) -> Com_1(exit_node(A,B,C,D,E,F,G,H,I,J)) :|: -1*A >= 1
+)

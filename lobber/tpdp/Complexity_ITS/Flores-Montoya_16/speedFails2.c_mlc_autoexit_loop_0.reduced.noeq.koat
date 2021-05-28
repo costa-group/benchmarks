@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C)
+(RULES
+ init_node(A,B,C) -> Com_1(eval_speedFails2_bb1_in(A,B,C))
+ eval_speedFails2_bb1_in(A,B,C) -> Com_1(eval_speedFails2_bb1_in(A+1,B,C)) :|: -1*A+1*B >= 1
+ eval_speedFails2_bb1_in(A,B,C) -> Com_1(eval_speedFails2_bb1_in(A+1,B,C)) :|: 1*A-1*B >= 1
+ eval_speedFails2_bb1_in(A,B,C) -> Com_1(exit_node(A,B,C)) :|: 1*A-1*B = 0
+)

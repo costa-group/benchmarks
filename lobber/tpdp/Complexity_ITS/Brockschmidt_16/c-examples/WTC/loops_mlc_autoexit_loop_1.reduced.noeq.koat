@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B u1)
+(RULES
+ init_node(A,B) -> Com_1(evalloopsbb6in(A,B))
+ evalloopsbb6in(A,B) -> Com_1(evalloopsbb6in(A-1,A+u1)) :|: 1*A >= 2 && 1*u1 >= 0
+ evalloopsbb6in(A,B) -> Com_1(evalloopsbb6in(A-1,u1)) :|: 1*A >= 0 && -1*A >= -1
+ evalloopsbb6in(A,B) -> Com_1(exit_node(A,B)) :|: -1*A >= 1
+)

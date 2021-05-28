@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C u1)
+(RULES
+ init_node(A,B,C) -> Com_1(evalrealheapsortstep1bb3in(A,B,C))
+ evalrealheapsortstep1bb3in(A,B,C) -> Com_1(evalrealheapsortstep1bb3in(A,B,u1)) :|: 1*C >= 1 && 2*u1-1*C >= -2 && -2*u1+1*C >= 1
+ evalrealheapsortstep1bb3in(A,B,C) -> Com_1(exit_node(A,B,C)) :|: -1*C >= 0
+)

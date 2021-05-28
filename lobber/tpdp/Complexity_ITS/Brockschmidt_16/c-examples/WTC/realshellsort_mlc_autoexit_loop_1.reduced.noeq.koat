@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E u1 u2)
+(RULES
+ init_node(A,B,C,D,E) -> Com_1(evalrealshellsortbb6in(A,B,C,D,E))
+ evalrealshellsortbb6in(A,B,C,D,E) -> Com_1(evalrealshellsortbb6in(A,B,C+1,u1,u2)) :|: 1*A-1*C >= 1
+ evalrealshellsortbb6in(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: -1*A+1*C >= 0
+)

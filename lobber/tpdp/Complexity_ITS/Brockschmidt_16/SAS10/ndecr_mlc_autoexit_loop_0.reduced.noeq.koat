@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C)
+(RULES
+ init_node(A,B,C) -> Com_1(lbl32(A,B,C))
+ lbl32(A,B,C) -> Com_1(lbl32(A,B,C-1)) :|: 1*C >= 2 && 1*A-1*C >= 1
+ lbl32(A,B,C) -> Com_1(exit_node(A,B,C)) :|: -1*C >= -1
+ lbl32(A,B,C) -> Com_1(exit_node(A,B,C)) :|: -1*A+1*C >= 0
+)

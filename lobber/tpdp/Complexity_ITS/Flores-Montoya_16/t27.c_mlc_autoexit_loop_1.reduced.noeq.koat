@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F u1 u2)
+(RULES
+ init_node(A,B,C,D,E,F) -> Com_1(eval_start_bb1_in(A,B,C,D,E,F))
+ eval_start_bb1_in(A,B,C,D,E,F) -> Com_1(eval_start_bb1_in(A+1,-u1+99,-u2+99,A+1,E,F)) :|: -1*A >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ eval_start_bb1_in(A,B,C,D,E,F) -> Com_1(exit_node(A,B,C,D,E,F)) :|: 1*A >= 0
+)

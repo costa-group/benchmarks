@@ -1,0 +1,10 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D u1)
+(RULES
+ init_node(A,B,C,D) -> Com_1(evalperfectbb8in(A,B,C,D))
+ evalperfectbb8in(A,B,C,D) -> Com_1(evalperfectbb8in(A,B-C,C-1,0)) :|: 1*C >= 1 && 1*A >= 0
+ evalperfectbb8in(A,B,C,D) -> Com_1(evalperfectbb8in(A,B,C-1,-u1-1)) :|: 1*C >= 1 && 1*u1 >= 0
+ evalperfectbb8in(A,B,C,D) -> Com_1(evalperfectbb8in(A,B,C-1,C-u1-1)) :|: 1*C >= 2 && 1*A >= 1 && 1*u1 >= 0
+ evalperfectbb8in(A,B,C,D) -> Com_1(exit_node(A,B,C,D)) :|: -1*C >= 0
+)

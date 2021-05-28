@@ -1,0 +1,25 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x1 x2 x3 x4 x5)
+(RULES
+
+f0(x1,x2,x3,x4,x5) -> f1(x1,x2,x3,x4,x5) :|: x1 <= 0 && x2 <= 0 && x3 <= 0 && x4 <= 0 && x5 <= 0
+
+f0(x1,x2,x3,x4,x5) -> f0(x1-1,x2,x3,x4,x5) :|: x1 > 0 && x2 > 0 && x3 > 0 && x4 > 0 && x5 > 0
+f0(x1,x2,x3,x4,x5) -> f0(x1,x2-1,x3,x4,x5) :|: x1 <= 0 && x2 > 0 && x3 > 0 && x4 > 0 && x5 > 0
+f0(x1,x2,x3,x4,x5) -> f0(x1,x2,x3-1,x4,x5) :|: x1 <= 0 && x2 <= 0 && x3 > 0 && x4 > 0 && x5 > 0
+f0(x1,x2,x3,x4,x5) -> f0(x1,x2,x3,x4-1,x5) :|: x1 <= 0 && x2 <= 0 && x3 <= 0 && x4 > 0 && x5 > 0
+f0(x1,x2,x3,x4,x5) -> f0(x1,x2,x3,x4,x5-1) :|: x1 <= 0 && x2 <= 0 && x3 <= 0 && x4 <= 0 && x5 > 0
+
+)
+
+# Ambos LoAT obtienen OMEGA(n) sin tratar de buscar bucles anidados: aceleran cada uno por
+# separado y con cualquiera de ellas obtiene OMEGA(n)
+
+# Para conseguir una "metering function for a single location" necesitaremos más transiciones
+# para "desplazar" los negativos a la izquierda de los positivos, como:
+# f0(x1,x2,x3,x4,x5) -> f0(x1,x2,x3,x5,x4) :|: x5 <= 0 && x4 > 0
+
+# Sin estas transiciones no se puede demostrar el "at least zero exit" de 
+# MF(x1...x5) = x1+x2+x3+x4+x5. Por ejemplo (x1,x2,x3,x4,x5)=(5,4,3,2,-8) no permite aplicar
+# ninguna transición pero MF(5,4,3,2,-8) > 0

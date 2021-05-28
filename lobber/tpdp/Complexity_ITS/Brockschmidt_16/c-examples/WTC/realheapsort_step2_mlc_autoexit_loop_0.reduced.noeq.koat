@@ -1,0 +1,13 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D)
+(RULES
+ init_node(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,C,D))
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(B+2*C+3,B,2*C+1,A-B-2)) :|: 1*A-1*B-2*C = 3
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,A,A-B-2)) :|: 1*A-1*B-2*C = 3
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,2*C+1,2*C+1)) :|: 1*A-1*B-2*C >= 4
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,A,2*C+1)) :|: 1*A-1*B-2*C >= 4
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,2*C+2,2*C+2)) :|: 1*A-1*B-2*C >= 4
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(evalrealheapsortstep2bb9in(A,B,A,2*C+2)) :|: 1*A-1*B-2*C >= 4
+ evalrealheapsortstep2bb9in(A,B,C,D) -> Com_1(exit_node(A,B,C,D)) :|: -1*A+1*B+2*C >= -2
+)

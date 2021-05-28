@@ -1,0 +1,10 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G u1 u2)
+(RULES
+ init_node(A,B,C,D,E,F,G) -> Com_1(cut(A,B,C,D,E,F,G))
+ cut(A,B,C,D,E,F,G) -> Com_1(cut(A,B,C,D-1,E,F,G)) :|: 1*D >= 0 && 1*A-1*D >= 1
+ cut(A,B,C,D,E,F,G) -> Com_1(cut(A,G-u1+1,C,D-1,G-u2,F,G)) :|: 1*D >= 0 && -1*B+1*G >= 0 && 1*A-1*D >= 1 && 1*u1 >= 0 && 1*u2 >= 0
+ cut(A,B,C,D,E,F,G) -> Com_1(exit_node(A,B,C,D,E,F,G)) :|: -1*D >= 1
+ cut(A,B,C,D,E,F,G) -> Com_1(exit_node(A,B,C,D,E,F,G)) :|: -1*A+1*D >= 0
+)

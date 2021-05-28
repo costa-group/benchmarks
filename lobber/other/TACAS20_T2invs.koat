@@ -1,0 +1,18 @@
+# Example in page 62 of TACAS20 (T_2-invs)
+
+# MF = y with Q = x >= y
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+f0(x, y) -> f(x, y)
+
+f(x, y) -> f(x+y, y-1) :|: x > 0 && y > 0
+
+f(x, y) -> fexit(x, y) :|: x <= 0
+
+f(x, y) -> fexit(x, y) :|: y <= 0
+
+)

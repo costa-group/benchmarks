@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E u1 u2)
+(RULES
+ init_node(A,B,C,D,E) -> Com_1(evalfbb8in(A,B,C,D,E))
+ evalfbb8in(A,B,C,D,E) -> Com_1(evalfbb8in(A,B,C+1,B+C+u1+1,u2)) :|: 1*A-1*C >= 0 && 1*u1 >= 0
+ evalfbb8in(A,B,C,D,E) -> Com_1(exit_node(A,B,C,D,E)) :|: -1*A+1*C >= 1
+)

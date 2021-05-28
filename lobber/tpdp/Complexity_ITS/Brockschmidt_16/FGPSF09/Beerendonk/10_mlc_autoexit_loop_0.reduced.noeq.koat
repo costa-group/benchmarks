@@ -1,0 +1,9 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A u1)
+(RULES
+ init_node(A) -> Com_1(eval(A))
+ eval(A) -> Com_1(eval(A-1)) :|: 1*A >= 1
+ eval(A) -> Com_1(eval(u1)) :|: 1*A >= 2 && 3*u1-1*A >= 1 && -2*u1+1*A >= 0
+ eval(A) -> Com_1(exit_node(A)) :|: -1*A >= 0
+)

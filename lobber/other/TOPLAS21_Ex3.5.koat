@@ -1,0 +1,21 @@
+# Ex. 3.5 in TOPLAS
+# Conditional MF [|y+z=1|].x
+
+# Our quasi-invariant should be the following one, which expresses the same information
+# MF = x
+# Q = y+z>=1 && y+z <= 1
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y z)
+(RULES
+
+f0(x, y, z) -> f(x, y, z)
+
+f(x, y, z) -> f(x-y-z, y, z) :|: x>0 && y+z>=1 && y+z <= 1
+
+f(x, y, z) -> fexit(x, y, z)     :|: x<=0
+f(x, y, z) -> fexit(x, y, z)     :|: y+z<1
+f(x, y, z) -> fexit(x, y, z)     :|: y+z>1
+
+)

@@ -1,0 +1,17 @@
+# Ex. 3.6 in TOPLAS
+# Conditional MF [|x>0|].tv  ==> unbounded
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f0))
+(VAR x y)
+(RULES
+
+f0(x, y) -> f(x, y)
+
+# Originally
+# f0(x, y) -{y}> f0(x+1, y) :|: x>0
+f(x, y) -> f(x+1, y) :|: x>0
+
+f(x, y) -> fexit(x, y)   :|: x<=0
+
+)

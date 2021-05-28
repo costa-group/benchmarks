@@ -1,0 +1,12 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D E F G H u1 u2 u3 u4)
+(RULES
+ init_node(A,B,C,D,E,F,G,H) -> Com_1(lbl131_loop_cont(A,B,C,D,E,F,G,H))
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(lbl131_loop_cont(-E+G-u1+1,u2,C,D,G-u3,F,G-u4,H)) :|: 1*D-1*G >= 0 && -1*E+1*G >= 1 && 1*E >= 0 && 1*A = 3 && 1*u1 >= 0 && 1*u3 >= 0 && 1*u4 >= 0
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: -1*D+1*G >= 1
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: 1*E-1*G >= 0
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: -1*E >= 1
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: -1*A >= -2
+ lbl131_loop_cont(A,B,C,D,E,F,G,H) -> Com_1(exit_node(A,B,C,D,E,F,G,H)) :|: 1*A >= 4
+)

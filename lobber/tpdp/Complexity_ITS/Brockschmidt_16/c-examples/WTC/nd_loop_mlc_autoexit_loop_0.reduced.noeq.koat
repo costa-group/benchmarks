@@ -1,0 +1,8 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A u1)
+(RULES
+ init_node(A) -> Com_1(evalndloopbbin(A))
+ evalndloopbbin(A) -> Com_1(evalndloopbbin(-u1+9)) :|: -1*A >= -8 && 1*u1 >= 0
+ evalndloopbbin(A) -> Com_1(exit_node(A)) :|: 1*A >= 9
+)

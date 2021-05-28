@@ -1,0 +1,7 @@
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS init_node))
+(VAR A B C D)
+(RULES
+ init_node(A,B,C,D) -> Com_1(evalEx2bb2in(A,B,C,D))
+ evalEx2bb2in(A,B,C,D) -> Com_1(evalEx2bb2in(A,B,C+1,D-1)) :|: 
+)
