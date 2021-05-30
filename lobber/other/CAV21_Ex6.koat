@@ -1,0 +1,20 @@
+# Example 6 from CAV'21
+
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS l0))
+(VAR x y)
+(RULES
+
+l0(x,y) -> l1(x,y)
+
+#e1
+l1(x,y) -> l2(x,y)  :|: x < 0  
+#e2
+l1(x,y) -> l2(x,y)  :|: y <= 0
+
+#t1
+l1(x,y) -> l1(x-1,y) :|: x >= 0 && y > 0
+#t2
+l1(x,y) -> l1(x,y-1) :|: x >= 0 && y > 0  
+
+)
