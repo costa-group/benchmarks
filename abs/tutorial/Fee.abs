@@ -1,9 +1,0 @@
-delta DFee (Int fee); // Implements feature Fee
-uses Account;
-modifies class AccountImpl {
-	modifies Int deposit(Int x) { 
-    	Int result = x;
-        if (x>=fee) result = original(x-fee);
-        return result;
-    }	
-}

@@ -1,8 +1,0 @@
-module Test;
-
-{
-    Rat o1 = 2 % 1;
-    println(toString(o1));
-    Rat o2 = 5/3 % 1/2;
-    println(toString(o2));
-}
